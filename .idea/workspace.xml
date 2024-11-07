@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11e660b6-f7a1-4259-b1e1-2a9763ab2781" name="Changes" comment="Проведена миграция">
-      <change afterPath="$PROJECT_DIR$/users/management/commands/ccdb.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/management/commands/ccsu.py" afterDir="false" />
+    <list default="true" id="11e660b6-f7a1-4259-b1e1-2a9763ab2781" name="Changes" comment="Созданы файлы для создания Админа и БД">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +120,23 @@
       <option name="project" value="LOCAL" />
       <updated>1731001139390</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Установлен язык и часовой пояс">
+      <option name="closed" value="true" />
+      <created>1731001702679</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731001702679</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Созданы файлы для создания Админа и БД">
+      <option name="closed" value="true" />
+      <created>1731001751482</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1731001751482</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -132,6 +148,8 @@
     <MESSAGE value="Добавлено приложение users" />
     <MESSAGE value="Добавлена модель пользователя" />
     <MESSAGE value="Проведена миграция" />
-    <option name="LAST_COMMIT_MESSAGE" value="Проведена миграция" />
+    <MESSAGE value="Установлен язык и часовой пояс" />
+    <MESSAGE value="Созданы файлы для создания Админа и БД" />
+    <option name="LAST_COMMIT_MESSAGE" value="Созданы файлы для создания Админа и БД" />
   </component>
 </project>
