@@ -12,6 +12,7 @@ from pandas.core.indexers import check_key_length
 from process_history.models import ProcessHistory
 from process_history.forms import ProcessHistoryForm, ProcessHistoryFormShort
 from users.models import UserRoles
+from django.http import HttpResponse
 
 
 # def process_history_view(request, task_id):
@@ -38,12 +39,29 @@ from users.models import UserRoles
 #     parameters = get_parameters_for_task(task_id)  # Реализуйте эту функцию для получения параметров
 #     return render(request, 'process_history/process_history.html', {'parameters': parameters})
 
+def index(request):
+    return HttpResponse("<h1>Welcome to the Index Page!</h1>")
+
+
+#
+# class ProcessHistoryListView(ListView):
+#     model = ProcessHistory
+#     extra_context = {
+#         'title: Все истории процессов',
+#     }
+#     template_name = 'process_history/process_history_list.html'
+
+from django.views.generic import ListView
+from .models import ProcessHistory
+
+
 class ProcessHistoryListView(ListView):
     model = ProcessHistory
-    extra_context = {
-        'title: Все истории процессов',
-    }
-    template_name = 'process_history/process_history_list.html'
+    template_name = 'process_history/process_history_list.html'  # Убедитесь, что путь к шаблону правильный
+    context_object_name = 'process_histories'  # Имя контекста для шаблона
+
+    def get_queryset(self):
+        return ProcessHistory.objects.all()  # Возвращает все записи
 
 
 class ProcessHistoryCreateView(LoginRequiredMixin, CreateView):
