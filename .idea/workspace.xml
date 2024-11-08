@@ -4,24 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="11e660b6-f7a1-4259-b1e1-2a9763ab2781" name="Changes" comment="Добавлено поле is_active для прользователя. Проведены миграции">
-      <change afterPath="$PROJECT_DIR$/machines/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/machines/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/machines/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/machines/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/machines/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/machines/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/machines/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/process_history/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/process_history/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/process_history/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/process_history/migrations/0001_initial.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/process_history/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/process_history/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/process_history/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/process_history/views.py" afterDir="false" />
+    <list default="true" id="11e660b6-f7a1-4259-b1e1-2a9763ab2781" name="Changes" comment="Добавлено приложение process_history">
+      <change afterPath="$PROJECT_DIR$/process_history/templates/process_history/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/process_history/templates/process_history/process_history.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/process_history/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -58,6 +48,7 @@
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;develop&quot;
   }
@@ -158,8 +149,27 @@
       <option name="project" value="LOCAL" />
       <updated>1731002791868</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Добавлено приложение process_history">
+      <option name="closed" value="true" />
+      <created>1731005186470</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1731005186470</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -173,6 +183,7 @@
     <MESSAGE value="Установлен язык и часовой пояс" />
     <MESSAGE value="Созданы файлы для создания Админа и БД" />
     <MESSAGE value="Добавлено поле is_active для прользователя. Проведены миграции" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлено поле is_active для прользователя. Проведены миграции" />
+    <MESSAGE value="Добавлено приложение process_history" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлено приложение process_history" />
   </component>
 </project>

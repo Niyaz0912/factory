@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>История процесса</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Подключите свой CSS файл -->
+</head>
+<body>
+    <h1>Заполнение истории процесса</h1>
+
+    <form method="POST" action="{% url 'save_process_history' task_id=task.id %}">
+        {% csrf_token %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Код контроля</th>
+                    <th>Отметка (Да/Нет)</th>
+                    <th>Количество деталей</th>
+                    <th>Параметры</th>
+                </tr>
+            </thead>
+            <tbody id="process-table-body">
+                {% for parameter in parameters %}
+                <tr>
+                    <td><input type="text" name="control_code_{{ forloop.counter }}" required></td>
+                    <td>
+                        <select name="mark_{{ forloop.counter }}">
+                            <option value="yes">Да</option>
+                            <option value="no">Нет</option>
+                        </select>
+                    </td>
+                    <td><input type="number" name="quantity_{{ forloop.counter }}" min="0" required></td>
+                    <td><input type="checkbox" name="param_count_{{ forloop.counter }}" value="+"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button type="submit">Сохранить</button>
+    </form>
+
+    <!-- Подключите JavaScript для динамического управления таблицей, если нужно -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>
