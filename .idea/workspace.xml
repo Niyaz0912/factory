@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
   <component name="ChangeListManager">
-    <list default="true" id="11e660b6-f7a1-4259-b1e1-2a9763ab2781" name="Changes" comment="Добавлено приложение process_history">
-      <change afterPath="$PROJECT_DIR$/process_history/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/my_project.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="HTML File" />
-        <option value="Python Script" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -32,136 +24,36 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 8
+  &quot;associatedIndex&quot;: 0
 }</component>
-  <component name="ProjectId" id="2oWwF7HoysUiKVWgh8R36iF4MOX" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2oZaMFRpKJlDgiCPJcNtZ75BIDF" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "D:/work_Top_Academy_web/hwork/NiyazProduction"
+    "git-widget-placeholder": "develop",
+    "last_opened_file_path": "C:/Users/Нияз/PycharmProjects/NiyazProduction"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\work_Top_Academy_web\hwork\NiyazProduction" />
-    </key>
-  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
+        <option value="bundled-python-sdk-0509580d9d50-746f403e7f0c-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.14494.241" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="11e660b6-f7a1-4259-b1e1-2a9763ab2781" name="Changes" comment="" />
-      <created>1730998532564</created>
+      <changelist id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="" />
+      <created>1731079501745</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1730998532564</updated>
+      <updated>1731079501745</updated>
     </task>
-    <task id="LOCAL-00001" summary="Инициализация нового проекта">
-      <option name="closed" value="true" />
-      <created>1730998645550</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1730998645550</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Старт Джанго проекта">
-      <option name="closed" value="true" />
-      <created>1730999054170</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1730999054170</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Обнавлены требования">
-      <option name="closed" value="true" />
-      <created>1730999661012</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1730999661012</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Добавлены настройки подключения к БД">
-      <option name="closed" value="true" />
-      <created>1730999683336</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1730999683336</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Добавлено приложение users">
-      <option name="closed" value="true" />
-      <created>1731000023035</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1731000023035</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Добавлена модель пользователя">
-      <option name="closed" value="true" />
-      <created>1731000780478</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1731000780478</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Проведена миграция">
-      <option name="closed" value="true" />
-      <created>1731001139390</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1731001139390</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Установлен язык и часовой пояс">
-      <option name="closed" value="true" />
-      <created>1731001702679</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1731001702679</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Созданы файлы для создания Админа и БД">
-      <option name="closed" value="true" />
-      <created>1731001751482</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1731001751482</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Добавлено поле is_active для прользователя. Проведены миграции">
-      <option name="closed" value="true" />
-      <created>1731002791868</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1731002791868</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Добавлено приложение process_history">
-      <option name="closed" value="true" />
-      <created>1731005186470</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1731005186470</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -174,20 +66,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Инициализация нового проекта" />
-    <MESSAGE value="Старт Джанго проекта" />
-    <MESSAGE value="Обнавлены требования" />
-    <MESSAGE value="Добавлены настройки подключения к БД" />
-    <MESSAGE value="Добавлено приложение users" />
-    <MESSAGE value="Добавлена модель пользователя" />
-    <MESSAGE value="Проведена миграция" />
-    <MESSAGE value="Установлен язык и часовой пояс" />
-    <MESSAGE value="Созданы файлы для создания Админа и БД" />
-    <MESSAGE value="Добавлено поле is_active для прользователя. Проведены миграции" />
-    <MESSAGE value="Добавлено приложение process_history" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлено приложение process_history" />
   </component>
 </project>
