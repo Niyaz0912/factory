@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+</head>
+<body>
+    <h1>Авторизация</h1>
+
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <label for="operator">Выберите оператора:</label>
+        <select name="operator_name" id="operator" required>
+            <option value="">--Выберите оператора--</option>
+            {% for operator in operators %}
+                <option value="{{ operator }}">{{ operator }}</option>
+            {% endfor %}
+        </select>
+
+        <div id="password-field" style="display: none;">
+            <label for="password">Введите пароль (8 цифр):</label>
+            <input type="password" name="password" id="password" maxlength="8" pattern="\d{8}" required title="Пароль должен состоять из 8 цифр">
+        </div>
+
+        <button type="submit">Войти</button>
+    </form>
+
+    <script>
+        const operatorSelect = document.getElementById('operator');
+        const passwordField = document.getElementById('password-field');
+
+        operatorSelect.addEventListener('change', function() {
+            if (this.value) {
+                passwordField.style.display = 'block'; // Показываем поле для ввода пароля
+            } else {
+                passwordField.style.display = 'none'; // Скрываем поле, если оператор не выбран
+            }
+        });
+    </script>
+</body>
+</html>
