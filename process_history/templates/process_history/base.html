@@ -1,86 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Проект Белмаг</title>
-    <!-- Подключение Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Ваши стили -->
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Белмаг</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="{% url 'process_history' task_id=1 %}">История процесса</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Другие страницы</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<div class="container mt-4">
-    <h1>Заполнение истории процесса</h1>
-
-    <form method="POST" action="{% url 'save_process_history' task_id=1 %}">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="controlCode">Код контроля</label>
-            <input type="text" class="form-control" id="controlCode" name="control_code" required>
-        </div>
-        <div class="form-group">
-            <label for="mark">Отметка (Да/Нет)</label>
-            <select class="form-control" id="mark" name="mark">
-                <option value="yes">Да</option>
-                <option value="no">Нет</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="quantity">Количество деталей</label>
-            <input type="number" class="form-control" id="quantity" name="quantity" min="0" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary">Сохранить</button>
-    </form>
-
-    <!-- Пример таблицы для отображения данных -->
-    <h2 class="mt-4">История процесса</h2>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Код контроля</th>
-                <th>Отметка</th>
-                <th>Количество деталей</th>
-                <th>Дата</th>
-            </tr>
-        </thead>
-        <tbody id="process-table-body">
-            <!-- Динамически заполните таблицу данными -->
-            {% for entry in process_entries %}
-            <tr>
-                <td>{{ entry.control_code }}</td>
-                <td>{{ entry.mark }}</td>
-                <td>{{ entry.quantity }}</td>
-                <td>{{ entry.date }}</td> <!-- Предполагается, что у вас есть поле даты -->
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-</div>
-
-<!-- Подключение Bootstrap JS и jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+{% block content %}
+{% endblock %}
 </body>
 </html>
