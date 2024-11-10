@@ -6,21 +6,22 @@ NULLABLE = {'blank': True, 'null': True}
 
 
 class UserRoles(models.TextChoices):
-    ADMIN = 'admin', _('admin')
-    MASTER = 'master', _('master')
-    USER = 'user', _('user')
+    OPERATOR = 'operator', _('Operator')
+    MASTER = 'master', _('Master')
+    ADMIN = 'admin', _('Administrator')
 
 
 class User(AbstractUser):
-    first_name = models.CharField(max_length=30, blank=False, null=False, default='Не указано')
-    last_name = models.CharField(max_length=30, blank=False, null=False, default='Не указано')
-    username = models.CharField(max_length=150, unique=True, blank=False, null=False, default='default_user')
-    role = models.CharField(max_length=9, choices=UserRoles.choices, default=UserRoles.USER)
-    phone = models.CharField(max_length=35, verbose_name='telephone_number', **NULLABLE)
+    is_staff = models.BooleanField(default=False)
+    first_name = models.CharField(max_length=30, blank=False, null=False, default='имя оператора')
+    last_name = models.CharField(max_length=30, blank=False, null=False, default='фамилия оператора')
+    username = models.CharField(max_length=150, unique=True, blank=False, null=False)
+    password = models.CharField(max_length=255)
+    role = models.CharField(max_length=9, choices=UserRoles.choices, default=UserRoles.OPERATOR)  # Роль пользователя
     is_active = models.BooleanField(default=True, verbose_name='active', **NULLABLE)
 
     USERNAME_FIELD = "username"  # Используем username для авторизации
-    REQUIRED_FIELDS = ['first_name', 'last_name']  # Обязательные поля
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'email']  # Обязательные поля
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

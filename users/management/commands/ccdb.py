@@ -6,13 +6,12 @@ from config.settings import DATABASE, USER, PASSWORD, HOST
 class Command(BaseCommand):
 
     def handle(self, *args, **options):
-        global conn
+        conn = None
         ConnectionString = f'''DRIVER={{ODBC Driver 17 for SQL Server}};
-                                        SERVER={HOST};
-                                        DATABASE="factory"
-                                        DATABASE={DATABASE};
-                                        UID={USER};
-                                        PWD={PASSWORD}'''
+                               SERVER={HOST};
+                               DATABASE=master;
+                               UID={USER};
+                               PWD={PASSWORD}'''
         try:
             conn = pyodbc.connect(ConnectionString)
             conn.autocommit = True
@@ -22,5 +21,6 @@ class Command(BaseCommand):
         else:
             print("База данных factory успешно создана;")
         finally:
-            conn.close()
+            if conn:  # Проверяем, что conn был создан перед закрытием
+                conn.close()
 
