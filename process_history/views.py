@@ -1,21 +1,3 @@
-# from audioop import reverse
-# from msilib.schema import ListView
-#
-# from django.shortcuts import render, redirect
-# from django.urls import reverse_lazy, reverse
-# from django.views.generic import CreateView, UpdateView, DetailView
-# from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.http import HttpResponseForbidden
-# from django.core.exceptions import PermissionDenied
-#
-# from process_history.models import ProcessHistory
-# from process_history.forms import ProcessHistoryForm, ProcessHistoryFormShort
-# from users.models import UserRoles
-# from django.http import HttpResponse
-# from django.views.generic import ListView, CreateView
-# from .models import ProcessHistory
-#
-#
 # class ProcessHistoryListView(ListView):
 #     model = ProcessHistory
 #     extra_context = {
@@ -78,7 +60,7 @@
 #         if self.request.user.role != UserRoles.MASTER:
 #             raise PermissionDenied()
 #         reverse(self.object)
-from django.shortcuts import redirect, render
+
 from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
