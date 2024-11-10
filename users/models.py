@@ -44,10 +44,12 @@ class UserRoles(models.TextChoices):
 
 
 class User(AbstractUser):
-    username = models.CharField(max_length=150, unique=True, null=True, blank=True)  # Теперь поле допускает NULL  # Уникальное поле username
+    first_name = models.CharField(max_length=30, blank=False, null=False, default='Не указано')
+    last_name = models.CharField(max_length=30, blank=False, null=False, default='Не указано')
+    username = models.CharField(max_length=150, unique=True, blank=False, null=False, default='default_user')
     role = models.CharField(max_length=9, choices=UserRoles.choices, default=UserRoles.USER)
     phone = models.CharField(max_length=35, verbose_name='telephone_number', **NULLABLE)
-    is_active = models.BooleanField(default=True, verbose_name='active')
+    is_active = models.BooleanField(default=True, verbose_name='active', **NULLABLE)
 
     USERNAME_FIELD = "username"  # Используем username для авторизации
     REQUIRED_FIELDS = ['first_name', 'last_name']  # Обязательные поля
