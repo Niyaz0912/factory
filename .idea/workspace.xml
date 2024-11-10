@@ -4,16 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="Пользователь авторизуется через ник, а не email">
+    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="Удален код под решеткой">
+      <change afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/registration/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/process_history/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/management/commands/ccdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/management/commands/ccdb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/management/commands/ccsu.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/management/commands/ccsu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0002_alter_user_is_active.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0003_user_role.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0004_remove_user_telegram_user_username_alter_user_email.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0005_alter_user_is_active.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0006_alter_user_first_name_alter_user_last_name_and_more.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/migrations/0007_alter_user_first_name_alter_user_last_name.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -94,7 +111,55 @@
       <option name="project" value="LOCAL" />
       <updated>1731191807308</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Сокращен код для login.html">
+      <option name="closed" value="true" />
+      <created>1731198754459</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1731198754459</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Указаны дефолтные значения для обязательных полей">
+      <option name="closed" value="true" />
+      <created>1731198800737</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1731198800737</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Проведены миграции">
+      <option name="closed" value="true" />
+      <created>1731198824403</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1731198824403</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Написана логика для функции login_view">
+      <option name="closed" value="true" />
+      <created>1731198883933</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1731198883933</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Системные файлы проекта">
+      <option name="closed" value="true" />
+      <created>1731198925264</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1731198925264</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Удален код под решеткой">
+      <option name="closed" value="true" />
+      <created>1731199486898</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1731199486898</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -113,6 +178,12 @@
     <MESSAGE value="Сделал модель для сменного задания, удалил некоторые поля для пользователя. Провел миграции" />
     <MESSAGE value="Заново переписаны все вьюшки и определены маршруты для них" />
     <MESSAGE value="Пользователь авторизуется через ник, а не email" />
-    <option name="LAST_COMMIT_MESSAGE" value="Пользователь авторизуется через ник, а не email" />
+    <MESSAGE value="Сокращен код для login.html" />
+    <MESSAGE value="Указаны дефолтные значения для обязательных полей" />
+    <MESSAGE value="Проведены миграции" />
+    <MESSAGE value="Написана логика для функции login_view" />
+    <MESSAGE value="Системные файлы проекта" />
+    <MESSAGE value="Удален код под решеткой" />
+    <option name="LAST_COMMIT_MESSAGE" value="Удален код под решеткой" />
   </component>
 </project>
