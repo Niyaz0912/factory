@@ -1,3 +1,4 @@
+<!-- templates/process_history/home.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -7,6 +8,10 @@
 </head>
 <body>
     <h1>Добро пожаловать на главную страницу!</h1>
-    <p><a href="{% url 'process_history:shift_assignment' %}">Перейти к сменным заданиям</a></p>
+
+    <!-- Ссылка на страницу сменных заданий -->
+    <a href="{% url 'process_history:shift_assignment' %}">Перейти к сменным заданиям</a>
+
+    <!-- Другие элементы страницы -->
 </body>
 </html>

@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Application definition
+LOGIN_URL = 'login'  # URL для страницы входа
+LOGIN_REDIRECT_URL = 'shift_assignment'  # URL для перенаправления после успешной аутентификации
 
 INSTALLED_APPS = [
     'django.contrib.admin',

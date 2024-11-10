@@ -65,6 +65,7 @@ from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseForbidden
+from users.models import User
 from .models import ShiftAssignment, ProcessHistory
 from .forms import ProcessHistoryForm, ShiftAssignmentForm
 from django.views.generic import TemplateView
@@ -73,7 +74,7 @@ from django.contrib.auth import authenticate, login
 
 
 class HomePageView(TemplateView):
-    template_name = 'process_history/home.html'  # Убедитесь, что этот шаблон существует
+    template_name = 'process_history/home.html'
 
 
 # Заданный пароль для авторизации
@@ -131,18 +132,18 @@ class ShiftAssignmentsUpdateView(LoginRequiredMixin, TemplateView):
 
 def login_view(request):
     if request.method == 'POST':
-        # Получаем данные из формы
-        username = request.POST.get('username')  # Имя пользователя (или ФИО)
-        password = request.POST.get('password')  # Пароль
 
-        # Аутентификация пользователя
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            login(request, user)  # Вход в систему
-            return redirect('home')  # Перенаправление на главную страницу или другую страницу
+            login(request, user)
+            return redirect('process_history:shift_assignment')  # Перенаправление на страницу сменных заданий
         else:
             error_message = "Неверное имя пользователя или пароль."
-            return render(request, 'registration/login.html', {'error_message': error_message})
+            users = User.objects.all()  # Получаем всех пользователей для выпадающего списка
+            return render(request, 'registration/login.html', {'error_message': error_message, 'users': users})
 
-    return render(request, 'registration/login.html')  # Отображение формы входа
+    return render(request, 'registration/login.html')

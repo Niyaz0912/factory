@@ -22,10 +22,10 @@ class ProcessHistory(models.Model):
 
 
 class ShiftAssignment(models.Model):
-    date = models.DateField(verbose_name="Дата задания")
     operator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="Оператор")
-    machine_id = models.CharField(max_length=50, verbose_name="ID машины")
-    part_id = models.CharField(max_length=50, verbose_name="ID детали")
+    operation_name = models.CharField(max_length=100, default="Не указано", verbose_name="Операция")
+    machine_id = models.CharField(max_length=50, verbose_name="№ станка")
+    part_id = models.CharField(max_length=50, verbose_name="Наименование детали")
     batch_number = models.CharField(max_length=50, verbose_name="Номер партии")
     quantity = models.IntegerField(verbose_name="Количество")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата и время создания")

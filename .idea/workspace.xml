@@ -4,21 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="Удален код под решеткой">
-      <change afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
+    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="Системные файлы и файлы миграций">
+      <change afterPath="$PROJECT_DIR$/process_history/templates/process_history/shift_assignments.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/process_history/templates/process_history/shift_assignments_update.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/process_history/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/process_history/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/management/commands/ccdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/management/commands/ccdb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/management/commands/ccsu.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/management/commands/ccsu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/0002_alter_user_is_active.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/0003_user_role.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/0004_remove_user_telegram_user_username_alter_user_email.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/0005_alter_user_is_active.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/0006_alter_user_first_name_alter_user_last_name_and_more.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/migrations/0007_alter_user_first_name_alter_user_last_name.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/base.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/complete_process_history.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/process_history/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +27,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -48,13 +47,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Нияз/PycharmProjects/NiyazProduction&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "develop",
+    "last_opened_file_path": "C:/Users/Нияз/PycharmProjects/NiyazProduction"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Нияз\PycharmProjects\NiyazProduction\templates\registration" />
+      <recent name="C:\Users\Нияз\PycharmProjects\NiyazProduction\process_history\templates\process_history" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -159,7 +165,31 @@
       <option name="project" value="LOCAL" />
       <updated>1731199486898</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Код обнавлен в соответствии с новой логикой">
+      <option name="closed" value="true" />
+      <created>1731263638238</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1731263638238</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Системные файлы и файлы миграций">
+      <option name="closed" value="true" />
+      <created>1731263670543</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1731263670543</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Системные файлы и файлы миграций">
+      <option name="closed" value="true" />
+      <created>1731263707045</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1731263707045</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,6 +214,8 @@
     <MESSAGE value="Написана логика для функции login_view" />
     <MESSAGE value="Системные файлы проекта" />
     <MESSAGE value="Удален код под решеткой" />
-    <option name="LAST_COMMIT_MESSAGE" value="Удален код под решеткой" />
+    <MESSAGE value="Код обнавлен в соответствии с новой логикой" />
+    <MESSAGE value="Системные файлы и файлы миграций" />
+    <option name="LAST_COMMIT_MESSAGE" value="Системные файлы и файлы миграций" />
   </component>
 </project>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сменное задание</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Ваши стили */
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Сменное задание</h1>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% else %}
+        <div class="card">
+            <h2>Задание для оператора</h2>
+            <div class="field">
+                <label for="operator_name">ФИО оператора:</label>
+                <p id="operator_name">{{ operator_name }}</p>
+            </div>
+            <div class="field">
+                <label for="equipment_number">№ оборудования:</label>
+                <p id="equipment_number">{{ equipment_number }}</p>
+            </div>
+            <div class="field">
+                <label for="operation_name">Наименование операции:</label>
+                <p id="operation_name">{{ operation_name }}</p>
+            </div>
+            <div class="field">
+                <label for="task_quantity">Задание (шт.):</label>
+                <p id="task_quantity">{{ task_quantity }}</p>
+            </div>
+            <div class="field">
+                <label for="batch_number">Номер партии:</label>
+                <p id="batch_number">{{ batch_number }}</p>
+            </div>
+
+            <!-- Кнопка "Выполнить" -->
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit">Выполнить</button>
+            </form>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>

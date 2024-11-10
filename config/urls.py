@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from process_history.views import HomePageView  # Импортируйте новое представление
+from process_history.views import HomePageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
