@@ -86,6 +86,8 @@ from django.http import HttpResponseForbidden
 from .models import ShiftAssignment, ProcessHistory
 from .forms import ProcessHistoryForm, ShiftAssignmentForm
 from django.views.generic import TemplateView
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 
 
 class HomePageView(TemplateView):
@@ -145,5 +147,20 @@ class ShiftAssignmentsUpdateView(LoginRequiredMixin, TemplateView):
         return redirect('process_history:shift_assignments')
 
 
-def login_view():
-    return None
+def login_view(request):
+    if request.method == 'POST':
+        # Получаем данные из формы
+        username = request.POST.get('username')  # Имя пользователя (или ФИО)
+        password = request.POST.get('password')  # Пароль
+
+        # Аутентификация пользователя
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)  # Вход в систему
+            return redirect('home')  # Перенаправление на главную страницу или другую страницу
+        else:
+            error_message = "Неверное имя пользователя или пароль."
+            return render(request, 'registration/login.html', {'error_message': error_message})
+
+    return render(request, 'registration/login.html')  # Отображение формы входа
