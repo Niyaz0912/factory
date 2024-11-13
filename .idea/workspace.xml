@@ -4,19 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="Системные файлы и файлы миграций">
-      <change afterPath="$PROJECT_DIR$/process_history/templates/process_history/shift_assignments.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/process_history/templates/process_history/shift_assignments_update.html" afterDir="false" />
+    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="Добавлен выход из аккаунта">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/base.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/complete_process_history.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/process_history/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,18 +36,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "develop",
-    "last_opened_file_path": "C:/Users/Нияз/PycharmProjects/NiyazProduction"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Нияз/PycharmProjects/NiyazProduction&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Нияз\PycharmProjects\NiyazProduction\templates\registration" />
+      <recent name="C:\Users\Нияз\PycharmProjects\NiyazProduction\process_history\templates\registration" />
       <recent name="C:\Users\Нияз\PycharmProjects\NiyazProduction\process_history\templates\process_history" />
+      <recent name="C:\Users\Нияз\PycharmProjects\NiyazProduction\templates\registration" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -189,7 +179,39 @@
       <option name="project" value="LOCAL" />
       <updated>1731263707045</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Вернул все до того момента пока все работает">
+      <option name="closed" value="true" />
+      <created>1731275983883</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1731275983883</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Включил для шаблонов css и js">
+      <option name="closed" value="true" />
+      <created>1731513657855</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1731513657855</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Установлен инструмент для работы с формами widget-tweaks">
+      <option name="closed" value="true" />
+      <created>1731513907996</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1731513907996</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Добавлен выход из аккаунта">
+      <option name="closed" value="true" />
+      <created>1731514512973</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1731514512973</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -216,6 +238,10 @@
     <MESSAGE value="Удален код под решеткой" />
     <MESSAGE value="Код обнавлен в соответствии с новой логикой" />
     <MESSAGE value="Системные файлы и файлы миграций" />
-    <option name="LAST_COMMIT_MESSAGE" value="Системные файлы и файлы миграций" />
+    <MESSAGE value="Вернул все до того момента пока все работает" />
+    <MESSAGE value="Включил для шаблонов css и js" />
+    <MESSAGE value="Установлен инструмент для работы с формами widget-tweaks" />
+    <MESSAGE value="Добавлен выход из аккаунта" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлен выход из аккаунта" />
   </component>
 </project>
