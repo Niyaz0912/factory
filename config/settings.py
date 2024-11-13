@@ -40,7 +40,9 @@ INSTALLED_APPS = [
 
     #добавленные приложения
     'users',
-    'process_history'
+    'process_history',
+    'widget_tweaks',
+
 ]
 
 MIDDLEWARE = [
