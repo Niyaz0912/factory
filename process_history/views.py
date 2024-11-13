@@ -1,9 +1,10 @@
-from django.views.generic import TemplateView, FormView
-from django.urls import reverse_lazy
+from django.views.generic import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from .models import ShiftAssignment, ProcessHistory
 from .forms import ProcessHistoryForm
+from .models import ShiftAssignment, ProcessHistory
+from django.contrib.auth.mixins import UserPassesTestMixin
+from django.views.generic import TemplateView
 
 
 class HomePageView(TemplateView):
@@ -22,7 +23,7 @@ class ShiftAssignmentView(LoginRequiredMixin, TemplateView):
         return redirect('process_history:history_process_create')  # Перенаправление на страницу создания истории процесса
 
 
-class HistoryProcessCreateView(LoginRequiredMixin, FormView):
+class HistoryProcessCreateView(LoginRequiredMixin, ProcessHistory, FormView):
     template_name = 'process_history/history_process_create.html'
     form_class = ProcessHistoryForm
 
@@ -44,7 +45,7 @@ class HistoryProcessCreateView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
 
-class CompleteProcessHistoryView(LoginRequiredMixin, TemplateView):
+class CompleteProcessHistoryView(LoginRequiredMixin, ProcessHistory, TemplateView):
     template_name = 'process_history/complete_process_history.html'
 
     def post(self, request, *args, **kwargs):
@@ -71,3 +72,25 @@ class ShiftAssignmentsUpdateView(LoginRequiredMixin, TemplateView):
         assignment.save()
 
         return redirect('process_history:shift_assignments')  # Перенаправление на страницу со сменными заданиями
+
+
+class ShiftAssignmentCreateView(UserPassesTestMixin, TemplateView):
+    template_name = 'process_history/shift_assignment_create.html'
+
+    def test_func(self):
+        # Проверяем, является ли пользователь мастером или администратором
+        return self.request.user.is_staff or hasattr(self.request.user, 'is_master') and self.request.user.is_master
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['old_assignments'] = ShiftAssignment.objects.filter(
+            operator=self.request.user)  # Получаем старые сменные задания
+        return context
+
+    def post(self, request, *args, **kwargs):
+        # Логика для создания нового сменного задания
+        # Например:
+        # assignment = ShiftAssignment(...)
+        # assignment.save()
+
+        return redirect('process_history:shift_assignment_create')  # Перенаправление на ту же страницу после создания

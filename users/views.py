@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
 from django.views.generic import TemplateView
+from django.contrib.auth import authenticate, login
 
 User = get_user_model()
 
@@ -35,11 +36,6 @@ User = get_user_model()  # Получаем текущую модель поль
 class UserLoginView(TemplateView):
     template_name = 'users/login.html'  # Убедитесь, что путь к шаблону правильный
 
-    def get(self, request, *args, **kwargs):
-        # Получаем всех пользователей для отображения на странице входа
-        users = User.objects.all()
-        return render(request, self.template_name, {'users': users})
-
     def post(self, request, *args, **kwargs):
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -48,11 +44,14 @@ class UserLoginView(TemplateView):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('process_history:shift_assignment')  # Перенаправление на страницу сменных заданий
+            # Проверяем, является ли пользователь мастером или администратором
+            if user.is_staff or hasattr(user, 'is_master') and user.is_master:
+                return redirect('process_history:shift_assignment_create')  # Перенаправление на страницу создания сменных заданий
+            else:
+                return redirect('process_history:shift_assignment')  # Перенаправление на страницу со сменными заданиями
         else:
             error_message = "Неверное имя пользователя или пароль."
-            users = User.objects.all()  # Получаем всех пользователей для отображения на странице входа
-            return render(request, self.template_name, {'error_message': error_message, 'users': users})
+            return render(request, self.template_name, {'error_message': error_message})
 
 
 class UserLogoutView(View):
