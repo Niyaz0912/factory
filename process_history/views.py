@@ -64,35 +64,33 @@
 from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseForbidden
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
 from users.models import User
 from .models import ShiftAssignment, ProcessHistory
-from .forms import ProcessHistoryForm, ShiftAssignmentForm
-from django.views.generic import TemplateView
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from .forms import ProcessHistoryForm
 
 
 class HomePageView(TemplateView):
     template_name = 'process_history/home.html'
 
 
-# Заданный пароль для авторизации
-AUTH_PASSWORD = "12345678"  # Пример 8-значного пароля
-
-
 class ShiftAssignmentView(LoginRequiredMixin, TemplateView):
     template_name = 'process_history/shift_assignments.html'
 
     def get(self, request, *args, **kwargs):
-        if request.method == 'POST':
-            password = request.POST.get('password')
-            if password == AUTH_PASSWORD:
-                assignments = ShiftAssignment.objects.filter(user=request.user)
-                return self.render_to_response({'assignments': assignments})
-            else:
-                return HttpResponseForbidden("Неверный пароль")
-        return render(request, 'process_history/login.html')
+        if request.user.is_authenticated:
+            # Получаем задания для текущего оператора
+            assignments = ShiftAssignment.objects.filter(operator=request.user)
+            return self.render_to_response({'assignments': assignments})
+        else:
+            return render(request, 'process_history/login.html')
+
+    def post(self, request, *args, **kwargs):
+        # Здесь вы можете обрабатывать данные формы
+        # Например, если вы хотите перенаправить на страницу создания истории процесса
+        return redirect(
+            'process_history:history_process_create')  # Перенаправление на страницу создания истории процесса
 
 
 class HistoryProcessCreateView(LoginRequiredMixin, FormView):
@@ -121,7 +119,8 @@ class ShiftAssignmentsUpdateView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['assignments'] = ShiftAssignment.objects.filter(user=self.request.user)
+        # Получаем задания для текущего оператора
+        context['assignments'] = ShiftAssignment.objects.filter(operator=self.request.user)
         return context
 
     def post(self, request, *args, **kwargs):
@@ -132,7 +131,6 @@ class ShiftAssignmentsUpdateView(LoginRequiredMixin, TemplateView):
 
 def login_view(request):
     if request.method == 'POST':
-
         username = request.POST.get('username')
         password = request.POST.get('password')
 
@@ -142,8 +140,20 @@ def login_view(request):
             login(request, user)
             return redirect('process_history:shift_assignment')  # Перенаправление на страницу сменных заданий
         else:
-            error_message = "Неверное имя пользователя или пароль."
-            users = User.objects.all()  # Получаем всех пользователей для выпадающего списка
-            return render(request, 'registration/login.html', {'error_message': error_message, 'users': users})
+            error_message = "Пароль неверный!"  # Изменено сообщение об ошибке
 
-    return render(request, 'registration/login.html')
+            users = User.objects.all()
+            print(f"Не удалось аутентифицировать пользователя: {username}")  # Отладочное сообщение
+            return render(request, 'registration/login.html', {
+                'error_message': error_message,
+                'users': users,
+                'username': username  # Сохраняем выбранное имя пользователя для удобства
+            })
+
+    users = User.objects.all()  # Получаем всех пользователей для выпадающего списка
+    return render(request, 'registration/login.html', {'users': users})
+
+
+def logout_view(request):
+    logout(request)  # Выход пользователя
+    return redirect('process_history:login')  # Перенаправление на страницу входа после выхода
