@@ -1,43 +1,13 @@
-from django.contrib.auth import authenticate, login, logout, get_user_model
-from django.contrib.auth.hashers import make_password
-from django.views import View
 from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
-from django.db import IntegrityError
-
+from django.shortcuts import redirect
 from .models import ShiftAssignment, ProcessHistory
 from .forms import ProcessHistoryForm
 
 
 class HomePageView(TemplateView):
     template_name = 'process_history/home.html'
-
-
-def login_view(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('process_history:shift_assignment')  # Перенаправление на страницу сменных заданий
-        else:
-            error_message = "Пароль неверный!"  # Сообщение об ошибке
-            return render(request, 'registration/login.html', {
-                'error_message': error_message,
-                'username': username  # Сохраняем выбранное имя пользователя для удобства
-            })
-
-    return render(request, 'registration/login.html')  # Отображение формы входа
-
-
-def logout_view(request):
-    logout(request)  # Выход пользователя
-    return redirect('process_history:login')  # Перенаправление на страницу входа после выхода
 
 
 class ShiftAssignmentView(LoginRequiredMixin, TemplateView):
