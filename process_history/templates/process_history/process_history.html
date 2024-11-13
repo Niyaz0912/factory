@@ -4,15 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>История процесса</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Подключите свой CSS файл -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Ваши стили (если необходимо) */
+    </style>
 </head>
 <body>
-    <h1>Заполнение истории процесса</h1>
+
+<div class="container mt-5">
+    <h1 class="text-center">Заполнение истории процесса</h1>
 
     <form method="POST" action="{% url 'save_process_history' task_id=task.id %}">
         {% csrf_token %}
-        <table>
-            <thead>
+        <table class="table table-bordered mt-4">
+            <thead class="thead-light">
                 <tr>
                     <th>Код контроля</th>
                     <th>Отметка (Да/Нет)</th>
@@ -23,24 +29,15 @@
             <tbody id="process-table-body">
                 {% for parameter in parameters %}
                 <tr>
-                    <td><input type="text" name="control_code_{{ forloop.counter }}" required></td>
+                    <td><input type="text" name="control_code_{{ forloop.counter }}" class="form-control" required></td>
                     <td>
-                        <select name="mark_{{ forloop.counter }}">
+                        <select name="mark_{{ forloop.counter }}" class="form-control">
                             <option value="yes">Да</option>
                             <option value="no">Нет</option>
                         </select>
                     </td>
-                    <td><input type="number" name="quantity_{{ forloop.counter }}" min="0" required></td>
+                    <td><input type="number" name="quantity_{{ forloop.counter }}" min="0" class="form-control" required></td>
                     <td><input type="checkbox" name="param_count_{{ forloop.counter }}" value="+"></td>
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>
-
-        <button type="submit">Сохранить</button>
-    </form>
-
-    <!-- Подключите JavaScript для динамического управления таблицей, если нужно -->
-    <script src="{% static 'js/scripts.js' %}"></script>
-</body>
-</html>

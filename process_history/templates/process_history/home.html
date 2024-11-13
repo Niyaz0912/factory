@@ -5,13 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Добро пожаловать на главную страницу!</h1>
+    <div class="container mt-5">
+        <h1 class="text-center">Добро пожаловать на главную страницу!</h1>
 
-    <!-- Ссылка на страницу сменных заданий -->
-    <a href="{% url 'process_history:shift_assignment' %}">Перейти к сменным заданиям</a>
+        <!-- Ссылка на страницу сменных заданий -->
+        <div class="text-center mt-4">
+            <a href="{% url 'process_history:shift_assignment' %}" class="btn btn-primary">Перейти к сменным заданиям</a>
+        </div>
 
-    <!-- Другие элементы страницы -->
+        <!-- Другие элементы страницы -->
+        <div class="mt-5">
+            <p class="text-center">Здесь вы можете управлять своими сменными заданиями и просматривать историю процессов.</p>
+        </div>
+    </div>
+
+    <!-- Подключение JavaScript для Bootstrap (если необходимо) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
