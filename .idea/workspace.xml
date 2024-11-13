@@ -4,8 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="Добавлен выход из аккаунта">
+    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="миграции и системные файлы">
+      <change afterPath="$PROJECT_DIR$/process_history/templates/base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/process_history/templates/registration/create_user.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/history_process_create.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/process_history/history_process_create.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/process_history/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/process_history.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/process_history/process_history.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/shift_assignments.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/process_history/shift_assignments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/registration/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,6 +57,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Нияз\PycharmProjects\NiyazProduction\process_history\templates" />
       <recent name="C:\Users\Нияз\PycharmProjects\NiyazProduction\process_history\templates\registration" />
       <recent name="C:\Users\Нияз\PycharmProjects\NiyazProduction\process_history\templates\process_history" />
       <recent name="C:\Users\Нияз\PycharmProjects\NiyazProduction\templates\registration" />
@@ -211,7 +223,15 @@
       <option name="project" value="LOCAL" />
       <updated>1731514512973</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="миграции и системные файлы">
+      <option name="closed" value="true" />
+      <created>1731515287018</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1731515287018</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -242,6 +262,7 @@
     <MESSAGE value="Включил для шаблонов css и js" />
     <MESSAGE value="Установлен инструмент для работы с формами widget-tweaks" />
     <MESSAGE value="Добавлен выход из аккаунта" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлен выход из аккаунта" />
+    <MESSAGE value="миграции и системные файлы" />
+    <option name="LAST_COMMIT_MESSAGE" value="миграции и системные файлы" />
   </component>
 </project>

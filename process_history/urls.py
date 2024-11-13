@@ -1,22 +1,22 @@
 from django.urls import path
 from .views import (
+    HomePageView,
+    login_view,
+    logout_view,
     ShiftAssignmentView,
     HistoryProcessCreateView,
     CompleteProcessHistoryView,
     ShiftAssignmentsUpdateView,
-    login_view,
-    logout_view,  # Импортируем функцию выхода
-    HomePageView,
 )
 
 app_name = 'process_history'
 
 urlpatterns = [
-    path('', HomePageView.as_view(), name='home'),  # Главная страница
-    path('login/', login_view, name='login'),  # Страница входа
-    path('logout/', logout_view, name='logout'),  # Страница выхода
-    path('shift_assignment/', ShiftAssignmentView.as_view(), name='shift_assignment'),  # Страница сменных заданий
-    path('history_process_create/', HistoryProcessCreateView.as_view(), name='history_process_create'),  # Создание истории процесса
-    path('complete_process_history/', CompleteProcessHistoryView.as_view(), name='complete_process_history'),  # Завершение истории процесса
-    path('shift_assignments_update/', ShiftAssignmentsUpdateView.as_view(), name='shift_assignments_update'),  # Обновление сменных заданий
+    path('', HomePageView.as_view(), name='home'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
+    path('shift_assignment/', ShiftAssignmentView.as_view(), name='shift_assignment'),
+    path('history_process_create/<int:assignment_id>/', HistoryProcessCreateView.as_view(), name='history_process_create'),
+    path('complete_process_history/', CompleteProcessHistoryView.as_view(), name='complete_process_history'),
+    path('shift_assignments_update/<int:assignment_id>/', ShiftAssignmentsUpdateView.as_view(), name='shift_assignments_update'),
 ]

@@ -1,132 +1,18 @@
-# class ProcessHistoryListView(ListView):
-#     model = ProcessHistory
-#     extra_context = {
-#         'title': 'Все истории процессов',
-#     }
-#     template_name = 'process_history/process_history_list.html'  # Убедитесь, что путь к шаблону правильный
-#     context_object_name = 'process_histories'  # Имя контекста для шаблона
-#
-#     def get_queryset(self):
-#         return ProcessHistory.objects.all()  # Возвращает все записи
-#
-#
-# class ProcessHistoryCreateView(LoginRequiredMixin, CreateView):
-#     model = ProcessHistory
-#     extra_context = {
-#         'title': 'Создание процесса',
-#     }
-#     success_url = reverse_lazy('process_history:process_history_create')
-#     template_name = 'process_history/process_history.html'
-#
-#     def form_valid(self, form):
-#         if self.request.user.role not in [UserRoles.USER, UserRoles.MASTER]:
-#             return HttpResponseForbidden("Нет соответствующего доступа!")
-#         self.object = form.save()
-#         self.object.user = self.request.user
-#         if self.object.detail_quantity == 120:
-#             print("Замените инструмент")
-#             return reverse('process_history:process_history_change')
-#         self.object.save()
-#         return super().form_valid(form)
-#
-#     def get_form_class(self):
-#         if self.object.detail_quantity == 0 or self.object.detail_quantity % 150 == 0:
-#             process_form_class = ProcessHistoryForm
-#         else:
-#             process_form_class = ProcessHistoryFormShort
-#         return process_form_class
-#
-#
-# class ProcessHistoryDetailView(LoginRequiredMixin, DetailView):
-#     model = ProcessHistory
-#     extra_context = {
-#         'title': 'Подробная информация о процессе',
-#     }
-#     template_name = 'process_history/process_history_detail'
-#
-#
-# class ProcessHistoryUpdateView(LoginRequiredMixin, UpdateView):
-#     model = ProcessHistory
-#     form_class = ProcessHistoryForm
-#     extra_context = {
-#         'title: Внесение изменений в процесс',
-#     }
-#
-#     def get_success_url(self):
-#         return reverse('process_history:process_history_detail', args=[self.kwargs.get('pk')])
-#
-#     def get_object(self, queryset=None):
-#         self.object = super().get_object(queryset)
-#         if self.request.user.role != UserRoles.MASTER:
-#             raise PermissionDenied()
-#         reverse(self.object)
-
+from django.contrib.auth import authenticate, login, logout, get_user_model
+from django.contrib.auth.hashers import make_password
+from django.views import View
 from django.views.generic import TemplateView, FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from users.models import User
+from django.db import IntegrityError
+
 from .models import ShiftAssignment, ProcessHistory
 from .forms import ProcessHistoryForm
 
 
 class HomePageView(TemplateView):
     template_name = 'process_history/home.html'
-
-
-class ShiftAssignmentView(LoginRequiredMixin, TemplateView):
-    template_name = 'process_history/shift_assignments.html'
-
-    def get(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
-            # Получаем задания для текущего оператора
-            assignments = ShiftAssignment.objects.filter(operator=request.user)
-            return self.render_to_response({'assignments': assignments})
-        else:
-            return render(request, 'process_history/login.html')
-
-    def post(self, request, *args, **kwargs):
-        # Здесь вы можете обрабатывать данные формы
-        # Например, если вы хотите перенаправить на страницу создания истории процесса
-        return redirect(
-            'process_history:history_process_create')  # Перенаправление на страницу создания истории процесса
-
-
-class HistoryProcessCreateView(LoginRequiredMixin, FormView):
-    template_name = 'process_history/history_process_create.html'
-    form_class = ProcessHistoryForm
-    success_url = reverse_lazy('process_history:history_process_create')
-
-    def form_valid(self, form):
-        process_history = form.save(commit=False)
-        process_history.user = self.request.user
-        process_history.save()
-        return super().form_valid(form)
-
-
-class CompleteProcessHistoryView(LoginRequiredMixin, TemplateView):
-    template_name = 'process_history/complete_process_history.html'
-
-    def post(self, request, *args, **kwargs):
-        # Логика завершения истории процесса
-        # Сохранение данных в БД и перенаправление на страницу обновления задания
-        return redirect('process_history:shift_assignments_update')
-
-
-class ShiftAssignmentsUpdateView(LoginRequiredMixin, TemplateView):
-    template_name = 'process_history/shift_assignments_update.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Получаем задания для текущего оператора
-        context['assignments'] = ShiftAssignment.objects.filter(operator=self.request.user)
-        return context
-
-    def post(self, request, *args, **kwargs):
-        # Логика обновления сменного задания
-        # Сохранение изменений в БД и перенаправление на страницу со сменными заданиями
-        return redirect('process_history:shift_assignments')
 
 
 def login_view(request):
@@ -140,20 +26,78 @@ def login_view(request):
             login(request, user)
             return redirect('process_history:shift_assignment')  # Перенаправление на страницу сменных заданий
         else:
-            error_message = "Пароль неверный!"  # Изменено сообщение об ошибке
-
-            users = User.objects.all()
-            print(f"Не удалось аутентифицировать пользователя: {username}")  # Отладочное сообщение
+            error_message = "Пароль неверный!"  # Сообщение об ошибке
             return render(request, 'registration/login.html', {
                 'error_message': error_message,
-                'users': users,
                 'username': username  # Сохраняем выбранное имя пользователя для удобства
             })
 
-    users = User.objects.all()  # Получаем всех пользователей для выпадающего списка
-    return render(request, 'registration/login.html', {'users': users})
+    return render(request, 'registration/login.html')  # Отображение формы входа
 
 
 def logout_view(request):
     logout(request)  # Выход пользователя
     return redirect('process_history:login')  # Перенаправление на страницу входа после выхода
+
+
+class ShiftAssignmentView(LoginRequiredMixin, TemplateView):
+    template_name = 'process_history/shift_assignments.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['assignments'] = ShiftAssignment.objects.filter(operator=self.request.user)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        return redirect('process_history:history_process_create')  # Перенаправление на страницу создания истории процесса
+
+
+class HistoryProcessCreateView(LoginRequiredMixin, FormView):
+    template_name = 'process_history/history_process_create.html'
+    form_class = ProcessHistoryForm
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        assignment_id = self.kwargs.get('assignment_id')
+        context['assignment'] = ShiftAssignment.objects.get(id=assignment_id)
+        return context
+
+    def form_valid(self, form):
+        process_history = form.save(commit=False)
+        process_history.user = self.request.user
+        process_history.assignment = self.get_context_data()['assignment']
+        process_history.save()
+
+        # Логика для создания модальных окон для ввода параметров
+        # Это может быть реализовано через JavaScript на клиентской стороне
+
+        return super().form_valid(form)
+
+
+class CompleteProcessHistoryView(LoginRequiredMixin, TemplateView):
+    template_name = 'process_history/complete_process_history.html'
+
+    def post(self, request, *args, **kwargs):
+        # Логика завершения истории процесса
+        return redirect('process_history:shift_assignments_update')
+
+
+class ShiftAssignmentsUpdateView(LoginRequiredMixin, TemplateView):
+    template_name = 'process_history/shift_assignments_update.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        assignment_id = self.kwargs.get('assignment_id')
+        context['assignment'] = ShiftAssignment.objects.get(id=assignment_id)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        # Логика обновления сменного задания и ввода количества брака
+        assignment_id = self.kwargs.get('assignment_id')
+        assignment = ShiftAssignment.objects.get(id=assignment_id)
+
+        # Обновление полей задания на основе введенных данных
+        assignment.broken_count = request.POST.get('broken_count')
+        assignment.save()
+
+        return redirect('process_history:shift_assignments')  # Перенаправление на страницу со сменными заданиями
