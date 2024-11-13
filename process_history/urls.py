@@ -5,6 +5,7 @@ from .views import (
     HistoryProcessCreateView,
     CompleteProcessHistoryView,
     ShiftAssignmentsUpdateView,
+    ShiftAssignmentCreateView,
 )
 
 app_name = 'process_history'
@@ -15,4 +16,5 @@ urlpatterns = [
     path('history_process_create/<int:assignment_id>/', HistoryProcessCreateView.as_view(), name='history_process_create'),
     path('complete_process_history/', CompleteProcessHistoryView.as_view(), name='complete_process_history'),
     path('shift_assignments_update/<int:assignment_id>/', ShiftAssignmentsUpdateView.as_view(), name='shift_assignments_update'),
+    path('shift_assignment/create/', ShiftAssignmentCreateView.as_view(), name='shift_assignment_create'),
 ]

@@ -4,20 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="Сделал ревью кода">
-      <change afterPath="$PROJECT_DIR$/users/templates/users/logout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/users/templates/users/user_list.html" afterDir="false" />
+    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="Изменил файлы представлений в соответствии с новой логикой приложения">
+      <change afterPath="$PROJECT_DIR$/process_history/templates/process_history/shift_assignment_create.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/process_history/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/templates/process_history/shift_assignments.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/process_history/shift_assignments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/templates/registration/create_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/create_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/process_history/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/process_history/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/templates/users/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/profile_user.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -266,7 +257,47 @@
       <option name="project" value="LOCAL" />
       <updated>1731526008201</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="создал шаблоны html для User, некоторые шаблоны переехали из process_history">
+      <option name="closed" value="true" />
+      <created>1731532736253</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1731532736253</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Убрал кнопку перехода к сменным заданиям и кнопку выхода">
+      <option name="closed" value="true" />
+      <created>1731532805438</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1731532805438</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Сделал url переадресацию ссылки кнопки выход">
+      <option name="closed" value="true" />
+      <created>1731532861875</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1731532861875</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Добавил маршруты для новых представлений User, некоторые маршруты перенаправил с process_history/urls.py">
+      <option name="closed" value="true" />
+      <created>1731532983710</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1731532983710</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Изменил файлы представлений в соответствии с новой логикой приложения">
+      <option name="closed" value="true" />
+      <created>1731533055186</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1731533055186</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -281,7 +312,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Сделал шаблоны для представлений" />
     <MESSAGE value="Сделал модель для сменного задания, удалил некоторые поля для пользователя. Провел миграции" />
     <MESSAGE value="Заново переписаны все вьюшки и определены маршруты для них" />
     <MESSAGE value="Пользователь авторизуется через ник, а не email" />
@@ -302,6 +332,11 @@
     <MESSAGE value="Страница для создания пользователя" />
     <MESSAGE value="в файле users/views.py написаны классы для основных представлений User" />
     <MESSAGE value="Сделал ревью кода" />
-    <option name="LAST_COMMIT_MESSAGE" value="Сделал ревью кода" />
+    <MESSAGE value="создал шаблоны html для User, некоторые шаблоны переехали из process_history" />
+    <MESSAGE value="Убрал кнопку перехода к сменным заданиям и кнопку выхода" />
+    <MESSAGE value="Сделал url переадресацию ссылки кнопки выход" />
+    <MESSAGE value="Добавил маршруты для новых представлений User, некоторые маршруты перенаправил с process_history/urls.py" />
+    <MESSAGE value="Изменил файлы представлений в соответствии с новой логикой приложения" />
+    <option name="LAST_COMMIT_MESSAGE" value="Изменил файлы представлений в соответствии с новой логикой приложения" />
   </component>
 </project>
