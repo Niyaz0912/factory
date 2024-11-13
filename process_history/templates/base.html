@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Мое приложение{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Добавьте другие стили, если необходимо -->
+</head>
+<body>
+
+<div class="container mt-5">
+    <header>
+        <h1 class="text-center">Добро пожаловать в приложение "Ассистент оператора"</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'process_history:home' %}">Главная</a>
+            <a class="nav-link" href="{% url 'process_history:login' %}">Вход</a>
+            <a class="nav-link" href="{% url 'process_history:logout' %}">Выход</a>
+        </nav>
+    </header>
+
+    <main id="content">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="text-center mt-5">
+        <p>© 2024 Мое приложение</p>
+    </footer>
+</div>
+
+<!-- Подключение JavaScript для Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
