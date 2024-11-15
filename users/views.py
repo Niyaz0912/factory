@@ -17,20 +17,25 @@ class UserCreateView(View):
     def post(self, request):
         username = request.POST.get('username')
         password = request.POST.get('password')
+        first_name = request.POST.get('first_name')  # Новое поле: имя
+        last_name = request.POST.get('last_name')    # Новое поле: фамилия
+        role = 'operator'  # Роль по умолчанию
 
         # Проверка на существование пользователя с таким же именем
         if User.objects.filter(username=username).exists():
             error_message = "Пользователь с таким именем уже существует."
             return render(request, 'users/create_user.html', {'error_message': error_message})
 
-        # Создаем пользователя с хэшированным паролем
-        user = User(username=username, password=make_password(password))
+        # Создаем пользователя с хэшированным паролем и дополнительными полями
+        user = User(
+            username=username,
+            password=make_password(password),
+            first_name=first_name,
+            last_name=last_name
+        )
         user.save()
 
         return redirect('process_history:login')  # Перенаправление на страницу входа после создания пользователя
-
-
-User = get_user_model()  # Получаем текущую модель пользователя
 
 
 class UserLoginView(TemplateView):

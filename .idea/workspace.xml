@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="Изменил файлы представлений в соответствии с новой логикой приложения">
-      <change afterPath="$PROJECT_DIR$/process_history/templates/process_history/shift_assignment_create.html" afterDir="false" />
+    <list default="true" id="e4aa5d64-85ba-4861-b979-3ae3ec191516" name="Changes" comment="создал маршрут для создания сменных заданий">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/process_history/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/process_history/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/process_history/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/management/commands/ccsu.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/management/commands/ccsu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/templates/users/create_user.html" beforeDir="false" afterPath="$PROJECT_DIR$/users/templates/users/create_user.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -297,7 +299,31 @@
       <option name="project" value="LOCAL" />
       <updated>1731533055186</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="создал представление ShiftAssignmentCreateView с допуском только админ и мастер">
+      <option name="closed" value="true" />
+      <created>1731536172410</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1731536172410</updated>
+    </task>
+    <task id="LOCAL-00030" summary="шаблон для страницы с создаием сменных заданий">
+      <option name="closed" value="true" />
+      <created>1731536223195</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1731536223195</updated>
+    </task>
+    <task id="LOCAL-00031" summary="создал маршрут для создания сменных заданий">
+      <option name="closed" value="true" />
+      <created>1731536288276</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1731536288276</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -312,9 +338,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Сделал модель для сменного задания, удалил некоторые поля для пользователя. Провел миграции" />
-    <MESSAGE value="Заново переписаны все вьюшки и определены маршруты для них" />
-    <MESSAGE value="Пользователь авторизуется через ник, а не email" />
     <MESSAGE value="Сокращен код для login.html" />
     <MESSAGE value="Указаны дефолтные значения для обязательных полей" />
     <MESSAGE value="Проведены миграции" />
@@ -337,6 +360,9 @@
     <MESSAGE value="Сделал url переадресацию ссылки кнопки выход" />
     <MESSAGE value="Добавил маршруты для новых представлений User, некоторые маршруты перенаправил с process_history/urls.py" />
     <MESSAGE value="Изменил файлы представлений в соответствии с новой логикой приложения" />
-    <option name="LAST_COMMIT_MESSAGE" value="Изменил файлы представлений в соответствии с новой логикой приложения" />
+    <MESSAGE value="создал представление ShiftAssignmentCreateView с допуском только админ и мастер" />
+    <MESSAGE value="шаблон для страницы с создаием сменных заданий" />
+    <MESSAGE value="создал маршрут для создания сменных заданий" />
+    <option name="LAST_COMMIT_MESSAGE" value="создал маршрут для создания сменных заданий" />
   </component>
 </project>
