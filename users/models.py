@@ -13,11 +13,11 @@ class UserRoles(models.TextChoices):
 
 class User(AbstractUser):
     is_staff = models.BooleanField(default=False)
-    first_name = models.CharField(max_length=30, blank=False, null=False, default='имя оператора')
-    last_name = models.CharField(max_length=30, blank=False, null=False, default='фамилия оператора')
+    first_name = models.CharField(max_length=30, blank=False, null=False, default='имя оператора', verbose_name="имя сотрудника")
+    last_name = models.CharField(max_length=30, blank=False, null=False, default='фамилия оператора', verbose_name="фамилия сотрудника")
     username = models.CharField(max_length=150, unique=True, blank=False, null=False)
-    password = models.CharField(max_length=255)
-    role = models.CharField(max_length=9, choices=UserRoles.choices, default=UserRoles.OPERATOR)  # Роль пользователя
+    password = models.CharField(max_length=255, verbose_name="пароль")
+    role = models.CharField(max_length=9, choices=UserRoles.choices, default=UserRoles.OPERATOR, verbose_name="должность")  # Роль пользователя
     is_active = models.BooleanField(default=True, verbose_name='active', **NULLABLE)
 
     USERNAME_FIELD = "username"  # Используем username для авторизации
