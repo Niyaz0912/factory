@@ -21,7 +21,7 @@ class User(AbstractUser):
     is_active = models.BooleanField(default=True, verbose_name='active', **NULLABLE)
 
     USERNAME_FIELD = "username"  # Используем username для авторизации
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'email']  # Обязательные поля
+    REQUIRED_FIELDS = ['first_name', 'last_name']  # Обязательные поля
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
