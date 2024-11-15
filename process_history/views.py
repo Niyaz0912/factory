@@ -1,8 +1,6 @@
-from django.template.context_processors import request
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView, ListView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.shortcuts import redirect
 from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView
 
@@ -17,6 +15,7 @@ class HomePageView(TemplateView):
 
 class ShiftAssignmentListView(LoginRequiredMixin, ListView):
     model = ShiftAssignment
+    form_class = ShiftAssignmentForm
     extra_context = {
         'title': 'Все ваши задания'
     }
@@ -33,7 +32,7 @@ class ShiftAssignmentListView(LoginRequiredMixin, ListView):
 
 class ShiftAssignmentCreateView(LoginRequiredMixin, CreateView):
     model = ShiftAssignment
-    form = ShiftAssignmentForm
+    form_class = ShiftAssignmentForm
     template_name = 'process_history/shift_assignment_create_update.html'
     success_url = reverse_lazy('process_history:home')
 
@@ -93,6 +92,7 @@ class ShiftAssignmentDeleteView(LoginRequiredMixin, PermissionRequiredMixin, Del
     success_url = reverse_lazy('process_history:assignments_list')
     permission_required = 'shift_assignments.delete_shift_assignment'
     # permission_required = 'process_history.delete_process_history'
+
 
 class HistoryProcessCreateView(LoginRequiredMixin, CreateView):
     model = ProcessHistory
