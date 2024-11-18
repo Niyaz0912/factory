@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'users',
     'process_history',
     'widget_tweaks',
+    'shift_assignment',
 
 ]
 
