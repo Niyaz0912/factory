@@ -9,13 +9,10 @@ from .models import ShiftAssignment
 from users.models import UserRoles
 
 
-class ShiftAssignmentListView(LoginRequiredMixin, ListView):
+class ShiftAssignmentListView(ListView):
     model = ShiftAssignment
-    form_class = ShiftAssignmentForm
-    extra_context = {
-        'title': 'Все ваши задания'
-    }
     template_name = 'shift_assignment/shift_assignment_list.html'
+    context_object_name = 'assignments'
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -40,12 +37,10 @@ class ShiftAssignmentCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ShiftAssignmentDetailView(LoginRequiredMixin, DetailView):
+class ShiftAssignmentDetailView(DetailView):
     model = ShiftAssignment
-    template_name = 'shift_assignment/shift_assignments_detail.html'
-    extra_context = {
-        'title': 'Ваше задание на смену'
-    }
+    template_name = 'shift_assignment/shift_assignment_detail.html'
+    context_object_name = 'assignment'
 
 
 class ShiftAssignmentUpdateView(LoginRequiredMixin, UpdateView):
