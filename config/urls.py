@@ -4,7 +4,8 @@ from process_history.views import HomePageView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', HomePageView.as_view(), name='home'),  # Добавлен маршрут для корневого URL
+    path('', HomePageView.as_view(), name='home'),
     path('users/', include('users.urls', namespace='users')),
-    path('', include('process_history.urls')),  # Подключение маршрутов приложения process_history
-]
+    path('process_history/', include('process_history.urls', namespace='process_history')),
+    path('shift_assignment/', include('shift_assignment.urls', namespace='shift_assignment')),
+    ]
