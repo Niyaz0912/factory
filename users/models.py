@@ -20,8 +20,8 @@ class User(AbstractUser):
     role = models.CharField(max_length=9, choices=UserRoles.choices, default=UserRoles.OPERATOR, verbose_name="должность")  # Роль пользователя
     is_active = models.BooleanField(default=True, verbose_name='active', **NULLABLE)
 
-    USERNAME_FIELD = "username"  # Используем username для авторизации
-    REQUIRED_FIELDS = ['first_name', 'last_name']  # Обязательные поля
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
