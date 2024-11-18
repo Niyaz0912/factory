@@ -1,79 +1,76 @@
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth import get_user_model
-from django.contrib.auth.hashers import make_password
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.views import View
-from django.views.generic import TemplateView
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import redirect
+from django.views.generic import CreateView, UpdateView, ListView, DetailView
 
-User = get_user_model()
+from django.urls import reverse_lazy
 
-
-class UserCreateView(View):
-    def get(self, request):
-        return render(request, 'users/create_user.html')
-
-    def post(self, request):
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        first_name = request.POST.get('first_name')  # Новое поле: имя
-        last_name = request.POST.get('last_name')    # Новое поле: фамилия
-        role = 'operator'  # Роль по умолчанию
-
-        # Проверка на существование пользователя с таким же именем
-        if User.objects.filter(username=username).exists():
-            error_message = "Пользователь с таким именем уже существует."
-            return render(request, 'users/create_user.html', {'error_message': error_message})
-
-        # Создаем пользователя с хэшированным паролем и дополнительными полями
-        user = User(
-            username=username,
-            password=make_password(password),
-            first_name=first_name,
-            last_name=last_name
-        )
-        user.save()
-
-        return redirect('process_history:login')  # Перенаправление на страницу входа после создания пользователя
+from users.models import User, UserRoles
+from users.forms import UserRegisterForm, UserLoginForm, UserUpdateForm, UserForm
 
 
-class UserLoginView(TemplateView):
-    template_name = 'users/login.html'  # Убедитесь, что путь к шаблону правильный
-
-    def post(self, request, *args, **kwargs):
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        # Аутентификация пользователя
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            # Проверяем, является ли пользователь мастером или администратором
-            if user.is_staff or hasattr(user, 'is_master') and user.is_master:
-                return redirect('process_history:shift_assignment_create')  # Перенаправление на страницу создания сменных заданий
-            else:
-                return redirect('process_history:shift_assignment')  # Перенаправление на страницу со сменными заданиями
-        else:
-            error_message = "Неверное имя пользователя или пароль."
-            return render(request, self.template_name, {'error_message': error_message})
+class UserRegisterView(CreateView):
+    model = User
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('users:login_user')
+    template_name = 'users/register_user.html'
 
 
-class UserLogoutView(View):
-    def get(self, request):
-        logout(request)  # Выход пользователя
-        return redirect('users:login')  # Перенаправление на страницу входа после выхода
+class UserLoginView(LoginView):
+    form_class = UserLoginForm
+    template_name = 'users/login_user.html'
+
+    def form_valid(self, form):
+        user = form.get_user()
+        login(self.request, user)
+        return redirect('users:profile_user')  # Перенаправление на профиль пользователя
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
 
 
-class UserProfileView(View):
-    def get(self, request):
-        if request.user.is_authenticated:
-            return render(request, 'users/profile_user.html', {'user': request.user})
-        else:
-            return redirect('process_history:login')
+class UserProfileView(UpdateView):
+    model = User
+    form_class = UserForm
+    template_name = 'users/user_profile_read_only.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_role'] = self.request.user.role  # Передаем роль пользователя в контекст
+        return context
 
 
-class UserListView(View):
-    def get(self, request):
-        users = User.objects.all()  # Получаем всех пользователей
-        return render(request, 'users/user_list.html', {'users': users})
+class UserUpdateView(UpdateView):
+    model = User
+    form_class = UserUpdateForm
+    template_name = 'users/update_user.html'
+    success_url = reverse_lazy('users:profile_user')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class UserLogoutView(LogoutView):
+    template_name = 'users/logout_user.html'
+
+
+class UserListView(LoginRequiredMixin, ListView):
+    model = User
+    extra_context = {
+        'title': 'Сотрудники УМКИ:'
+    }
+    template_name = 'users/users.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.filter(is_active=True)
+        return queryset
+
+
+class UserViewProfileView(DetailView):
+    model = User
+    template_name = 'users/user_view_profile.html'

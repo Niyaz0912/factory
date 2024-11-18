@@ -1,6 +1,7 @@
+from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView, ListView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, AccessMixin
 from django.core.exceptions import PermissionDenied
 
 from .forms import ShiftAssignmentForm
@@ -29,14 +30,14 @@ class ShiftAssignmentCreateView(LoginRequiredMixin, CreateView):
     model = ShiftAssignment
     form_class = ShiftAssignmentForm
     template_name = 'shift_assignment/shift_assignment_create.html'
-    success_url = reverse_lazy('process_history:home')
 
     def form_valid(self, form):
         if self.request.user.role not in [UserRoles.MASTER, UserRoles.ADMIN]:
-            raise PermissionDenied
+            raise PermissionDenied("У вас нет прав для создания задания.")
         self.object = form.save()
         self.object.master = self.request.user
         self.object.save()
+        return super().form_valid(form)
 
 
 class ShiftAssignmentDetailView(LoginRequiredMixin, DetailView):
@@ -58,34 +59,23 @@ class ShiftAssignmentUpdateView(LoginRequiredMixin, UpdateView):
         self.object = super().get_object(queryset)
         if self.object.master != self.request.user and self.request.user.role not in [UserRoles.MASTER,
                                                                                       UserRoles.ADMIN]:
-            raise PermissionDenied()
+            raise PermissionDenied("У вас нет прав для редактирования этого задания.")
         return self.object
 
-    def get_form_class(self):
-        assignment_forms = {
-            'admin': ShiftAssignmentForm,
-            'master': ShiftAssignmentForm,
-            'operator': ShiftAssignmentForm,
-        }
-        user_role = self.request.user.role
-        assignment_form_class = assignment_forms[user_role]
-        return assignment_form_class
-
     def get_success_url(self):
-        return reverse('process_history:assignments_list')
+        return reverse('shift_assignment:assignments_list')
 
     def form_valid(self, form):
         if self.request.user.role not in [UserRoles.MASTER, UserRoles.ADMIN]:
-            raise PermissionDenied
+            raise PermissionDenied("У вас нет прав для обновления задания.")
         self.object = form.save()
-        self.object.save()
+        return super().form_valid(form)
 
 
 class ShiftAssignmentDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = ShiftAssignment
-    template_name = 'process_history/shift_assignment_delete.html'
-    success_url = reverse_lazy('process_history:assignments_list')
+    template_name = 'shift_assignment/shift_assignment_delete.html'
+    success_url = reverse_lazy('shift_assignment:assignments_list')
     permission_required = 'shift_assignment.delete_shift_assignment'
+
     # permission_required = 'process_history.delete_process_history'
-
-
