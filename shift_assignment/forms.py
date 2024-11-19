@@ -3,21 +3,20 @@ from shift_assignment.models import ShiftAssignment
 
 
 class ShiftAssignmentForm(forms.ModelForm):
-    pass
+    file = forms.FileField(label='Выбрать файл .xls', required=False)  # Добавлено поле для загрузки файла
 
     class Meta:
         model = ShiftAssignment
         fields = [
-            'master',
             'operator',
             'operation_name',
             'machine_id',
             'part_id',
             'batch_number',
-            'quantity'
+            'quantity',
+            'file'
         ]
         widgets = {
-            'master': forms.Select(attrs={'class': 'form-control'}),
             'operator': forms.Select(attrs={'class': 'form-control'}),
             'operation_name': forms.TextInput(
                 attrs={'class': 'form-control', 'placeholder': 'Введите наименование операции'}),
@@ -32,3 +31,5 @@ class ShiftAssignmentForm(forms.ModelForm):
         if quantity < 0:
             raise forms.ValidationError("Количество не может быть отрицательным.")
         return quantity
+
+

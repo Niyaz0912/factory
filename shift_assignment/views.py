@@ -1,6 +1,6 @@
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, DetailView, UpdateView, ListView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, ListView, DeleteView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, AccessMixin
 from django.core.exceptions import PermissionDenied
 
@@ -27,6 +27,7 @@ class ShiftAssignmentCreateView(LoginRequiredMixin, CreateView):
     model = ShiftAssignment
     form_class = ShiftAssignmentForm
     template_name = 'shift_assignment/shift_assignment_create.html'
+    success_url = reverse_lazy('shift_assignment_list')
 
     def form_valid(self, form):
         if self.request.user.role not in [UserRoles.MASTER, UserRoles.ADMIN]:
@@ -35,11 +36,11 @@ class ShiftAssignmentCreateView(LoginRequiredMixin, CreateView):
         self.object.master = self.request.user
         self.object.save()
         return super().form_valid(form)
-
-
+    
+    
 class ShiftAssignmentDetailView(DetailView):
     model = ShiftAssignment
-    template_name = 'shift_assignment/shift_assignment_detail.html'
+    template_name = 'shift_assignment/detail.html'
     context_object_name = 'assignment'
 
 
