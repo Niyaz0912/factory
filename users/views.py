@@ -5,9 +5,10 @@ from django.shortcuts import redirect
 from django.views.generic import CreateView, UpdateView, ListView, DetailView
 
 from django.urls import reverse_lazy
-
 from users.models import User, UserRoles
 from users.forms import UserRegisterForm, UserLoginForm, UserUpdateForm, UserForm
+
+from shift_assignment.models import ShiftAssignment
 
 
 class UserRegisterView(CreateView):
@@ -40,7 +41,11 @@ class UserProfileView(UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user_role'] = self.request.user.role  # Передаем роль пользователя в контекст
+        context['user_role'] = self.request.user.role
+
+        if self.request.user.role == UserRoles.OPERATOR:
+            context['shift_assignments'] = ShiftAssignment.objects.filter(operator=self.request.user)
+
         return context
 
 
