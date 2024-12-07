@@ -9,30 +9,62 @@
 <div class="container mt-5">
     <h1 class="text-center">Создание задания</h1>
 
-    <form method="post" enctype="multipart/form-data">  <!-- Убедитесь, что enctype установлен -->
-        {% csrf_token %}  <!-- Используйте тег для CSRF токена -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
 
         <div class="form-group">
-            {{ form.operator.label }}  <!-- Отображаем метку без аргументов -->
-            {{ form.operator|add_class:"form-control" }}  <!-- Используем фильтр для добавления класса -->
+            {{ form.operator.label }}
+            {{ form.operator }}
             {% if form.operator.errors %}
-                <div class="text-danger">{{ form.operator.errors }}</div>  <!-- Отображение ошибок для поля оператора -->
+                <div class="text-danger">{{ form.operator.errors }}</div>
             {% endif %}
         </div>
 
         <div class="form-group">
-            {{ form.operation_name.label }}  <!-- Отображаем метку без аргументов -->
-            {{ form.operation_name|add_class:"form-control" }}  <!-- Используем фильтр для добавления класса -->
+            {{ form.operation_name.label }}
+            {{ form.operation_name }}
             {% if form.operation_name.errors %}
-                <div class="text-danger">{{ form.operation_name.errors }}</div>  <!-- Отображение ошибок для поля наименования операции -->
+                <div class="text-danger">{{ form.operation_name.errors }}</div>
             {% endif %}
         </div>
 
         <div class="form-group">
-            {{ form.machine_id.label }}  <!-- Отображаем метку без аргументов -->
-            {{ form.machine_id|add_class:"form-control" }}  <!-- Используем фильтр для добавления класса -->
+            {{ form.machine_id.label }}
+            {{ form.machine_id }}
             {% if form.machine_id.errors %}
-                <div class="text-danger">{{ form.machine_id.errors }}</div>  <!-- Отображение ошибок для поля номера станка -->
+                <div class="text-danger">{{ form.machine_id.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.part_id.label }}
+            {{ form.part_id }}
+            {% if form.part_id.errors %}
+                <div class="text-danger">{{ form.part_id.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.batch_number.label }}
+            {{ form.batch_number }}
+            {% if form.batch_number.errors %}
+                <div class="text-danger">{{ form.batch_number.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.quantity.label }}
+            {{ form.quantity }}
+            {% if form.quantity.errors %}
+                <div class="text-danger">{{ form.quantity.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.file.label }}
+            {{ form.file }}
+            {% if form.file.errors %}
+                <div class="text-danger">{{ form.file.errors }}</div>
             {% endif %}
         </div>
 

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Детали задания - {{ assignment.title }}
+Детали задания - {{ assignment.operation_name }}
 {% endblock %}
 
 {% block content %}
@@ -9,15 +9,16 @@
     <h1 class="text-center">Детали задания</h1>
 
     <main id="content" class="mt-4">
-        <h2>{{ assignment.title }}</h2>
-        <p><strong>Сотрудник:</strong> {{ assignment.employee }}</p>
-        <p><strong>Время смены:</strong> {{ assignment.shift_time }}</p>
+        <h2>{{ assignment.operation_name }}</h2>
+        <p><strong>Оператор:</strong> {{ assignment.operator }}</p>
+        <p><strong>Станок:</strong> {{ assignment.machine_id }}</p>
+        <p><strong>Количество:</strong> {{ assignment.quantity }}</p>
         <p><strong>Мастер:</strong> {{ assignment.master }}</p>
         <p><strong>Описание:</strong> {{ assignment.description }}</p>
 
         <div class="mt-4">
             <a href="{% url 'shift_assignment:shift_assignment_list' %}" class="btn btn-primary">Назад к списку заданий</a>
-            <a href="{% url 'shift_assignment:shift_assignment_edit' pk=assignment.pk %}" class="btn btn-warning">Редактировать задание</a>
+            <a href="{% url 'shift_assignment:assignments_update' pk=assignment.pk %}" class="btn btn-warning">Редактировать задание</a>
         </div>
     </main>
 </div>

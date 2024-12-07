@@ -1,27 +1,26 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends "base.html" %}
 
-{% block title %}Профиль пользователя{% endblock %}
+{% block title %}
+Профиль пользователя
+{% endblock %}
 
 {% block content %}
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
-        <p class="card-text">Роль: {{ user.role }}</p>
-        <p class="card-text">Имя пользователя: {{ user.username }}</p>
+<div class="container">
+    <h1>Профиль пользователя</h1>
+    <p>Роль: {{ user_role }}</p>
 
-        <!-- Кнопка для создания сменного задания -->
-        {% if user.is_superuser or user.role == 'MASTER' %}
-            <a href="{% url 'shift_assignment:assignments_create' %}" class="btn btn-primary">Создать сменное задание</a>
-        {% endif %}
-
-        <!-- Кнопка для просмотра сменного задания -->
-        {% if shift_assignment %}
-            <a href="{% url 'shift_assignment:shift_assignment_detail' shift_assignment.pk %}" class="btn btn-primary">Посмотреть сменное задание</a>
-        {% else %}
-            <p>Нет сменного задания для просмотра.</p>
-        {% endif %}
-    </div>
+    <h3>Сменные задания</h3>
+    {% if shift_assignments %}
+        <ul>
+            {% for assignment in shift_assignments %}
+                <li>
+                    {{ assignment.operation_name }} - {{ assignment.date }}
+                    <a href="{% url 'shift_assignment:shift_assignment_detail' assignment.pk %}">Просмотреть</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Нет назначенных сменных заданий.</p>
+    {% endif %}
 </div>
-
 {% endblock %}
