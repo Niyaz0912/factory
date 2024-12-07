@@ -6,8 +6,9 @@ from users.models import User
 
 
 class ShiftAssignment(models.Model):
-    operator = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='operator', null=True, blank=True,
+    operator = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='assignments', null=True, blank=True,
                                  verbose_name="Оператор")
+    master = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     operation_name = models.CharField(max_length=100, verbose_name="Операция")
     machine_id = models.CharField(max_length=50, verbose_name="№ станка")
     part_id = models.CharField(max_length=50, verbose_name="Наименование детали")
