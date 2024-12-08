@@ -1,25 +1,15 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
-{% block title %}
-Детали задания - {{ assignment.operation_name }}
-{% endblock %}
+{% block title %}Детали сменного задания{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="text-center">Детали задания</h1>
+    <h1>{{ assignment.title }}</h1>
+    <p><strong>Дата:</strong> {{ assignment.date }}</p>
+    <p><strong>Описание:</strong> {{ assignment.description }}</p>
+    <p><strong>Оператор:</strong> {{ assignment.operator.username }}</p>
 
-    <main id="content" class="mt-4">
-        <h2>{{ assignment.operation_name }}</h2>
-        <p><strong>Оператор:</strong> {{ assignment.operator }}</p>
-        <p><strong>Станок:</strong> {{ assignment.machine_id }}</p>
-        <p><strong>Количество:</strong> {{ assignment.quantity }}</p>
-        <p><strong>Мастер:</strong> {{ assignment.master }}</p>
-        <p><strong>Описание:</strong> {{ assignment.description }}</p>
-
-        <div class="mt-4">
-            <a href="{% url 'shift_assignment:shift_assignment_list' %}" class="btn btn-primary">Назад к списку заданий</a>
-            <a href="{% url 'shift_assignment:assignments_update' pk=assignment.pk %}" class="btn btn-warning">Редактировать задание</a>
-        </div>
-    </main>
+    <!-- Кнопка возврата к списку -->
+    <a href="{% url 'shift_assignment:list' %}" class="btn btn-secondary">Назад к списку</a>
 </div>
 {% endblock %}

@@ -1,74 +1,11 @@
-{% extends 'base.html' %}
-{% load custom_tags %}  <!-- Загрузка пользовательских тегов -->
 
-{% block title %}
-Создание задания
-{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
-    <h1 class="text-center">Создание задания</h1>
-
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        <div class="form-group">
-            {{ form.operator.label }}
-            {{ form.operator }}
-            {% if form.operator.errors %}
-                <div class="text-danger">{{ form.operator.errors }}</div>
-            {% endif %}
-        </div>
-
-        <div class="form-group">
-            {{ form.operation_name.label }}
-            {{ form.operation_name }}
-            {% if form.operation_name.errors %}
-                <div class="text-danger">{{ form.operation_name.errors }}</div>
-            {% endif %}
-        </div>
-
-        <div class="form-group">
-            {{ form.machine_id.label }}
-            {{ form.machine_id }}
-            {% if form.machine_id.errors %}
-                <div class="text-danger">{{ form.machine_id.errors }}</div>
-            {% endif %}
-        </div>
-
-        <div class="form-group">
-            {{ form.part_id.label }}
-            {{ form.part_id }}
-            {% if form.part_id.errors %}
-                <div class="text-danger">{{ form.part_id.errors }}</div>
-            {% endif %}
-        </div>
-
-        <div class="form-group">
-            {{ form.batch_number.label }}
-            {{ form.batch_number }}
-            {% if form.batch_number.errors %}
-                <div class="text-danger">{{ form.batch_number.errors }}</div>
-            {% endif %}
-        </div>
-
-        <div class="form-group">
-            {{ form.quantity.label }}
-            {{ form.quantity }}
-            {% if form.quantity.errors %}
-                <div class="text-danger">{{ form.quantity.errors }}</div>
-            {% endif %}
-        </div>
-
-        <div class="form-group">
-            {{ form.file.label }}
-            {{ form.file }}
-            {% if form.file.errors %}
-                <div class="text-danger">{{ form.file.errors }}</div>
-            {% endif %}
-        </div>
-
-        <button type="submit" class="btn btn-primary">Создать задание</button>
-    </form>
-</div>
+<h1>Создание сменного задания</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Создать</button>
+</form>
 {% endblock %}

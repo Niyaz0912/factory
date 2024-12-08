@@ -1,12 +1,9 @@
-from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, DetailView, UpdateView, ListView, DeleteView, FormView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, AccessMixin
-from django.core.exceptions import PermissionDenied
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, UpdateView, ListView, DeleteView, CreateView
 
 from .forms import ShiftAssignmentForm
 from .models import ShiftAssignment
 from users.models import UserRoles
-import pandas as pd
 
 
 class ShiftAssignmentListView(ListView):
@@ -23,45 +20,35 @@ class ShiftAssignmentListView(ListView):
         return queryset
 
 
-class ShiftAssignmentCreateView(LoginRequiredMixin, CreateView):
+class ShiftAssignmentCreateView(CreateView):
     model = ShiftAssignment
     form_class = ShiftAssignmentForm
-    template_name = 'shift_assignment/shift_assignment_create.html'
-    success_url = reverse_lazy('shift_assignment:shift_assignment_list')
+    template_name = 'shift_assignment/shift_assignment_create.html'  # Убедитесь, что путь указан правильно
 
     def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.master = self.request.user
-        self.object.save()
+        # Здесь можно добавить дополнительную логику перед сохранением формы, если необходимо
         return super().form_valid(form)
 
-    
+    def get_success_url(self):
+        return reverse_lazy('shift_assignment:list')
+
+
 class ShiftAssignmentDetailView(DetailView):
     model = ShiftAssignment
     template_name = 'shift_assignment/shift_assignment_detail.html'
     context_object_name = 'assignment'
 
 
-class ShiftAssignmentUpdateView(LoginRequiredMixin, UpdateView):
+class ShiftAssignmentUpdateView(UpdateView):
     model = ShiftAssignment
     form_class = ShiftAssignmentForm
-    template_name = 'shift_assignment/shift_assignment_create.html'
-    success_url = reverse_lazy('shift_assignment:shift_assignment_list')
-
-    def get_object(self, queryset=None):
-        self.object = super().get_object(queryset)
-        if self.object.master != self.request.user and self.request.user.role not in [UserRoles.MASTER, UserRoles.ADMIN]:
-            raise PermissionDenied("У вас нет прав для редактирования этого задания.")
-        return self.object
-
-    def form_valid(self, form):
-        self.object = form.save()
-        return super().form_valid(form)
+    template_name = 'shift_assignment/shift_assignments_update.html'
+    success_url = reverse_lazy('users:profile_user')  # Перенаправление на профиль после успешного обновления
 
 
-class ShiftAssignmentDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
+class ShiftAssignmentDeleteView(DeleteView):
     model = ShiftAssignment
-    template_name = 'shift_assignment/shift_assignment_delete.html'
-    success_url = reverse_lazy('shift_assignment:shift_assignment_list')
-    permission_required = 'shift_assignment.delete_shift_assignment'
+    template_name = 'shift_assignment/shift_assignment_delete.html'  # Убедитесь, что путь указан правильно
 
+    def get_success_url(self):
+        return reverse_lazy('users:profile_user', kwargs={'pk': self.request.user.pk})

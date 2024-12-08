@@ -25,26 +25,30 @@ class UserLoginView(LoginView):
     def form_valid(self, form):
         user = form.get_user()
         login(self.request, user)
-        return redirect('users:profile_user')  # Перенаправление на профиль пользователя
-
-    def form_invalid(self, form):
-        return super().form_invalid(form)
+        return redirect('users:profile_user', pk=user.pk)
 
 
-class UserProfileView(UpdateView):
+class UserProfileView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserForm
-    template_name = 'users/user_profile_read_only.html'
-
-    def get_object(self, queryset=None):
-        return self.request.user
+    template_name = 'users/user_profile.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user_role'] = self.request.user.role
+        user_role = self.request.user.role  # Получаем роль пользователя
 
-        if self.request.user.role == UserRoles.OPERATOR:
-            context['shift_assignments'] = ShiftAssignment.objects.filter(operator=self.request.user)
+        # Получаем сменные задания в зависимости от роли пользователя
+        if user_role in [UserRoles.ADMIN, UserRoles.MASTER]:
+            context['shift_assignments'] = ShiftAssignment.objects.all()  # Все задания для админа и мастера
+            context['can_create_shift'] = True  # Возможность создания сменного задания
+        elif user_role == UserRoles.OPERATOR:
+            context['shift_assignments'] = ShiftAssignment.objects.filter(operator=self.request.user)  # Задания только для оператора
+            context['can_create_shift'] = False  # Оператор не может создавать задания
+
+        # Передаем строковые значения ролей в контекст
+        context['is_admin'] = user_role == UserRoles.ADMIN
+        context['is_master'] = user_role == UserRoles.MASTER
+        context['is_operator'] = user_role == UserRoles.OPERATOR
 
         return context
 
@@ -61,6 +65,7 @@ class UserUpdateView(UpdateView):
 
 class UserLogoutView(LogoutView):
     template_name = 'users/logout_user.html'
+    next_page = reverse_lazy('users:login_user')
 
 
 class UserListView(LoginRequiredMixin, ListView):

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Добро пожаловать в приложение "Ассистент оператора"</h1>
+    <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+
+    {% if can_create_shift %}
+        <h3>Создание сменного задания:</h3>
+        <a href="{% url 'shift_assignment:create_shift' %}" class="btn btn-primary mb-3">Создать сменное задание</a>
+    {% endif %}
+
+    <h3>Сменные задания:</h3>
+    <div class="row">
+        {% for assignment in shift_assignments %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ assignment.title }}</h5>
+                        <p class="card-text"><strong>Дата:</strong> {{ assignment.date }}</p>
+                        <p class="card-text"><strong>Описание:</strong> {{ assignment.description }}</p>
+                        <p class="card-text"><strong>Оператор:</strong> {{ assignment.operator.username }}</p>
+
+                        {% if is_admin or is_master %}
+                            <a href="{% url 'shift_assignment:update_shift' assignment.id %}" class="btn btn-warning">Редактировать</a>
+                            <form action="{% url 'shift_assignment:delete_shift' assignment.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Удалить</button>
+                            </form>
+                        {% else %}
+                            <a href="{% url 'shift_assignment:shift_assignment_detail' assignment.id %}" class="btn btn-info">Подробнее</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>Нет созданных сменных заданий.</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

@@ -1,26 +1,19 @@
-{% extends "base.html" %}
-
-{% block title %}
-Профиль пользователя
-{% endblock %}
+{% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    <h1>Профиль пользователя</h1>
-    <p>Роль: {{ user_role }}</p>
 
-    <h3>Сменные задания</h3>
-    {% if shift_assignments %}
-        <ul>
-            {% for assignment in shift_assignments %}
-                <li>
-                    {{ assignment.operation_name }} - {{ assignment.date }}
-                    <a href="{% url 'shift_assignment:shift_assignment_detail' assignment.pk %}">Просмотреть</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Нет назначенных сменных заданий.</p>
-    {% endif %}
-</div>
+<h1>Профиль пользователя</h1>
+
+{% if can_create_shift %}
+    <a href="{% url 'shift_assignment:create_shift' %}">Создать сменное задание</a>
+{% endif %}
+
+<h2>Сменные задания:</h2>
+<ul>
+    {% for assignment in shift_assignments %}
+        <li>{{ assignment.title }} - {{ assignment.date }}</li>
+    {% empty %}
+        <li>Нет созданных сменных заданий.</li>
+    {% endfor %}
+</ul>
 {% endblock %}

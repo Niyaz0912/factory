@@ -1,62 +1,20 @@
+<!-- shift_assignment/shift_assignment_list.html -->
 {% extends 'base.html' %}
 
-{% block title %}
-    {{ title }}
-{% endblock %}
+{% block title %}Список сменных заданий{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h1>{{ title }}</h1>
+<h1>Список сменных заданий</h1>
 
-    {% if object_list %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Задание</th>
-                    <th>Оператор</th>
-                    <th>Станок</th>
-                    <th>Количество</th>
-                    <th>Действия</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for assignment in object_list %}
-                    <tr>
-                        <td>{{ assignment.operation_name }}</td>
-                        <td>{{ assignment.operator }}</td>
-                        <td>{{ assignment.machine_id }}</td>
-                        <td>{{ assignment.quantity }}</td>
-                        <td>
-                            <!-- Кнопка для просмотра сменного задания -->
-                            <a href="{% url 'shift_assignment:shift_assignment_detail' assignment.pk %}" class="btn btn-info">Просмотреть</a>
-                            <!-- Кнопка для редактирования задания -->
-                            <a href="{% url 'shift_assignment:assignments_update' assignment.pk %}" class="btn btn-warning">Редактировать</a>
-                            <!-- Форма для удаления задания -->
-                            <form action="{% url 'shift_assignment:assignments_delete' assignment.pk %}" method="post" style="display:inline;">
-                                {% csrf_token %}
-                                <button type="submit" class="btn btn-danger">Удалить</button>
-                            </form>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>Нет заданий для отображения.</p>
-    {% endif %}
+<ul>
+    {% for assignment in shift_assignments %}
+        <li>
+            <a href="{% url 'shift_assignment:shift_assignment_detail' assignment.pk %}">{{ assignment.title }}</a> - {{ assignment.date }}
+        </li>
+    {% empty %}
+        <li>Нет созданных сменных заданий.</li>
+    {% endfor %}
+</ul>
 
-    <!-- Кнопка для создания нового задания -->
-    <a href="{% url 'shift_assignment:assignments_create' %}" class="btn btn-primary">Создать новое задание</a>
-
-    <!-- Дополнительный список заданий (если необходимо) -->
-    <div class="mt-4">
-        {% for assignment in object_list %}
-            <div>
-                <h5>{{ assignment.operation_name }}</h5>
-                <a href="{% url 'shift_assignment:shift_assignment_detail' assignment.pk %}" class="btn btn-primary">Посмотреть сменное задание</a>
-            </div>
-        {% endfor %}
-    </div>
-
-</div>
+<a href="{% url 'shift_assignment:create_shift' %}" class="btn btn-primary">Создать новое задание</a>
 {% endblock %}
