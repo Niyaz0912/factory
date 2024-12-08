@@ -6,10 +6,14 @@
 <div class="container mt-5">
     <h1>{{ assignment.title }}</h1>
     <p><strong>Дата:</strong> {{ assignment.date }}</p>
-    <p><strong>Описание:</strong> {{ assignment.description }}</p>
-    <p><strong>Оператор:</strong> {{ assignment.operator.username }}</p>
+    <h3>Описание:</h3>
+    <p><strong>Имя оператора:</strong> {{ assignment.operator.username }}</p>
+    <p><strong>Название операции:</strong> {{ assignment.operation_name }}</p>
+    <p><strong>Номер станка:</strong> {{ assignment.machine_id}}</p>
+    <p><strong>Наименование детали:</strong> {{ assignment.part_id }}</p>
+    <p><strong>Номер партии:</strong> {{ assignment.batch_number }}</p>
+    <p><strong>Количество:</strong> {{ assignment.quantity }}</p>
 
-    <!-- Кнопка возврата к списку -->
-    <a href="{% url 'shift_assignment:list' %}" class="btn btn-secondary">Назад к списку</a>
+    <a href="{% url 'process_history:history_process_create' assignment.id %}" class="btn btn-success">Выполнить задание</a>
 </div>
 {% endblock %}
