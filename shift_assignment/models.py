@@ -1,27 +1,19 @@
 from django.db import models
-from django.urls import reverse
+from django.conf import settings
 from django.utils import timezone
-
-from users.models import User
 
 
 class ShiftAssignment(models.Model):
-    operator = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='assignments', null=True, blank=True,
-                                 verbose_name="Оператор")
-    master = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    operation_name = models.CharField(max_length=100, verbose_name="Операция")
-    machine_id = models.CharField(max_length=50, verbose_name="№ станка")
-    part_id = models.CharField(max_length=50, verbose_name="Наименование детали")
-    batch_number = models.CharField(max_length=50, verbose_name="Номер партии")
-    quantity = models.IntegerField(verbose_name="Количество")
-    date = models.DateTimeField(default=timezone.now)
-    file = models.FileField(upload_to='uploads/', blank=True, null=True)
-
-    def get_absolute_url(self):
-        return reverse('shift_assignment_detail', kwargs={'pk': self.pk})
+    batch_number = models.CharField(max_length=100)  # Пример поля
+    operation_name = models.CharField(max_length=100)  # Пример поля
+    quantity = models.IntegerField()  # Пример поля
+    operator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)  # Обновлено
+    part_id = models.CharField(max_length=50)  # Пример поля
+    machine_id = models.IntegerField()  # Пример поля
+    date = models.DateField(default=timezone.now)
 
     def __str__(self):
-        return f'Задание: {self.operation_name}, Оператор: {self.operator}, Дата: {self.date}'
+        return f'{self.operation_name} - {self.batch_number}'
 
     class Meta:
         verbose_name = 'shift_assignment'

@@ -22,7 +22,7 @@
                     <span class="navbar-text mx-3">
                         {{ user.first_name }} {{ user.last_name }}
                     </span>
-                    <a class="btn btn-info mx-2" href="{% url 'users:profile_user' user.pk %}">Профиль</a>  {# Передаем pk пользователя #}
+                    <a class="btn btn-info mx-2" href="{% url 'users:user_profile' user.pk %}">Профиль</a>  {# Передаем pk пользователя #}
                     <form action="{% url 'users:logout' %}" method="post" class="d-inline">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger">Выйти</button>

@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 
+{% block title %}Загрузка сменного задания{% endblock %}
+
 {% block content %}
-<h2>Загрузить сменные задания</h2>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Загрузить</button>
-</form>
+<div class="container mt-5">
+    <h2>Загрузите сменное задание</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="file" class="form-label">Выберите файл .xls или .xlsx:</label>
+            <input type="file" class="form-control" id="file" name="file" accept=".xls,.xlsx" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Загрузить</button>
+    </form>
+</div>
 {% endblock %}
