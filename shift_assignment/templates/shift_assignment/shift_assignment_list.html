@@ -1,7 +1,8 @@
-<!-- shift_assignment/shift_assignment_list.html -->
 {% extends 'base.html' %}
 
 {% block title %}Список сменных заданий{% endblock %}
+
+{% block content %}  <!-- Добавлен блок для основного контента -->
 <table>
     <thead>
         <tr>
@@ -20,5 +21,4 @@
         {% endfor %}
     </tbody>
 </table>
-
 {% endblock %}
