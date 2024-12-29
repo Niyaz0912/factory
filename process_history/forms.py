@@ -7,7 +7,13 @@ from process_history.models import ProcessHistory
 class ProcessHistoryForm(forms.ModelForm):
     class Meta:
         model = ProcessHistory
-        fields = ['control_code', 'mark', 'quantity', 'parameters']
+        fields = ['roughness_check', 'defects_check', 'threading_check', 'diameter_check', 'value', 'detail_quantity',
+                  'control_code', 'mark_yes_no']
+
+
+class QualityControlForm(forms.Form):
+    roughness = forms.DecimalField(label='Шероховатость (мкм)', max_digits=5, decimal_places=2)
+    defects_absent = forms.BooleanField(required=False, label='Отсутствие рисок, канавок и т.д.')
 
 
 class HistoryProcessCreateView(CreateView):
