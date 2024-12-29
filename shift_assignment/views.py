@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from users.models import User
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView, UpdateView, ListView, DeleteView, CreateView
 
 from .forms import ShiftAssignmentForm
@@ -10,7 +10,7 @@ from users.models import UserRoles
 
 
 import pandas as pd
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from .models import ShiftAssignment
 from django.http import JsonResponse
@@ -45,7 +45,7 @@ class UploadShiftAssignmentView(LoginRequiredMixin, View):
 
                 # Логика для сохранения данных из DataFrame в базу данных
                 for index, row in df.iterrows():
-                    operator_id = row['operator_id']  # Используем operator_id вместо operator
+                    operator_id = row['operator_id']
                     try:
                         operator = User.objects.get(id=operator_id)  # Получите объект пользователя по ID
                     except User.DoesNotExist:
@@ -94,15 +94,22 @@ class ShiftAssignmentUpdateView(UpdateView):
     model = ShiftAssignment
     form_class = ShiftAssignmentForm
     template_name = 'shift_assignment/shift_assignments_update.html'
-    success_url = reverse_lazy('users:profile_user')  # Перенаправление на профиль после успешного обновления
-
-
-class ShiftAssignmentDeleteView(DeleteView):
-    model = ShiftAssignment
-    template_name = 'shift_assignment/shift_assignment_delete.html'  # Убедитесь, что путь указан правильно
 
     def get_success_url(self):
-        return reverse_lazy('users:profile_user', kwargs={'pk': self.request.user.pk})
+        # Перенаправляем на профиль текущего пользователя после успешного обновления
+        return reverse_lazy('users:user_profile', kwargs={'pk': self.request.user.pk})
+
+
+class ShiftAssignmentDeleteView(LoginRequiredMixin, DeleteView):
+    model = ShiftAssignment
+    template_name = 'shift_assignment/shift_assignment_delete.html'
+
+    def get_success_url(self):
+        # Возвращаем URL для перенаправления на профиль текущего пользователя
+        return reverse_lazy('users:user_profile', kwargs={'pk': self.request.user.pk})
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(ShiftAssignment, pk=self.kwargs['pk'])
 
 
 class OperatorAssignmentsView(View):
