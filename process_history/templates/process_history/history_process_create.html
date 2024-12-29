@@ -1,23 +1,17 @@
-{% extends 'base.html' %}
-
-{% block title %}История процесса{% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
-<form method="POST" action="{% url 'process_history:save_process_history' %}">
+  <h1>История процесса</h1>
+  <form method="post">
     {% csrf_token %}
-    <table class="table table-bordered mt-4">
-        <thead class="thead-light">
-            <tr>
-                <th>Код контроля</th>
-                <th>Отметка (Да/Нет)</th>
-                <th>Количество деталей</th>
-                <th>Параметры</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Ваши поля формы -->
-        </tbody>
-    </table>
-    <button type="submit" class="btn btn-primary">Сохранить</button>
-</form>
+
+    <p><strong>Имя оператора:</strong> {{ operator }}</p>
+    <p><strong>Название операции:</strong> {{ operation_name }}</p>
+    <p><strong>Номер станка:</strong> {{ machine_id }}</p>
+    <p><strong>Наименование детали:</strong> {{ part_id }}</p>
+    <p><strong>Номер партии:</strong> {{ batch_number }}</p>
+
+    {{ form.as_p }}  <!-- Отображение формы -->
+    <button type="submit">Сохранить</button>
+  </form>
 {% endblock %}
