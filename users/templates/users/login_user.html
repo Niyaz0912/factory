@@ -27,5 +27,9 @@
 
     <hr>
 
+    <!-- Кнопка для перехода на страницу регистрации -->
+    <form action="{% url 'users:user_register' %}" method="get" class="d-inline">
+        <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+    </form>
 </div>
 {% endblock %}
