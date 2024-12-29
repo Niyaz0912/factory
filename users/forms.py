@@ -2,6 +2,7 @@ from django import forms
 
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from users.models import User
+from django.utils.translation import gettext_lazy as _
 
 
 class StyleFormMixin:
@@ -29,8 +30,18 @@ class UserRegisterForm(StyleFormMixin, UserCreationForm):
         return temp_data['password2']
 
 
-class UserLoginForm(StyleFormMixin, AuthenticationForm):
-    pass
+class UserLoginForm(AuthenticationForm):
+    def clean(self):
+        super().clean()
+        if self.errors:
+            error_messages = []
+            for field in self.errors:
+                error_messages.extend(self.errors[field])
+            if error_messages:
+                raise forms.ValidationError(_('Пожалуйста, введите правильные имя пользователя и пароль. '
+                                              'Оба поля могут быть чувствительны к регистру.'))
+
+        return self.cleaned_data
 
 
 class UserUpdateForm(StyleFormMixin, forms.ModelForm):
