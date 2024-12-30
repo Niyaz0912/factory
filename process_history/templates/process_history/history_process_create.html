@@ -1,17 +1,121 @@
 {% extends "base.html" %}
+{% load static %}  <!-- Загружаем тег статических файлов -->
 
 {% block content %}
-  <h1>История процесса</h1>
-  <form method="post">
+<h1 style="margin-top: 40px; margin-bottom: 20px;">История процесса</h1>
+<form method="post">
     {% csrf_token %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th><strong>username:</strong></th>
+                <th><strong>Название операции:</strong></th>
+                <th><strong>Номер станка:</strong></th>
+                <th><strong>Наименование детали:</strong></th>
+                <th><strong>Номер партии:</strong></th>
+            </tr>
+            <tr>
+                <td>{{ operator }}</td>
+                <td>{{ operation_name }}</td>
+                <td>{{ machine_id }}</td>
+                <td>{{ part_id }}</td>
+                <td>{{ batch_number }}</td>
+            </tr>
+        </thead>
+    </table>
+    <br>
 
-    <p><strong>Имя оператора:</strong> {{ operator }}</p>
-    <p><strong>Название операции:</strong> {{ operation_name }}</p>
-    <p><strong>Номер станка:</strong> {{ machine_id }}</p>
-    <p><strong>Наименование детали:</strong> {{ part_id }}</p>
-    <p><strong>Номер партии:</strong> {{ batch_number }}</p>
+    <!-- Карточка для параметров детали -->
+    <div class="card" style="margin-top: 20px; width: 50%; border-width: 2px; border-color: #007bff; border-style: solid;">
+        <div class="card-header">
+            <h2>Параметры детали:</h2>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>Шероховатость:</td>
+                        <td>
+                            <label><input type="radio" name="roughness" value="yes" checked /> +</label> <!-- Установлено по умолчанию -->
+                            <label><input type="radio" name="roughness" value="no" /> -</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Специальная характеристика:</td>
+                        <td><input type="number" name="special_characteristic" min="21.95" max="22" step="0.001" placeholder="Введите значение от 21,95 до 22" required style="width: 150px;" /></td> <!-- Уменьшена ширина -->
+                    </tr>
+                    <tr>
+                        <td>Внешний вид:</td>
+                        <td>
+                            <label><input type="radio" name="appearance" value="yes" checked /> +</label> <!-- Установлено по умолчанию -->
+                            <label><input type="radio" name="appearance" value="no" /> -</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Наличие резьбы и отверстия под шплинт:</td>
+                        <td>
+                            <label><input type="radio" name="thread_hole" value="yes" checked /> +</label> <!-- Установлено по умолчанию -->
+                            <label><input type="radio" name="thread_hole" value="no" /> -</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Размер галтели:</td>
+                        <td>
+                            <label><input type="radio" name="galtel_size" value="yes" checked /> +</label> <!-- Установлено по умолчанию -->
+                            <label><input type="radio" name="galtel_size" value="no" /> -</label>
+                        </td>
+                    </tr>
 
-    {{ form.as_p }}  <!-- Отображение формы -->
-    <button type="submit">Сохранить</button>
-  </form>
+                    <!-- Поле для количества деталей -->
+                    <tr>
+                        <td>Количество деталей:</td>
+                        <td><input type="number" name="detail_quantity" placeholder="Введите количество" style="width: 150px;" /></td> <!-- Уменьшена ширина -->
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</form>
+
+<h2 style="margin-top: 40px;">Таблица параметров</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Количество шт.</th>
+            <th>Шероховатость</th>
+            <th>Спец. характеристика</th>
+            <th>Внешний вид</th>
+            <th>Резьба и отверстие под шплинт</th>
+            <th>Размер галтели</th>
+            <th>Код контроля</th>
+            <th>Маркировка да/нет</th>
+        </tr>
+    </thead>
+    <tbody id="parametersTableBody">
+        <!-- Записи будут добавляться сюда -->
+    </tbody>
+</table>
+
+
 {% endblock %}
+
+<!-- Подключаем CSS файл -->
+<link rel="stylesheet" href="{% static 'process_history/css/styles.css' %}" type="text/css">
+
+<!-- Подключаем JS файл -->
+<script src="{% static 'process_history/js/scripts.js' %}"></script>
+
+<script>
+// Устанавливаем фокус на поле "Значение специальной характеристики"
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('input[name="special_characteristic"]').focus();
+});
+</script>
+
+
+
