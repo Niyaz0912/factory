@@ -5,11 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}My App{% endblock %}</title>
 
+    {% load static %}  <!-- Загружаем тег статических файлов -->
+
     <!-- Подключение Bootstrap через CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Подключение вашего CSS файла -->
+    <link rel="stylesheet" href="{% static 'process_history/css/styles.css' %}" type="text/css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Подключение вашего JS файла -->
+    <script src="{% static 'process_history/js/scripts.js' %}"></script>
 </head>
 <body>
     <div class="container mt-5">
@@ -37,6 +46,5 @@
         {% endblock %}
     </div>
 
-    <!-- Подключение дополнительных скриптов (если необходимо) -->
 </body>
 </html>

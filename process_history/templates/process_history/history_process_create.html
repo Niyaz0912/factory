@@ -2,8 +2,12 @@
 {% load static %}  <!-- Загружаем тег статических файлов -->
 
 {% block content %}
-<h1 style="margin-top: 40px; margin-bottom: 20px;">История процесса</h1>
-<form method="post">
+<div class="d-flex justify-content-between align-items-center">
+    <h1 style="margin-top: 40px; margin-bottom: 20px;">История процесса</h1>
+    <a href="{% url 'process_history:save_process_history' assignment_id %}" class="btn btn-primary" style="margin-top: 40px;">Завершить историю процесса</a>
+</div>
+
+<form id="parameterForm">
     {% csrf_token %}
     <table class="table">
         <thead>
@@ -26,54 +30,107 @@
     <br>
 
     <!-- Карточка для параметров детали -->
-    <div class="card" style="margin-top: 20px; width: 50%; border-width: 2px; border-color: #007bff; border-style: solid;">
+    <div class="card" style="margin-top: 20px; width: calc(100% - 40px); margin-left: 20px; margin-right: 20px; border-width: 2px; border-color: #007bff; border-style: solid;">
         <div class="card-header">
             <h2>Параметры детали:</h2>
         </div>
         <div class="card-body">
-            <table class="table">
-                <tbody>
-                    <tr>
-                        <td>Шероховатость:</td>
-                        <td>
-                            <label><input type="radio" name="roughness" value="yes" checked /> +</label> <!-- Установлено по умолчанию -->
-                            <label><input type="radio" name="roughness" value="no" /> -</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Специальная характеристика:</td>
-                        <td><input type="number" name="special_characteristic" min="21.95" max="22" step="0.001" placeholder="Введите значение от 21,95 до 22" required style="width: 150px;" /></td> <!-- Уменьшена ширина -->
-                    </tr>
-                    <tr>
-                        <td>Внешний вид:</td>
-                        <td>
-                            <label><input type="radio" name="appearance" value="yes" checked /> +</label> <!-- Установлено по умолчанию -->
-                            <label><input type="radio" name="appearance" value="no" /> -</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Наличие резьбы и отверстия под шплинт:</td>
-                        <td>
-                            <label><input type="radio" name="thread_hole" value="yes" checked /> +</label> <!-- Установлено по умолчанию -->
-                            <label><input type="radio" name="thread_hole" value="no" /> -</label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Размер галтели:</td>
-                        <td>
-                            <label><input type="radio" name="galtel_size" value="yes" checked /> +</label> <!-- Установлено по умолчанию -->
-                            <label><input type="radio" name="galtel_size" value="no" /> -</label>
-                        </td>
-                    </tr>
+            <div style="display: flex; justify-content: space-between;">
+                <!-- Первый столбик -->
+                <div style="flex: 1; margin-right: 10px;">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Шероховатость:</td>
+                                <td>
+                                    <label><input type="radio" name="roughness" value="yes" checked /> +</label>
+                                    <label><input type="radio" name="roughness" value="no" /> -</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Специальная характеристика:</td>
+                                <td><input type="number" id="specialCharacteristic" name="special_characteristic" min="21.95" max="22" step="0.001" placeholder="Введите значение от 21,95 до 22" required style="width: 150px;" /></td>
+                            </tr>
+                            <tr>
+                                <td>Внешний вид:</td>
+                                <td>
+                                    <label><input type="radio" name="appearance" value="yes" checked /> +</label>
+                                    <label><input type="radio" name="appearance" value="no" /> -</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Наличие резьбы и отверстия под шплинт:</td>
+                                <td>
+                                    <label><input type="radio" name="thread_hole" value="yes" checked /> +</label>
+                                    <label><input type="radio" name="thread_hole" value="no" /> -</label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Размер галтели:</td>
+                                <td>
+                                    <label><input type="radio" name="galtel_size" value="yes" checked /> +</label>
+                                    <label><input type="radio" name="galtel_size" value="no" /> -</label>
+                                </td>
+                            </tr>
 
-                    <!-- Поле для количества деталей -->
-                    <tr>
-                        <td>Количество деталей:</td>
-                        <td><input type="number" name="detail_quantity" placeholder="Введите количество" style="width: 150px;" /></td> <!-- Уменьшена ширина -->
-                    </tr>
+                        </tbody>
+                    </table>
 
-                </tbody>
-            </table>
+                </div>
+
+                <!-- Второй столбик -->
+                <div style="flex: 1; margin-left: 10px;">
+                    <table class="table">
+                        <tbody>
+
+                            <!-- Поле для количества деталей -->
+                            <tr>
+                                <td>Количество деталей:</td>
+                                <td><input type="number" id="quantity" name="detail_quantity" placeholder="Введите количество" value="1" style="width: 150px;" /></td>
+                            </tr>
+
+                            <!-- Поле для кода контроля -->
+                            <tr>
+                                <td>Код контроля:</td>
+                                <td><select id="controlCode">
+                                        <!-- Значения кода контроля -->
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="3;2">3;2</option>
+                                        <!-- Дополнительные значения -->
+                                    </select></td>
+                            </tr>
+
+                            <!-- Поле для маркировки да/нет -->
+                            <tr>
+                                <td>Маркировка да/нет:</td>
+                                <td>
+                                    <label><input type="radio" name="mark_yes_no" value="yes" checked /> Да</label>
+                                    <label><input type="radio" name="mark_yes_no" value="no" /> Нет</label>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <!-- Кнопка для добавления нового замера -->
+                    <!-- Округленные углы и зеленый цвет -->
+                    <button type="button" id="addMeasurementButton"
+                        style="
+                        background-color: green;
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        padding: 10px 15px;
+                        cursor: pointer;">Новый замер</button>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -86,21 +143,20 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Количество шт.</th>
-            <th>Шероховатость</th>
-            <th>Спец. характеристика</th>
-            <th>Внешний вид</th>
-            <th>Резьба и отверстие под шплинт</th>
-            <th>Размер галтели</th>
-            <th>Код контроля</th>
-            <th>Маркировка да/нет</th>
+            <th>Количество шт.</th><!-- Изменено на "+" -->
+            <th>Шероховатость</th><!-- Изменено на "+" -->
+            <th>Спец. характеристика</th><!-- Изменено на "+" -->
+            <th>Внешний вид</th><!-- Изменено на "+" -->
+            <th>Резьба и отверстие под шплинт</th><!-- Изменено на "+" -->
+            <th>Размер галтели</th><!-- Изменено на "+" -->
+            <th>Код контроля</th><!-- Добавлено поле Код контроля -->
+            <th>Маркировка да/нет</th><!-- Добавлено поле Маркировка да/нет -->
         </tr>
     </thead>
     <tbody id="parametersTableBody">
         <!-- Записи будут добавляться сюда -->
     </tbody>
 </table>
-
 
 {% endblock %}
 
@@ -109,13 +165,6 @@
 
 <!-- Подключаем JS файл -->
 <script src="{% static 'process_history/js/scripts.js' %}"></script>
-
-<script>
-// Устанавливаем фокус на поле "Значение специальной характеристики"
-document.addEventListener("DOMContentLoaded", function() {
-    document.querySelector('input[name="special_characteristic"]').focus();
-});
-</script>
 
 
 

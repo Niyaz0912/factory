@@ -2,6 +2,8 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 
+NULLABLE = {'blank': True, 'null': True}
+
 
 class ProcessHistory(models.Model):
     CONTROL_CODE_CHOICES = [
@@ -15,11 +17,11 @@ class ProcessHistory(models.Model):
     ]
 
     process_name = models.CharField(max_length=255, verbose_name="Наименование операции:")
-    detail_name = models.CharField(max_length=100, verbose_name="Наименование изделия")
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True,
                              verbose_name="Оператор")
+    part_id = models.CharField(max_length=100, verbose_name="№ партии")
+    batch_number = models.CharField(max_length=100, verbose_name="Наименование изделия")
     machine_id = models.IntegerField(default=1, verbose_name="№ станка")
-    parameter_name = models.CharField(max_length=100, verbose_name="Параметры")
     value = models.CharField(max_length=100, verbose_name="Значение специальной характеристики")
     timestamp = models.DateTimeField(auto_now_add=True)
     detail_quantity = models.IntegerField(default=0, verbose_name="Количество деталей")
@@ -31,7 +33,8 @@ class ProcessHistory(models.Model):
     control_code = models.CharField(max_length=10, choices=CONTROL_CODE_CHOICES, default=1, verbose_name="Код контроля")
 
     # Новые поля для параметров контроля
-    roughness_check = models.CharField(max_length=1, choices=[('+', '+'), ('-', '-')], default='+', verbose_name="Шероховатость")
+    roughness_check = models.CharField(max_length=1, choices=[('+', '+'), ('-', '-')], default='+',
+                                       verbose_name="Шероховатость")
     defects_check = models.CharField(max_length=1, choices=[('+', '+'), ('-', '-')],
                                      default='+', verbose_name="Отсутствие рисок, канавок и т.д.")
 
