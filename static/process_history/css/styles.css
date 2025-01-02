@@ -14,3 +14,38 @@ h1 {
 h2 {
     color: #555; /* Цвет подзаголовка */
 }
+
+body {
+    background-color: #f8f9fa; /* Светлый фон */
+}
+
+h1 {
+    color: #343a40; /* Темный цвет заголовка */
+}
+
+.btn-success {
+    background-color: #28a745; /* Цвет кнопки */
+    border-color: #28a745;
+}
+
+
+.btn-new {
+    border-radius: 10px;
+    color: white;
+    transition: .2s linear;
+    background: #0B63F6;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.btn-new:hover {
+    box-shadow: 2px 2px white, 4px 4px #FC63B5;
+    top: -4px;
+    left: -4px;
+}
+
+.button-wrapper{
+	display: flex;
+	justify-content: center;
+}

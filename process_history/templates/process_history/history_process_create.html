@@ -49,7 +49,9 @@
                             </tr>
                             <tr>
                                 <td>Специальная характеристика:</td>
-                                <td><input type="number" id="specialCharacteristic" name="special_characteristic" min="21.95" max="22" step="0.001" placeholder="Введите значение от 21,95 до 22" required style="width: 150px;" /></td>
+                                <td><input type="number" id="specialCharacteristic" name="special_characteristic"
+                                           min="21.95" max="22" step="0.001" placeholder="от 21,95 до 22"
+                                           required style="width: 150px;" /></td> <!-- Уменьшена ширина -->
                             </tr>
                             <tr>
                                 <td>Внешний вид:</td>
@@ -86,7 +88,7 @@
                             <!-- Поле для количества деталей -->
                             <tr>
                                 <td>Количество деталей:</td>
-                                <td><input type="number" id="quantity" name="detail_quantity" placeholder="Введите количество" value="1" style="width: 150px;" /></td>
+                                <td><input type="number" id="quantity" name="detail_quantity" placeholder="Введите количество" value="1" style="width: 80px;" /></td> <!-- Уменьшена ширина -->
                             </tr>
 
                             <!-- Поле для кода контроля -->
@@ -100,8 +102,8 @@
                                         <option value="4">4</option>
                                         <option value="5">5</option>
                                         <option value="6">6</option>
+                                        <!-- Дополнительное значение -->
                                         <option value="3;2">3;2</option>
-                                        <!-- Дополнительные значения -->
                                     </select></td>
                             </tr>
 
@@ -118,15 +120,16 @@
                     </table>
 
                     <!-- Кнопка для добавления нового замера -->
-                    <!-- Округленные углы и зеленый цвет -->
+                    <!-- Используем класс btn-new для стилизации -->
+                    <!-- Добавляем отступ справа для перемещения кнопки вправо -->
                     <button type="button" id="addMeasurementButton"
+                        class='btn-new'
                         style="
-                        background-color: green;
-                        color: white;
-                        border: none;
-                        border-radius: 5px;
-                        padding: 10px 15px;
-                        cursor: pointer;">Новый замер</button>
+                        width: 200px; /* Ширина кнопки */
+                        height: 70px; /* Высота кнопки */
+                        font-size: 24px;
+                        cursor: pointer;
+                        margin-left: 30px;">Новый замер</button>
 
                 </div>
 
@@ -161,10 +164,11 @@
 {% endblock %}
 
 <!-- Подключаем CSS файл -->
-<link rel="stylesheet" href="{% static 'process_history/css/styles.css' %}" type="text/css">
+<link rel='stylesheet' href='{% static 'process_history/css/styles.css' %}' type='text/css'>
 
 <!-- Подключаем JS файл -->
-<script src="{% static 'process_history/js/scripts.js' %}"></script>
+<script src='{% static 'process_history/js/scripts.js' %}'></script>
+
 
 
 

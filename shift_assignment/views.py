@@ -5,7 +5,7 @@ from django.urls import reverse_lazy, reverse
 from django.views.generic import DetailView, UpdateView, ListView, DeleteView, CreateView
 
 from .forms import ShiftAssignmentForm
-from .models import ShiftAssignment
+from .models import ShiftAssignment, CompletedShiftAssignment
 from users.models import UserRoles
 
 
@@ -70,6 +70,26 @@ class UploadShiftAssignmentView(LoginRequiredMixin, View):
         return JsonResponse({'status': 'error', 'message': 'Ошибка при загрузке файла.'})
 
 
+class CompletedShiftAssignmentListView(ListView):
+    model = CompletedShiftAssignment
+    template_name = 'shift_assignment/completed_shift_assignment_list.html'
+    context_object_name = 'completed_assignments'
+
+    def get_queryset(self):
+        # Получаем роль текущего пользователя
+        user_role = self.request.user.role
+
+        if user_role == UserRoles.ADMIN or user_role == UserRoles.MASTER:
+            # Администраторы и мастера могут видеть все выполненные задания
+            return CompletedShiftAssignment.objects.all()
+        elif user_role == UserRoles.OPERATOR:
+            # Операторы могут видеть только свои выполненные задания
+            return CompletedShiftAssignment.objects.filter(operator=self.request.user)
+        else:
+            # Для других ролей можно вернуть пустой queryset или обработать по-другому
+            return CompletedShiftAssignment.objects.none()
+
+
 class ShiftAssignmentListView(ListView):
     model = ShiftAssignment
     template_name = 'shift_assignment/shift_assignment_list.html'
@@ -77,11 +97,20 @@ class ShiftAssignmentListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        if self.request.user.role in [UserRoles.MASTER, UserRoles.ADMIN]:
-            queryset = queryset.filter(master=self.request.user)
-        elif self.request.user.role == UserRoles.OPERATOR:
-            queryset = queryset.filter(operator=self.request.user)
-        return queryset
+        user_role = self.request.user.role
+
+        if user_role == UserRoles.ADMIN:
+            # Администраторы могут видеть все задания
+            return queryset
+        elif user_role == UserRoles.MASTER:
+            # Мастера могут видеть задания, связанные с ними
+            return queryset.filter(master=self.request.user)
+        elif user_role == UserRoles.OPERATOR:
+            # Операторы могут видеть только свои выполненные задания
+            return queryset.filter(operator=self.request.user)
+        else:
+            # Для других ролей можно вернуть пустой queryset или обработать по-другому
+            return ShiftAssignment.objects.none()
 
 
 class ShiftAssignmentDetailView(DetailView):

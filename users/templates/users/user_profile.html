@@ -6,12 +6,13 @@
 <div class="container mt-5">
     <h2>{{ user.first_name }} {{ user.last_name }}</h2>
     <a href="{% url 'users:update_user' user.pk %}" class="btn btn-secondary mb-3">Редактировать профиль</a>
+
     {% if can_create_shift %}
         <h3>Создание сменного задания:</h3>
         <a href="{% url 'shift_assignment:upload_shift_assignment' %}" class="btn btn-primary mb-3">Создать сменное задание</a>
     {% endif %}
 
-    <h3>Сменные задания:</h3>
+    <h3 class="text-primary">Сменные задания:</h3>
     <div class="row">
         {% for assignment in shift_assignments %}
             <div class="col-md-4 mb-4">
@@ -22,7 +23,7 @@
                         <h3>Описание:</h3>
                         <p><strong>Имя оператора:</strong> {{ assignment.operator.username }}</p>
                         <p><strong>Название операции:</strong> {{ assignment.operation_name }}</p>
-                        <p><strong>Номер станка:</strong> {{ assignment.machine_id}}</p>
+                        <p><strong>Номер станка:</strong> {{ assignment.machine_id }}</p>
                         <p><strong>Наименование детали:</strong> {{ assignment.part_id }}</p>
                         <p><strong>Номер партии:</strong> {{ assignment.batch_number }}</p>
                         <p><strong>Количество:</strong> {{ assignment.quantity }}</p>
@@ -44,50 +45,32 @@
         {% endfor %}
     </div>
 
-</div>
+    <h3 class="text-success">Выполненные сменные задания:</h3>
+    <div class="row">
+        {% for completed in completed_assignments %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ completed.operation_name }}</h5>
+                        <p class="card-text"><strong>Оператор:</strong> {{ completed.operator.username }}</p>
+                        <p class="card-text"><strong>Номер станка:</strong> {{ completed.machine_id }}</p>
+                        <p class="card-text"><strong>Наименование детали:</strong> {{ completed.part_id }}</p>
+                        <p class="card-text"><strong>Номер партии:</strong> {{ completed.batch_number }}</p>
+                        <p class="card-text"><strong>Количество:</strong> {{ completed.quantity }}</p>
+                        <p class="card-text"><strong>Количество брака:</strong> {{ completed.defect_quantity }}</p>
+                        <p class="card-text"><strong>Причина остановки:</strong> {{ completed.stop_reason }}</p>
 
-    <!-- Модальное окно для подтверждения удаления -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Подтверждение удаления</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    Вы действительно хотите удалить это сменное задание?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
-                    <form id="deleteForm" method="post" action="" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Да, удалить</button>
-                    </form>
+                        <!-- Дополнительные действия для завершенных заданий можно добавить здесь -->
+                    </div>
                 </div>
             </div>
-        </div>
+        {% empty %}
+            <p>Нет выполненных сменных заданий.</p>
+        {% endfor %}
     </div>
 
 </div>
 
-<!-- Подключение jQuery и Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-
-<script>
-// JavaScript для обработки нажатия кнопки "Удалить"
-$(document).ready(function() {
-    $('#deleteModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget); // Кнопка, которая открыла модальное окно
-        var assignmentId = button.data('id'); // Получаем ID задания
-        var actionUrl = '/shift_assignment/' + assignmentId + '/delete/'; // Создаем URL для удаления
-
-        // Устанавливаем действие формы удаления
-        $('#deleteForm').attr('action', actionUrl);
-    });
-});
-</script>
-
 {% endblock %}
+
+

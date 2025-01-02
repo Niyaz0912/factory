@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 from users.models import User, UserRoles
 from users.forms import UserRegisterForm, UserLoginForm, UserUpdateForm, UserForm
 
-from shift_assignment.models import ShiftAssignment
+from shift_assignment.models import ShiftAssignment, CompletedShiftAssignment
 
 
 class UserRegisterView(CreateView):
@@ -28,22 +28,26 @@ class UserLoginView(LoginView):
         return redirect('users:user_profile', pk=user.pk)
 
 
-class UserProfileView(LoginRequiredMixin, UpdateView):
+class UserProfileView(LoginRequiredMixin, DetailView):
     model = User
-    form_class = UserForm
     template_name = 'users/user_profile.html'
+    context_object_name = 'user'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user_role = self.request.user.role  # Получаем роль пользователя
 
-        # Получаем сменные задания в зависимости от роли пользователя
+        # Устанавливаем can_create_shift для администраторов и мастеров
+        context['can_create_shift'] = user_role in [UserRoles.ADMIN, UserRoles.MASTER]
+
+        # Получаем текущие сменные задания в зависимости от роли пользователя
         if user_role in [UserRoles.ADMIN, UserRoles.MASTER]:
             context['shift_assignments'] = ShiftAssignment.objects.all()  # Все задания для админа и мастера
-            context['can_create_shift'] = True  # Возможность создания сменного задания
         elif user_role == UserRoles.OPERATOR:
             context['shift_assignments'] = ShiftAssignment.objects.filter(operator=self.request.user)
-            context['can_create_shift'] = False  # Оператор не может создавать задания
+
+        # Получаем выполненные сменные задания для текущего пользователя
+        context['completed_assignments'] = CompletedShiftAssignment.objects.filter(operator=self.request.user)
 
         # Передаем строковые значения ролей в контекст
         context['is_admin'] = user_role == UserRoles.ADMIN
