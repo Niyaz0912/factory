@@ -1,18 +1,14 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from users.models import User
-from django.urls import reverse_lazy, reverse
-from django.views.generic import DetailView, UpdateView, ListView, DeleteView, CreateView
+from django.urls import reverse_lazy
+from django.views.generic import DetailView, UpdateView, DeleteView
 
 from .forms import ShiftAssignmentForm, CompletedShiftAssignmentForm
 from .models import ShiftAssignment, CompletedShiftAssignment
-from users.models import UserRoles
-
 
 import pandas as pd
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
-from .models import ShiftAssignment
 from django.http import JsonResponse
 
 
@@ -130,11 +126,3 @@ class ShiftAssignmentDeleteView(LoginRequiredMixin, DeleteView):
     def get_object(self, queryset=None):
         return get_object_or_404(ShiftAssignment, pk=self.kwargs['pk'])
 
-
-class OperatorAssignmentsView(View):
-    def get(self, request):
-        if request.user.role == UserRoles.OPERATOR:
-            assignments = ShiftAssignment.objects.filter(operator=request.user)
-        else:
-            assignments = ShiftAssignment.objects.all()  # Или другой подход в зависимости от вашей логики
-        return render(request, 'assignments.html', {'assignments': assignments})

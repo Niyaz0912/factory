@@ -25,8 +25,7 @@ class HistoryProcessCreateView(View):
     form_class = ProcessHistoryForm
     template_name = 'process_history/history_process_create.html'
 
-    def get(self, request, *args, **kwargs):
-        pk = self.kwargs.get('pk')  # Получаем ID сменного задания из URL
+    def get(self, request, pk):
         shift_assignment = get_object_or_404(ShiftAssignment, pk=pk)
 
         context = {
