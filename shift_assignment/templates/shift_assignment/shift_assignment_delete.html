@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Удаление сменного задания{% endblock %}
 
 {% block content %}
@@ -13,3 +13,8 @@
     <a href="{% url 'users:user_profile' request.user.pk %}" class="btn btn-secondary">Нет, отменить</a>
 </form>
 {% endblock %}
+<!-- Подключаем CSS файл -->
+<link rel='stylesheet' href='{% static 'process_history/css/styles.css' %}' type='text/css'>
+
+<!-- Подключаем JS файл -->
+<script src='{% static 'process_history/js/scripts.js' %}'></script>

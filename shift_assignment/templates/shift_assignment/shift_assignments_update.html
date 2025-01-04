@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <div class="container mt-5">
     <h2>Редактирование сменного задания</h2>
@@ -11,3 +11,8 @@
     </form>
 </div>
 {% endblock %}
+<!-- Подключаем CSS файл -->
+<link rel='stylesheet' href='{% static 'process_history/css/styles.css' %}' type='text/css'>
+
+<!-- Подключаем JS файл -->
+<script src='{% static 'process_history/js/scripts.js' %}'></script>

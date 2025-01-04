@@ -1,5 +1,5 @@
 {% extends "base.html" %}  <!-- Наследование от базового шаблона -->
-
+{% load static %}
 {% block title %}Вход в систему{% endblock %}  <!-- Переопределение заголовка страницы -->
 
 {% block content %}
@@ -33,3 +33,8 @@
     </form>
 </div>
 {% endblock %}
+<!-- Подключаем CSS файл -->
+<link rel='stylesheet' href='{% static 'process_history/css/styles.css' %}' type='text/css'>
+
+<!-- Подключаем JS файл -->
+<script src='{% static 'process_history/js/scripts.js' %}'></script>
