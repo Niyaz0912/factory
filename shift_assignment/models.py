@@ -30,14 +30,14 @@ class ShiftAssignment(models.Model):
 class CompletedShiftAssignment(models.Model):
     shift_assignment = models.ForeignKey(ShiftAssignment, on_delete=models.CASCADE,
                                          related_name='completed_assignments')
-    operator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # Указывает на оператора
-    operation_name = models.CharField(max_length=255)
-    machine_id = models.CharField(max_length=50)
-    part_id = models.CharField(max_length=50)
-    batch_number = models.CharField(max_length=50)
-    quantity = models.IntegerField()
-    defect_quantity = models.IntegerField(default=0)
-    stop_reason = models.TextField(null=True, blank=True)
+    operator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="Оператор", on_delete=models.CASCADE)  # Указывает на оператора
+    operation_name = models.CharField(max_length=255, verbose_name="Наименование операции")
+    machine_id = models.CharField(max_length=50, verbose_name="№ станка")
+    part_id = models.CharField(max_length=50, verbose_name="Наименование продукции")
+    batch_number = models.CharField(max_length=50, verbose_name="№ партии")
+    quantity = models.IntegerField(verbose_name="Количество")
+    defect_quantity = models.IntegerField(default=0, verbose_name="Количество брака")
+    stop_reason = models.TextField(null=True, blank=True, verbose_name="Причина остановки станка")
 
     def __str__(self):
         return f'Завершенное задание: {self.operation_name}, Оператор: {self.operator}'
