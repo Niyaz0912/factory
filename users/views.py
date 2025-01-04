@@ -46,8 +46,11 @@ class UserProfileView(LoginRequiredMixin, DetailView):
         elif user_role == UserRoles.OPERATOR:
             context['shift_assignments'] = ShiftAssignment.objects.filter(operator=self.request.user)
 
-        # Получаем выполненные сменные задания для текущего пользователя
-        context['completed_assignments'] = CompletedShiftAssignment.objects.filter(operator=self.request.user)
+        # Получаем выполненные сменные задания для текущего пользователя и всех мастеров и администраторов
+        if user_role in [UserRoles.ADMIN, UserRoles.MASTER]:
+            context['completed_assignments'] = CompletedShiftAssignment.objects.all()  # Все выполненные задания для админа и мастера
+        else:
+            context['completed_assignments'] = CompletedShiftAssignment.objects.filter(operator=self.request.user)  # Только для оператора
 
         # Передаем строковые значения ролей в контекст
         context['is_admin'] = user_role == UserRoles.ADMIN
