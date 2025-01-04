@@ -4,7 +4,8 @@
 {% block content %}
 <div class="d-flex justify-content-between align-items-center">
     <h1 style="margin-top: 40px; margin-bottom: 20px;">История процесса</h1>
-    <a href="{% url 'shift_assignment:completed_shift_assignment' shift_assignment.id %}" class="btn btn-primary" style="margin-top: 40px;">Закончить сменное задание</a>
+    <a href="{% url 'shift_assignment:completed_shift_assignment' shift_assignment.id %}" class="btn btn-primary"
+       style="margin-top: 40px;">Закончить сменное задание</a>
 </div>
 
 <!-- Отладочная информация -->
@@ -33,114 +34,149 @@
     <br>
 
     <!-- Карточка для параметров детали -->
-    <div class="card" style="margin-top: 20px; width: calc(100% - 40px); margin-left: 20px; margin-right: 20px; border-width: 2px; border-color: #007bff; border-style: solid;">
-        <div class="card-header">
-            <h2>Параметры детали:</h2>
-        </div>
-        <div class="card-body">
-            <div style="display: flex; justify-content: space-between;">
-                <!-- Первый столбик -->
-                <div style="flex: 1; margin-right: 10px;">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>Шероховатость:</td>
-                                <td>
-                                    <label><input type="radio" name="roughness" value="yes" checked /> +</label>
-                                    <label><input type="radio" name="roughness" value="no" /> -</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Специальная характеристика:</td>
-                                <td><input type="number" id="specialCharacteristic" name="special_characteristic"
-                                           min="21.95" max="22" step="0.001" placeholder="от 21,95 до 22"
-                                           required style="width: 150px;" /></td> <!-- Уменьшена ширина -->
-                            </tr>
-                            <tr>
-                                <td>Внешний вид:</td>
-                                <td>
-                                    <label><input type="radio" name="appearance" value="yes" checked /> +</label>
-                                    <label><input type="radio" name="appearance" value="no" /> -</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Наличие резьбы и отверстия под шплинт:</td>
-                                <td>
-                                    <label><input type="radio" name="thread_hole" value="yes" checked /> +</label>
-                                    <label><input type="radio" name="thread_hole" value="no" /> -</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Размер галтели:</td>
-                                <td>
-                                    <label><input type="radio" name="galtel_size" value="yes" checked /> +</label>
-                                    <label><input type="radio" name="galtel_size" value="no" /> -</label>
-                                </td>
-                            </tr>
+    <div class="card" style="margin-top: 20px; width: calc(100% - 40px); margin-left: 20px; margin-right: 20px;
+    border-width: 2px; border-color: #007bff; border-style: solid;">
+    <div class="card-header">
+        <h2>Параметры детали:</h2>
+    </div>
+    <div class="card-body">
+        <div style="display: flex; justify-content: space-between;">
+            <!-- Первый столбик -->
+            <div style="flex: 1; margin-right: 10px;">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Шероховатость:</td>
+                            <td class="form_toggle">
+                                <div class="form_toggle-item item-1">
+                                    <input type="radio" name="roughness" value="yes" id="roughness_yes" checked />
+                                    <label for="roughness_yes">-</label>
+                                </div>
+                                <div class="form_toggle-item item-2">
+                                    <input type="radio" name="roughness" value="no" id="roughness_no" />
+                                    <label for="roughness_no">+</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Специальная характеристика:</td>
+                            <td><input type="number" id="specialCharacteristic" name="special_characteristic"
+                                       min="21.95" max="22" step="0.001" placeholder="от 21,95 до 22"
+                                       required style="width: 150px;" /></td>
+                        </tr>
+                        <tr>
+                            <td>Внешний вид:</td>
+                            <td class="form_toggle">
+                                <div class="form_toggle-item item-1">
+                                    <input type="radio" name="appearance" value="yes" id="appearance_yes" checked />
+                                    <label for="appearance_yes">-</label>
+                                </div>
+                                <div class="form_toggle-item item-2">
+                                    <input type="radio" name="appearance" value="no" id="appearance_no" />
+                                    <label for="appearance_no">+</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Наличие резьбы и отверстия под шплинт:</td>
+                            <td class="form_toggle">
+                                <div class="form_toggle-item item-1">
+                                    <input type="radio" name="thread_hole" value="yes" id="thread_hole_yes" checked />
+                                    <label for="thread_hole_yes">-</label>
+                                </div>
+                                <div class="form_toggle-item item-2">
+                                    <input type="radio" name="thread_hole" value="no" id="thread_hole_no" />
+                                    <label for="thread_hole_no">+</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Размер галтели:</td>
+                            <td class="form_toggle">
+                                <div class="form_toggle-item item-1">
+                                    <input type="radio" name="galtel_size" value="yes" id="galtel_size_yes" checked />
+                                    <label for="galtel_size_yes">-</label>
+                                </div>
+                                <div class="form_toggle-item item-2">
+                                    <input type="radio" name="galtel_size" value="no" id="galtel_size_no" />
+                                    <label for="galtel_size_no">+</label>
+                                </div>
+                            </td>
+                        </tr>
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
 
-                </div>
+            </div>
 
-                <!-- Второй столбик -->
-                <div style="flex: 1; margin-left: 10px;">
-                    <table class="table">
-                        <tbody>
+            <!-- Второй столбик -->
+            <div style="flex: 1; margin-left: 10px;">
+                <table class="table">
+                    <tbody>
 
-                            <!-- Поле для количества деталей -->
-                            <tr>
-                                <td>Количество деталей:</td>
-                                <td><input type="number" id="quantity" name="detail_quantity" placeholder="Введите количество" value="1" style="width: 80px;" /></td> <!-- Уменьшена ширина -->
-                            </tr>
+                        <!-- Поле для количества деталей -->
+                        <tr>
+                            <td>Количество деталей:</td>
+                            <td><input type="number" id="quantity" name="detail_quantity"
+                                       placeholder="Введите количество" value="1"
+                                       style="width: 80px;" /></td>
+                        </tr>
 
-                            <!-- Поле для кода контроля -->
-                            <tr>
-                                <td>Код контроля:</td>
-                                <td><select id="controlCode">
-                                        <!-- Значения кода контроля -->
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <!-- Дополнительное значение -->
-                                        <option value="3;2">3;2</option>
-                                    </select></td>
-                            </tr>
+                        <!-- Поле для кода контроля -->
+                        <tr>
+                            <td>Код контроля:</td>
+                            <td><select id="controlCode">
+                                    <!-- Значения кода контроля -->
+                                    <option value="">Выберите код</option> <!-- Добавлено значение по умолчанию -->
+                                    <option value='1'>1</option>
+                                    <option value='2'>2</option>
+                                    <option value='3'>3</option>
+                                    <option value='4'>4</option>
+                                    <option value='5'>5</option>
+                                    <option value='6'>6</option>
+                                    <!-- Дополнительное значение -->
+                                    <option value='3;2'>3;2</option>
+                                </select></td>
+                        </tr>
 
-                            <!-- Поле для маркировки да/нет -->
-                            <tr>
-                                <td>Маркировка да/нет:</td>
-                                <td>
-                                    <label><input type="radio" name="mark_yes_no" value="yes" checked /> Да</label>
-                                    <label><input type="radio" name="mark_yes_no" value="no" /> Нет</label>
-                                </td>
-                            </tr>
+                        <!-- Поле для маркировки да/нет -->
+                        <tr>
+                            <td>Маркировка да/нет:</td>
+                            <td class='form_toggle'>
+                                <!-- Изменены идентификаторы и названия атрибутов name -->
+                                <!-- Теперь зеленый вариант "Да", затем красный "Нет". -->
+                                <div class='form_toggle-item item-1'>
+                                    <input type='radio' name='mark_yes_no' value='no' id='mark_no' checked />
+                                    <label for='mark_no' class='label-no'>Нет</label> <!-- Зеленый цвет -->
+                                </div>
+                                <div class='form_toggle-item item-2'>
+                                    <input type='radio' name='mark_yes_no' value='yes' id='mark_yes' />
+                                    <label for='mark_yes' class='label-yes'>Да</label> <!-- Красный цвет -->
+                                </div>
+                            </td>
+                        </tr>
 
-                        </tbody>
-                    </table>
+                    </tbody>
+                </table>
 
-                    <!-- Кнопка для добавления нового замера -->
-                    <!-- Используем класс btn-new для стилизации -->
-                    <!-- Добавляем отступ справа для перемещения кнопки вправо -->
-                    <button type="button" id="addMeasurementButton"
-                        class='btn-new'
-                        style="
-                        width: 200px; /* Ширина кнопки */
-                        height: 70px; /* Высота кнопки */
-                        font-size: 24px;
-                        cursor: pointer;
-                        margin-left: 30px;">Новый замер</button>
-
-                </div>
+                <button type='button' id='addMeasurementButton'
+                    class='btn-new'
+                    style="
+                    width: 200px; /* Ширина кнопки */
+                    height: 70px; /* Высота кнопки */
+                    font-size: 24px;
+                    cursor: pointer;
+                    margin-left: 30px;">Новый замер</button>
 
             </div>
 
         </div>
 
     </div>
+
+</div>
+
+
 
 </form>
 
