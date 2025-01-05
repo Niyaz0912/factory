@@ -86,9 +86,15 @@ class CompletedShiftAssignmentView(View):
         if form.is_valid():
             completed_shift_assignment = form.save(commit=False)
             completed_shift_assignment.operator = request.user
+
+            # Получаем ID сменного задания и связываем его с завершенным заданием
+            assignment_id = kwargs.get('pk')
+            completed_shift_assignment.shift_assignment = get_object_or_404(ShiftAssignment, id=assignment_id)
+
             completed_shift_assignment.save()
 
-            return redirect('shift_assignment:completed_shift_assignment_list')  # Перенаправляем на список выполненных заданий
+            # Перенаправляем на профиль пользователя с его ID
+            return redirect('users:user_profile', pk=request.user.pk)  # Используем правильное имя маршрута
 
         assignment_id = kwargs.get('pk')
         shift_assignment = get_object_or_404(ShiftAssignment, id=assignment_id)
