@@ -1,4 +1,3 @@
-// scripts.js
 document.addEventListener("DOMContentLoaded", function() {
     // Устанавливаем фокус на поле "Специальная характеристика"
     const specialCharacteristicInput = document.querySelector('#specialCharacteristic');
@@ -6,22 +5,29 @@ document.addEventListener("DOMContentLoaded", function() {
         specialCharacteristicInput.focus();
     }
 
+    // Функция для проверки диапазона специальной характеристики
+    function validateSpecialCharacteristic(value) {
+        const min = 21.95;
+        const max = 22;
+        return !isNaN(value) && value >= min && value <= max;
+    }
+
     // Функция для добавления новой строки в таблицу
     function addRow() {
         const quantityInput = document.getElementById('quantity');
         let quantity = parseInt(quantityInput.value); // Преобразуем в число
         const roughness = document.querySelector('input[name="roughness"]:checked').value;
-        const specialCharacteristic = specialCharacteristicInput.value; // Сохраняем текущее значение
+        const specialCharacteristic = parseFloat(specialCharacteristicInput.value); // Сохраняем текущее значение и преобразуем в число
         const appearance = document.querySelector('input[name="appearance"]:checked').value;
         const threadHole = document.querySelector('input[name="thread_hole"]:checked').value;
         const galtelSize = document.querySelector('input[name="galtel_size"]:checked').value;
         const controlCode = document.getElementById('controlCode') ? document.getElementById('controlCode').value : ''; // Проверка наличия поля
         const markYesNo = document.querySelector('input[name="mark_yes_no"]:checked').value;
 
-        // Проверяем, что специальная характеристика введена
-        if (!specialCharacteristic) {
-            alert("Пожалуйста, введите специальную характеристику.");
-            return; // Прерываем выполнение, если поле пустое
+        // Проверяем, что специальная характеристика введена и в диапазоне
+        if (!validateSpecialCharacteristic(specialCharacteristic)) {
+            alert("Пожалуйста, введите специальную характеристику в диапазоне от 21.95 до 22.");
+            return; // Прерываем выполнение, если поле пустое или вне диапазона
         }
 
         // Создаем новую строку таблицы
@@ -64,4 +70,18 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log("Кнопка 'Новый замер' нажата"); // Отладочное сообщение
         addRow(); // Вызываем функцию добавления строки
     });
+
+   // Проверка диапазона при потере фокуса
+specialCharacteristicInput.addEventListener('blur', function() {
+    let value = parseFloat(this.value);
+
+    if (!validateSpecialCharacteristic(value)) {
+        alert(`Пожалуйста, введите значение в диапазоне от 21.95 до 22.`);
+        this.value = ''; // Очищаем поле
+        this.focus(); // Возвращаем фокус на поле
+    } else {
+        // Округляем значение до трех знаков после запятой и обновляем поле
+        this.value = value.toFixed(3);
+    }
 });
+
