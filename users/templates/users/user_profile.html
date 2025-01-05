@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Профиль пользователя{% endblock %}
 
 {% block content %}
@@ -8,7 +8,7 @@
     <a href="{% url 'users:update_user' user.pk %}" class="btn btn-secondary mb-3">Редактировать профиль</a>
 
     {% if can_create_shift %}
-        <h3>Создание сменного задания:</h3>
+        <br>
         <a href="{% url 'shift_assignment:upload_shift_assignment' %}" class="btn btn-primary mb-3">Создать сменное задание</a>
     {% endif %}
 
@@ -18,11 +18,9 @@
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h1>{{ assignment.title }}</h1>
+
                         <p><strong>Дата:</strong> {{ assignment.date }}</p>
-                        <h3>Описание:</h3>
                         <p><strong>Имя оператора:</strong> {{ assignment.operator.username }}</p>
-                        <p><strong>Название операции:</strong> {{ assignment.operation_name }}</p>
                         <p><strong>Номер станка:</strong> {{ assignment.machine_id }}</p>
                         <p><strong>Наименование детали:</strong> {{ assignment.part_id }}</p>
                         <p><strong>Номер партии:</strong> {{ assignment.batch_number }}</p>
@@ -41,7 +39,7 @@
                 </div>
             </div>
         {% empty %}
-            <p>Нет созданных сменных заданий.</p>
+            <p>Нет активных сменных заданий.</p>
         {% endfor %}
     </div>
 
@@ -65,12 +63,17 @@
                 </div>
             </div>
         {% empty %}
-            <p>Нет выполненных сменных заданий.</p>
+            <p>Нет выполненных заданий.</p>
         {% endfor %}
     </div>
 
 </div>
 
 {% endblock %}
+<!-- Подключаем CSS файл -->
+<link rel='stylesheet' href='{% static 'process_history/css/styles.css' %}' type='text/css'>
+
+<!-- Подключаем JS файл -->
+<script src='{% static 'process_history/js/scripts.js' %}'></script>
 
 
