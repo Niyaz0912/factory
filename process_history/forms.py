@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from process_history.models import ProcessHistory
 from shift_assignment.models import ShiftAssignment
 from users.forms import StyleFormMixin
@@ -14,6 +15,12 @@ class ProcessHistoryForm(StyleFormMixin, forms.ModelForm):
         ],
         label='Причина остановки'
     )
+    special_characteristics = forms.DecimalField(
+        label='Специальные характеристики',
+        max_digits=5,
+        decimal_places=3,
+        required=False
+    )
 
     class Meta:
         model = ProcessHistory
@@ -27,8 +34,22 @@ class ProcessHistoryForm(StyleFormMixin, forms.ModelForm):
             'control_code',
             'mark_yes_no',
             'defect_quantity',  # Добавляем поле количества брака
-            'stop_reason'       # Добавляем поле причины остановки
+            'stop_reason',      # Добавляем поле причины остановки
+            'special_characteristics'  # Добавляем поле специальных характеристик
         ]
+
+    def clean_value(self):
+        value = self.cleaned_data.get('value')
+
+        if value is not None:
+            # Проверка диапазона
+            if not (21.95 <= value <= 22):
+                raise ValidationError('Значение должно быть в диапазоне от 21.95 до 22.')
+
+            # Округление до трех знаков после запятой
+            return round(value, 3)
+
+        return value
 
 
 class QualityControlForm(StyleFormMixin, forms.Form):

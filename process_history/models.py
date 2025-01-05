@@ -1,8 +1,7 @@
 from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.conf import settings
 from django.urls import reverse
-
-NULLABLE = {'blank': True, 'null': True}
 
 
 class ProcessHistory(models.Model):
@@ -22,7 +21,19 @@ class ProcessHistory(models.Model):
     part_id = models.CharField(max_length=100, verbose_name="№ партии")
     batch_number = models.CharField(max_length=100, verbose_name="Наименование изделия")
     machine_id = models.IntegerField(default=1, verbose_name="№ станка")
-    value = models.CharField(max_length=100, verbose_name="Значение специальной характеристики")
+
+    # Поле для специальных характеристик с валидацией
+    value = models.DecimalField(
+        max_digits=5, verbose_name="Значение специальной характеристики",
+        decimal_places=3,
+        validators=[
+            MinValueValidator(21.95),
+            MaxValueValidator(22)
+        ],
+        null=True,
+        blank=True
+    )
+
     timestamp = models.DateTimeField(auto_now_add=True)
     detail_quantity = models.IntegerField(default=0, verbose_name="Количество деталей")
     assignment = models.ForeignKey('shift_assignment.ShiftAssignment', on_delete=models.SET_NULL, null=True, blank=True,
@@ -30,7 +41,8 @@ class ProcessHistory(models.Model):
     mark_yes_no = models.BooleanField(default=True, verbose_name="Отметка да/нет")
 
     # Поле для кода контроля
-    control_code = models.CharField(max_length=10, choices=CONTROL_CODE_CHOICES, default=1, verbose_name="Код контроля")
+    control_code = models.CharField(max_length=10, choices=CONTROL_CODE_CHOICES, default='1',
+                                    verbose_name="Код контроля")
 
     # Новые поля для параметров контроля
     roughness_check = models.CharField(max_length=1, choices=[('+', '+'), ('-', '-')], default='+',
