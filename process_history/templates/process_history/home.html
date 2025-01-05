@@ -3,16 +3,31 @@
 {% block title %}Главная страница{% endblock %}  <!-- Переопределение заголовка страницы -->
 
 {% block content %}
-<div class="text-center">
-    <h2>Добро пожаловать на главную страницу!</h2>
-    <p>В этом приложении вы можете эффективно управлять своими сменными заданиями и отслеживать историю процессов.</p>
-    <p>Пожалуйста, авторизуйтесь, чтобы начать работу и получить доступ ко всем функциям приложения.</p>
-    <p>Мы рады видеть вас здесь!</p>
+<div class="text-lift"
+     style="position: relative; height: 100vh; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; z-index: 1;">
+    <div style="position: relative; z-index: 2; margin-top: 40px; padding: 15px;">
+        <!-- Опущение текста вниз на 40 пикселей и отступ от края картинки -->
+        <h3 style="color: black; text-shadow:
+            1px 1px 0 rgba(255, 255, 255, 1),
+            -1px -1px 0 rgba(255, 255, 255, 1),
+            -1px 1px 0 rgba(255, 255, 255, 1),
+            1px -1px 0 rgba(255, 255, 255, 1);">В этом приложении вы можете эффективно управлять своими сменными
+            заданиями и отслеживать историю процессов.</h3>
+        <h3 style="color: black; text-shadow:
+            1px 1px 0 rgba(255, 255, 255, 1),
+            -1px -1px 0 rgba(255, 255, 255, 1),
+            -1px 1px 0 rgba(255, 255, 255, 1),
+            1px -1px 0 rgba(255, 255, 255, 1);">Пожалуйста, авторизуйтесь, чтобы начать работу и получить доступ ко всем
+            функциям приложения.</h3>
+    </div>
+    <div style="background-image: url('https://belmag.ru/img/cms/mekhanicheskaya_obrabotka/Machining.jpg');
+    background-size: cover; background-position: center; background-repeat: no-repeat; position: absolute; top: 0;
+    left: 0; right: 0; bottom: 0; opacity: 1;"></div> <!-- Полупрозрачный фон -->
 </div>
-
 {% endblock %}
+
 <!-- Подключаем CSS файл -->
-<link rel='stylesheet' href='{% static 'process_history/css/styles.css' %}' type='text/css'>
+<link rel='stylesheet' href='{% static ' process_history/css/styles.css' %}' type='text/css'>
 
 <!-- Подключаем JS файл -->
-<script src='{% static 'process_history/js/scripts.js' %}'></script>
+<script src='{% static ' process_history/js/scripts.js' %}'></script>
