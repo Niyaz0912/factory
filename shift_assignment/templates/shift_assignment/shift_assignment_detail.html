@@ -14,12 +14,13 @@
     <p><strong>Номер партии:</strong> {{ assignment.batch_number }}</p>
     <p><strong>Количество:</strong> {{ assignment.quantity }}</p>
 
-    <a href="{% url 'process_history:history_process_create' assignment.id %}" class="btn btn-success">Выполнить задание</a>
+    <a href="{% url 'process_history:history_process_create' assignment.id %}" class="btn btn-success">Выполнить
+        задание</a>
 
 </div>
 {% endblock %}
 <!-- Подключаем CSS файл -->
-<link rel='stylesheet' href='{% static 'process_history/css/styles.css' %}' type='text/css'>
+<link rel='stylesheet' href='{% static ' process_history/css/styles.css' %}' type='text/css'>
 
 <!-- Подключаем JS файл -->
-<script src='{% static 'process_history/js/scripts.js' %}'></script>
+<script src='{% static ' process_history/js/scripts.js' %}'></script>

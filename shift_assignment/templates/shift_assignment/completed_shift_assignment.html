@@ -5,15 +5,15 @@
 {% block content %}
 <div>
     <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}  <!-- Отображение формы -->
-            <button type="submit" class="btn btn-success">Сохранить</button>
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Отображение формы -->
+        <button type="submit" class="btn btn-success">Сохранить</button>
     </form>
 </div>
 {% endblock %}
 
 <!-- Подключаем CSS файл -->
-<link rel='stylesheet' href='{% static 'process_history/css/styles.css' %}' type='text/css'>
+<link rel='stylesheet' href='{% static ' process_history/css/styles.css' %}' type='text/css'>
 
 <!-- Подключаем JS файл -->
-<script src='{% static 'process_history/js/scripts.js' %}'></script>
+<script src='{% static ' process_history/js/scripts.js' %}'></script>

@@ -19,32 +19,39 @@
 
     <!-- Подключение вашего JS файла -->
     <script src="{% static 'process_history/js/scripts.js' %}"></script>
+
+    <!--    <style>-->
+    <!--        body {-->
+    <!--            background-color: #F8F8FF; /* Светло-серый фон */-->
+    <!--        }-->
+    <!--    </style>-->
 </head>
 <body>
-    <div class="container mt-5">
-        <header>
-            <h1 class="text-center">Добро пожаловать в приложение "Помощник оператора"</h1>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand float-left" href="{% url 'process_history:home' %}">Главная</a>
+<div class="container mt-5">
+    <header>
+        <h1 class="text-center">Добро пожаловать в приложение "Помощник оператора"</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand float-left" href="{% url 'process_history:home' %}">Главная</a>
 
-                {% if user.is_authenticated %}
-                    <span class="navbar-text mx-3">
+            {% if user.is_authenticated %}
+            <span class="navbar-text mx-3">
                         {{ user.first_name }} {{ user.last_name }}
                     </span>
-                    <a class="btn btn-info mx-2" href="{% url 'users:user_profile' user.pk %}">Профиль</a>
-                    <form action="{% url 'users:logout' %}" method="post" class="d-inline">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Выйти</button>
-                    </form>
-                {% else %}
-                    <a class="btn btn-success float-right" href="{% url 'users:login_user' %}">Войти</a>  {# Кнопка для входа #}
-                {% endif %}
-            </nav>
-        </header>
+            <a class="btn btn-info mx-2" href="{% url 'users:user_profile' user.pk %}">Профиль</a>
+            <form action="{% url 'users:logout' %}" method="post" class="d-inline">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Выйти</button>
+            </form>
+            {% else %}
+            <a class="btn btn-success float-right" href="{% url 'users:login_user' %}">Войти</a> {# Кнопка для входа #}
+            {% endif %}
+        </nav>
+    </header>
 
-        {% block content %}
-        {% endblock %}
-    </div>
+    {% block content %}
+    {% endblock %}
+</div>
 
 </body>
 </html>
+
