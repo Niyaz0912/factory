@@ -1,89 +1,91 @@
-/* styles.css */
-.table {
-    margin-top: 20px; /* Отступ сверху для таблицы */
-}
-
-.radio-label {
-    margin-right: 15px; /* Отступ между радиокнопками */
+/* Общие стили */
+body {
+    background-image: url(https://img.freepik.com/free-vector/white-abstract-background-3d-paper-style_23-2148402758.jpg?t=st=1736113103~exp=1736116703~hmac=54c773eae686e8a2eddb4b3f9386153de5eb1f3d6fedd6d0359c74899f4a0996&w=1060); /* Устанавливаем фоновое изображение */
+    background-size: cover; /* Заполнение всего экрана фоновым изображением, чтобы оно не оставляло пустых мест */
+    background-position: center; /* Центрирование изображения на экране */
+    background-repeat: no-repeat; /* Запрещаем повторение изображения, чтобы оно отображалось только один раз */
 }
 
 h1 {
-    color: #333; /* Цвет заголовка */
+    color: #555; /* Устанавливаем темный цвет заголовка h1 для лучшего контраста с фоном */
 }
 
 h2 {
-    color: #555; /* Цвет подзаголовка */
+    color: #555; /* Цвет подзаголовка h2 такой же, как и у заголовка h1 для единообразия */
 }
 
-body {
-    background-color: #f8f9fa; /* Светлый фон */
+/* Стили для таблицы */
+.table {
+    margin-top: 20px; /* Отступ сверху для таблицы, чтобы отделить её от верхних элементов */
 }
 
-h1 {
-    color: #343a40; /* Темный цвет заголовка */
-}
-
+/* Стили для кнопок */
 .btn-success {
-    background-color: #28a745; /* Цвет кнопки */
-    border-color: #28a745;
+    background-color: #28a745; /* Цвет фона кнопки успеха (зеленый) */
+    border-color: #28a745; /* Цвет границы кнопки соответствует цвету фона */
 }
 
 .btn-new {
-    border-radius: 10px;
-    color: white;
-    transition: .2s linear;
-    background: #0B63F6;
-    position: relative;
-    top: 0;
-    left: 0;
+    border-radius: 10px; /* Закругление углов кнопки для более мягкого внешнего вида */
+    color: white; /* Цвет текста на кнопке белый для хорошей видимости на синем фоне */
+    transition: .2s linear; /* Плавный переход для эффектов при наведении или взаимодействии с кнопкой */
+    background: #0B63F6; /* Основной цвет фона кнопки (синий) */
 }
 
 .btn-new:hover {
-    box-shadow: 2px 2px white, 4px 4px #FC63B5;
-    top: -4px;
-    left: -4px;
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #3C82F8; /* Эффект тени при наведении на кнопку для визуального выделения */
 }
 
+/* Обертка для кнопок */
 .button-wrapper {
-	display: flex;
-	justify-content: center;
+    display: flex; /* Используем flexbox для выравнивания кнопок в строку */
+    justify-content: center; /* Центрирование кнопок в контейнере */
 }
 
-/* Настройки радиокнопок */
+/* Стили для радиокнопок */
+.radio-label {
+    margin-right: 15px; /* Отступ между радиокнопками для лучшего восприятия */
+}
+
 .form_toggle {
-	display: inline-block;
-	overflow: hidden;
+    display: inline-block; /* Отображаем блок в строке, чтобы элементы располагались горизонтально */
+    overflow: hidden; /* Скрытие переполнения, чтобы избежать лишних полос прокрутки при изменении размеров элементов */
 }
+
 .form_toggle-item {
-	float: left;
-	display: inline-block;
+    float: left; /* Плавающее позиционирование элементов радиокнопок в строке */
+    display: inline-block; /* Элементы отображаются в одной строке с учетом отступов и размеров */
 }
+
 .form_toggle-item input[type=radio] {
-	display: none; /* Скрыть стандартные радиокнопки */
+    display: none; /* Скрываем стандартные радиокнопки, чтобы использовать кастомные стили */
 }
+
 .form_toggle-item label {
-	display: inline-block;
-	padding: 0px 15px;
-	line-height: 34px;
-	border: 1px solid #999;
-	border-right: none;
-	cursor: pointer;
-	user-select: none;
+    display: inline-block; /* Отображаем метку как блочный элемент в строке */
+    padding: 0px 15px; /* Отступы по вертикали и горизонтали для создания пространства вокруг текста метки */
+    line-height: 34px; /* Высота строки, чтобы текст был вертикально центрирован внутри метки */
+    border: 1px solid #999; /* Граница радиокнопок серого цвета для визуального отделения */
+    border-right: none; /* Убираем правую границу у первого элемента радиогруппы для соединения с соседним элементом */
+    cursor: pointer; /* Изменяем курсор на указатель при наведении на метку радиокнопки */
+    user-select: none; /* Запрещаем выделение текста при взаимодействии с меткой радиокнопки */
 }
 
+/* Закругление углов для элементов радиокнопок */
 .form_toggle .item-1 label {
-	border-radius: 6px 0 0 6px; /* Левый элемент */
+    border-radius: 6px 0 0 6px; /* Закругляем левый элемент радиогруппы слева */
 }
+
 .form_toggle .item-2 label {
-	border-radius: 0 6px 6px 0; /* Правый элемент */
-	border-right: 1px solid #999; /* Правый элемент */
+    border-radius: 0 6px 6px 0; /* Закругляем правый элемент радиогруппы справа */
+    border-right: 1px solid #999; /* Добавляем правую границу у правого элемента радиогруппы для отделения от соседнего элемента */
 }
 
-/* Checked */
+/* Стили для состояния "Checked" радиокнопок (выбранные) */
 .form_toggle .item-1 input[type=radio]:checked + label {
-	background: #bbffbb; /* Светло-зеленый фон для "Да" (слева) */
-}
-.form_toggle .item-2 input[type=radio]:checked + label {
-	background: #ffc5c5; /* Светло-красный фон для "Нет" (справа) */
+    background: #00FF7F; /* Цвет фона выбранного левого элемента радиогруппы (зеленый) */
 }
 
+.form_toggle .item-2 input[type=radio]:checked + label {
+    background: #FF4500; /* Цвет фона выбранного правого элемента радиогруппы (оранжевый) */
+}

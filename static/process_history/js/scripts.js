@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function validateSpecialCharacteristic(value) {
         const min = 21.95;
         const max = 22;
-        return !isNaN(value) && value >= min && value <= max;
+        return !isNaN(value) && value >= min && value <= max; // Проверка на NaN и диапазон
     }
 
     // Функция для добавления новой строки в таблицу
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const quantityInput = document.getElementById('quantity');
         let quantity = parseInt(quantityInput.value); // Преобразуем в число
         const roughness = document.querySelector('input[name="roughness"]:checked').value;
-        const specialCharacteristic = parseFloat(specialCharacteristicInput.value); // Сохраняем текущее значение и преобразуем в число
+        const specialCharacteristic = parseFloat(specialCharacteristicInput.value); // Преобразуем в число
         const appearance = document.querySelector('input[name="appearance"]:checked').value;
         const threadHole = document.querySelector('input[name="thread_hole"]:checked').value;
         const galtelSize = document.querySelector('input[name="galtel_size"]:checked').value;
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <tr>
                 <td>${quantity}</td>
                 <td>${roughness}</td>
-                <td>${specialCharacteristic}</td>
+                <td>${specialCharacteristic.toFixed(3)}</td> <!-- Округляем до трех знаков -->
                 <td>${appearance}</td>
                 <td>${threadHole}</td>
                 <td>${galtelSize}</td>
@@ -46,12 +46,10 @@ document.addEventListener("DOMContentLoaded", function() {
         // Добавляем строку в начало таблицы
         document.getElementById('parametersTableBody').insertAdjacentHTML('afterbegin', newRow);
 
-        // Очищаем поле "Специальная характеристика"
-        specialCharacteristicInput.value = '';
-
-        // Увеличиваем количество деталей на 30
-        quantity += 30;
-        quantityInput.value = quantity;
+        // Очищаем поле "Специальная характеристика" и устанавливаем фокус на него
+        specialCharacteristicInput.value = ''; // Очищаем поле после добавления строки
+        quantity += 30; // Увеличиваем количество деталей на 30
+        quantityInput.value = quantity; // Обновляем значение количества деталей
 
         // Устанавливаем фокус на поле "Специальная характеристика"
         specialCharacteristicInput.focus();
@@ -72,16 +70,15 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
    // Проверка диапазона при потере фокуса
-specialCharacteristicInput.addEventListener('blur', function() {
-    let value = parseFloat(this.value);
+   specialCharacteristicInput.addEventListener('blur', function() {
+       let value = parseFloat(this.value); // Преобразуем значение в число
 
-    if (!validateSpecialCharacteristic(value)) {
-        alert(`Пожалуйста, введите значение в диапазоне от 21.95 до 22.`);
-        this.value = ''; // Очищаем поле
-        this.focus(); // Возвращаем фокус на поле
-    } else {
-        // Округляем значение до трех знаков после запятой и обновляем поле
-        this.value = value.toFixed(3);
-    }
+       if (!validateSpecialCharacteristic(value)) {
+           alert(`Пожалуйста, введите значение в диапазоне от 21.95 до 22.`);
+           this.value = ''; // Очищаем поле
+           this.focus(); // Возвращаем фокус на поле
+       } else {
+           this.value = value.toFixed(3); // Округляем значение до трех знаков после запятой и обновляем поле
+       }
+   });
 });
-
