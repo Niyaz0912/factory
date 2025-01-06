@@ -82,3 +82,13 @@ document.addEventListener("DOMContentLoaded", function() {
        }
    });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Заполнение полей формы данными из объекта assignmentData
+    document.querySelector('input[name="operator"]').value = assignmentData.operator;
+    document.querySelector('input[name="operation_name"]').value = assignmentData.operation_name;
+    document.querySelector('input[name="machine_id"]').value = assignmentData.machine_id;
+    document.querySelector('input[name="part_id"]').value = assignmentData.part_id;
+    document.querySelector('input[name="batch_number"]').value = assignmentData.batch_number;
+    document.querySelector('input[name="quantity"]').value = assignmentData.quantity;
+});

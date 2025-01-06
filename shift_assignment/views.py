@@ -67,15 +67,26 @@ class UploadShiftAssignmentView(LoginRequiredMixin, View):
 
 
 class CompletedShiftAssignmentView(View):
-    model = CompletedShiftAssignment
+    model = ShiftAssignment  # Указываем модель, если это необходимо
     template_name = 'shift_assignment/completed_shift_assignment.html'
 
     def get(self, request, *args, **kwargs):
         assignment_id = kwargs.get('pk')  # Получаем ID сменного задания из URL
         shift_assignment = get_object_or_404(ShiftAssignment, id=assignment_id)
 
+        # Передаем объект сменного задания в контекст
+        initial_data = {
+            'operator_name': shift_assignment.operator,  # Пример поля
+            'operation_name': shift_assignment.operation_name,
+            'machine_id': shift_assignment.machine_id,
+            'part_id': shift_assignment.part_id,
+            'batch_number': shift_assignment.batch_number,
+            'quantity': shift_assignment.quantity,
+        }
+
         context = {
-            'shift_assignment': shift_assignment,  # Передаем объект сменного задания
+            'form': CompletedShiftAssignmentForm(initial=initial_data),  # Заполняем форму начальными данными
+            'shift_assignment': shift_assignment,
         }
 
         return render(request, self.template_name, context)
@@ -84,6 +95,7 @@ class CompletedShiftAssignmentView(View):
         form = CompletedShiftAssignmentForm(request.POST)
 
         if form.is_valid():
+            # Создаем новый объект CompletedShiftAssignment
             completed_shift_assignment = form.save(commit=False)
             completed_shift_assignment.operator = request.user
 
@@ -91,11 +103,22 @@ class CompletedShiftAssignmentView(View):
             assignment_id = kwargs.get('pk')
             completed_shift_assignment.shift_assignment = get_object_or_404(ShiftAssignment, id=assignment_id)
 
+            # Заполняем остальные поля из сменного задания
+            shift_assignment = get_object_or_404(ShiftAssignment, id=assignment_id)
+            completed_shift_assignment.operator = shift_assignment.operator  # Пример поля
+            completed_shift_assignment.operation_name = shift_assignment.operation_name
+            completed_shift_assignment.machine_id = shift_assignment.machine_id
+            completed_shift_assignment.part_id = shift_assignment.part_id
+            completed_shift_assignment.batch_number = shift_assignment.batch_number
+            completed_shift_assignment.quantity = shift_assignment.quantity
+
+            # Сохраняем объект в базе данных
             completed_shift_assignment.save()
 
             # Перенаправляем на профиль пользователя с его ID
             return redirect('users:user_profile', pk=request.user.pk)  # Используем правильное имя маршрута
 
+        # Если форма не валидна, повторно получаем объект сменного задания для передачи в контекст
         assignment_id = kwargs.get('pk')
         shift_assignment = get_object_or_404(ShiftAssignment, id=assignment_id)
 
@@ -103,6 +126,7 @@ class CompletedShiftAssignmentView(View):
             'form': form,
             'shift_assignment': shift_assignment,
         })
+
 
 
 class ShiftAssignmentDetailView(DetailView):

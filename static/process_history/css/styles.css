@@ -1,6 +1,6 @@
 /* Общие стили */
 body {
-    background-image: url(https://img.freepik.com/free-vector/white-abstract-background-3d-paper-style_23-2148402758.jpg?t=st=1736113103~exp=1736116703~hmac=54c773eae686e8a2eddb4b3f9386153de5eb1f3d6fedd6d0359c74899f4a0996&w=1060); /* Устанавливаем фоновое изображение */
+    background-image: url(https://i.pinimg.com/736x/cd/b6/11/cdb611e63808813d0e39a58c97703815.jpg); /* Устанавливаем фоновое изображение */
     background-size: cover; /* Заполнение всего экрана фоновым изображением, чтобы оно не оставляло пустых мест */
     background-position: center; /* Центрирование изображения на экране */
     background-repeat: no-repeat; /* Запрещаем повторение изображения, чтобы оно отображалось только один раз */
