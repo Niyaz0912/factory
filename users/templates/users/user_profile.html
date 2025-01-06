@@ -44,7 +44,6 @@
         <p>Нет активных сменных заданий.</p>
         {% endfor %}
     </div>
-
     <h3 class="text-success">Выполненные сменные задания:</h3>
     <div class="row">
         {% for completed in completed_assignments %}
@@ -60,7 +59,19 @@
                     <p class="card-text"><strong>Количество брака:</strong> {{ completed.defect_quantity }}</p>
                     <p class="card-text"><strong>Причина остановки:</strong> {{ completed.stop_reason }}</p>
 
-                    <!-- Дополнительные действия для завершенных заданий можно добавить здесь -->
+                    <!-- Кнопка редактирования для завершенных заданий -->
+                    <a href="{% url 'shift_assignment:completed_shift_assignment_update' completed.id %}"
+                       class="btn btn-warning">Редактировать</a>
+
+                    <!-- Условие для отображения кнопки удаления -->
+                    {% if is_admin or is_master %}
+                    <form action="{% url 'shift_assignment:delete_completed_shift' completed.id %}" method="post"
+                          style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
+
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -68,14 +79,14 @@
         <p>Нет выполненных заданий.</p>
         {% endfor %}
     </div>
-
 </div>
 
 {% endblock %}
 <!-- Подключаем CSS файл -->
-<link rel='stylesheet' href='{% static ' process_history/css/styles.css' %}' type='text/css'>
+<link rel='stylesheet' href='{% static ' process_history
+/css/styles.css' %}' type='text/css'>
 
 <!-- Подключаем JS файл -->
-<script src='{% static ' process_history/js/scripts.js' %}'></script>
-
+<script src='{% static ' process_history
+/js/scripts.js' %}'></script>
 

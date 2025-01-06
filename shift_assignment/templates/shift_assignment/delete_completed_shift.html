@@ -1,0 +1,14 @@
+{% extends 'base.html' %}  <!-- Замените на ваш базовый шаблон -->
+
+{% block content %}
+<div class="container">
+    <h2>Подтверждение удаления</h2>
+    <p>Вы уверены, что хотите удалить завершенное задание с ID {{ completed_shift.id }}?</p>
+
+    <form action="{% url 'shift_assignment:delete_completed_shift' completed_shift.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить</button>
+        <a href="{% url 'shift_assignment:user_profile' pk=request.user.pk %}" class="btn btn-secondary">Отменить</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Редактировать выполненное задание</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Отображение формы -->
+        <button type="submit" class="btn btn-success">Сохранить</button>
+        <a href="{% url 'users:user_profile' object.operator.pk %}" class="btn btn-secondary">Отмена</a>
+    </form>
+{% endblock %}

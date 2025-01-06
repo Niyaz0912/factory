@@ -69,13 +69,12 @@ document.addEventListener("DOMContentLoaded", function() {
         addRow(); // Вызываем функцию добавления строки
     });
 
-   // Проверка диапазона при потере фокуса
+   // Проверка диапазона при потере фокуса (можно оставить или убрать)
    specialCharacteristicInput.addEventListener('blur', function() {
        let value = parseFloat(this.value); // Преобразуем значение в число
 
        if (!validateSpecialCharacteristic(value)) {
-           alert(`Пожалуйста, введите значение в диапазоне от 21.95 до 22.`);
-           this.value = ''; // Очищаем поле
+           this.value = ''; // Очищаем поле, если значение вне диапазона
            this.focus(); // Возвращаем фокус на поле
        } else {
            this.value = value.toFixed(3); // Округляем значение до трех знаков после запятой и обновляем поле
@@ -92,3 +91,4 @@ document.addEventListener("DOMContentLoaded", function() {
     document.querySelector('input[name="batch_number"]').value = assignmentData.batch_number;
     document.querySelector('input[name="quantity"]').value = assignmentData.quantity;
 });
+

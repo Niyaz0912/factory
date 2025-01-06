@@ -128,6 +128,22 @@ class CompletedShiftAssignmentView(View):
         })
 
 
+class CompletedShiftAssignmentUpdateView(UpdateView):
+    model = CompletedShiftAssignment
+    form_class = CompletedShiftAssignmentForm
+    template_name = 'shift_assignment/completed_shift_assignment_update.html'
+
+    def get_success_url(self):
+        # Перенаправляем на профиль текущего пользователя после успешного обновления
+        return reverse_lazy('users:user_profile', kwargs={'pk': self.request.user.pk})
+
+
+class DeleteCompletedShiftView(View):
+    def post(self, request, id):
+        completed_shift = get_object_or_404(CompletedShiftAssignment, id=id)
+        completed_shift.delete()
+        return redirect('users:user_profile', pk=request.user.id)
+
 
 class ShiftAssignmentDetailView(DetailView):
     model = ShiftAssignment
