@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 import os
+import environ
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -77,22 +78,46 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 load_dotenv()
-USER = os.getenv('MS_SQL_USER')
-PASSWORD = os.getenv('MS_SQL_KEY')
-HOST = os.getenv('MS_SQL_SERVER')
-DATABASE = os.getenv('MS_SQL_DATABASE')
 
+# Настройки для MS SQL Server
+# USER = os.getenv('MS_SQL_USER')
+# PASSWORD = os.getenv('MS_SQL_KEY')
+# HOST = os.getenv('MS_SQL_SERVER')
+# DATABASE = os.getenv('MS_SQL_DATABASE')
+
+# Настройки для PostgreSQL
+PG_USER = os.getenv('PG_USER')
+PG_PASSWORD = os.getenv('PG_PASSWORD')
+PG_HOST = os.getenv('PG_HOST')
+PG_DATABASE = os.getenv('PG_DATABASE')
+
+# DATABASES = {
+#     'mssql': {
+#         'ENGINE': 'mssql',
+#         'NAME': DATABASE,
+#         'USER': USER,
+#         'PASSWORD': PASSWORD,
+#         'HOST': HOST,
+#         'PORT': '',
+#         'OPTIONS': {
+#             'driver': 'ODBC Driver 17 for SQL Server'
+#         }
+#     },
+# }
+
+# Инициализация окружения
+env = environ.Env()
+environ.Env.read_env()  # Чтение из .env файла
+
+# Настройки базы данных
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
-        'NAME': DATABASE,
-        'USER': USER,
-        'PASSWORD': PASSWORD,
-        'HOST': HOST,
-        'PORT': '',
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server'
-        }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('PG_DATABASE'),  # Имя базы данных
+        'USER': env('PG_USER'),      # Имя пользователя
+        'PASSWORD': env('PG_PASSWORD'),  # Пароль пользователя
+        'HOST': env('PG_HOST'),      # Хост базы данных
+        'PORT': env('PG_PORT'),      # Порт базы данных
     }
 }
 
@@ -108,12 +133,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        }
     },
 ]
 

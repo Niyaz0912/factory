@@ -1,0 +1,44 @@
+[
+    {
+        "model": "users.user",
+        "pk": 1,
+        "fields": {
+            "username": "admin@web.bm",
+            "first_name": "Admin",
+            "last_name": "Adminov",
+            "is_staff": true,
+            "is_superuser": true,
+            "is_active": true,
+            "role": "admin",
+            "password": "<hashed_password>"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 2,
+        "fields": {
+            "username": "master@web.bm",
+            "first_name": "Master",
+            "last_name": "Masterov",
+            "is_staff": true,
+            "is_superuser": false,
+            "is_active": true,
+            "role": "master",
+            "password": "<hashed_password>"
+        }
+    },
+    {
+        "model": "users.user",
+        "pk": 3,
+        "fields": {
+            "username": "operator@web.bm",
+            "first_name": "Operator",
+            "last_name": "Operatov",
+            "is_staff": false,
+            "is_superuser": false,
+            "is_active": true,
+            "role": "operator",
+            "password": "<hashed_password>"
+        }
+    }
+]
