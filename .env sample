@@ -1,0 +1,12 @@
+# MSSQL Server connection settings
+#MS_SQL_SERVER=
+#MS_SQL_DATABASE=
+#MS_SQL_USER=
+#MS_SQL_KEY=
+
+# PostgreSQL connection settings
+PG_HOST=
+PG_PORT=
+PG_DATABASE=
+PG_USER=
+PG_PASSWORD=

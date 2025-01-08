@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: my_database
+      POSTGRES_USER: my_user
+      POSTGRES_PASSWORD: my_password
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    environment:
+      PG_DATABASE: my_database
+      PG_USER: my_user
+      PG_PASSWORD: my_password
+      PG_HOST: db  # Имя сервиса базы данных в Docker Compose
+      PG_PORT: 5432
+    ports:
+      - "8000:8000"
