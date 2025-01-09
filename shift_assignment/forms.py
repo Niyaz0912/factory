@@ -12,7 +12,7 @@ class ShiftAssignmentForm(StyleFormMixin, forms.ModelForm):
 
 
 class CompletedShiftAssignmentForm(StyleFormMixin, forms.ModelForm):
-    defect_quantity = forms.IntegerField(required=False, label='Количество брака')
+    defect_quantity = forms.IntegerField(required=False, label='Количество брака', initial=0)
     stop_reason = forms.ChoiceField(
         choices=[
             ('Работа в нормальном режиме', 'Работа в нормальном режиме'),
@@ -32,12 +32,13 @@ class CompletedShiftAssignmentForm(StyleFormMixin, forms.ModelForm):
             'part_id',
             'batch_number',
             'quantity',
-            'defect_quantity',  # Добавляем поле количества брака
-            'stop_reason'       # Добавляем поле причины остановки
+            'defect_quantity',
+            'stop_reason'
         ]
         widgets = {
-            # Применяем виджеты для улучшения отображения полей
             'date': forms.DateInput(attrs={'type': 'date'}),
+            'quantity': forms.NumberInput(attrs={'min': 1, 'placeholder': 'Введите количество'}),
+            # Добавьте другие кастомные виджеты по необходимости
         }
 
     def clean_quantity(self):
@@ -46,4 +47,5 @@ class CompletedShiftAssignmentForm(StyleFormMixin, forms.ModelForm):
         if quantity is not None and quantity <= 0:
             raise ValidationError("Количество должно быть больше нуля.")
         return quantity
+
 
