@@ -76,7 +76,7 @@ class CompletedShiftAssignmentView(View):
 
         # Передаем объект сменного задания в контекст
         initial_data = {
-            'operator_name': shift_assignment.operator,  # Пример поля
+            'operator_name': shift_assignment.operator,
             'operation_name': shift_assignment.operation_name,
             'machine_id': shift_assignment.machine_id,
             'part_id': shift_assignment.part_id,
@@ -101,19 +101,21 @@ class CompletedShiftAssignmentView(View):
 
             # Получаем ID сменного задания и связываем его с завершенным заданием
             assignment_id = kwargs.get('pk')
-            completed_shift_assignment.shift_assignment = get_object_or_404(ShiftAssignment, id=assignment_id)
+            shift_assignment = get_object_or_404(ShiftAssignment, id=assignment_id)
+            completed_shift_assignment.shift_assignment = shift_assignment
 
             # Заполняем остальные поля из сменного задания
-            shift_assignment = get_object_or_404(ShiftAssignment, id=assignment_id)
             completed_shift_assignment.operator = shift_assignment.operator  # Пример поля
             completed_shift_assignment.operation_name = shift_assignment.operation_name
             completed_shift_assignment.machine_id = shift_assignment.machine_id
             completed_shift_assignment.part_id = shift_assignment.part_id
             completed_shift_assignment.batch_number = shift_assignment.batch_number
-            completed_shift_assignment.quantity = shift_assignment.quantity
 
-            # Сохраняем объект в базе данных
+            # Сохраняем объект выполненного задания в базе данных
             completed_shift_assignment.save()
+
+            # Удаляем исходное сменное задание из базы данных
+            shift_assignment.delete()  # Удаляем только ShiftAssignment
 
             # Перенаправляем на профиль пользователя с его ID
             return redirect('users:user_profile', pk=request.user.pk)  # Используем правильное имя маршрута

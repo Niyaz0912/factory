@@ -28,8 +28,8 @@ class ShiftAssignment(models.Model):
 
 
 class CompletedShiftAssignment(models.Model):
-    shift_assignment = models.ForeignKey(ShiftAssignment, on_delete=models.CASCADE,
-                                         related_name='completed_assignments')
+    shift_assignment = models.ForeignKey(ShiftAssignment, on_delete=models.SET_NULL,
+                                         related_name='completed_assignments', null=True)  # Устанавливаем на NULL вместо удаления
     date = models.DateTimeField(default=timezone.now)
     operator = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name="Оператор", on_delete=models.CASCADE)  # Указывает на оператора
     operation_name = models.CharField(max_length=255, verbose_name="Наименование операции")
