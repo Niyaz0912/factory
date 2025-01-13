@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-3fn%eh*miuw2w!^!(qf%))&087nmjz-$24=uzr81k4p&9vu4*!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 LOGIN_URL = 'login'  # URL для страницы входа
 LOGIN_REDIRECT_URL = '/profile/'  # URL для перенаправления после успешной аутентификации
@@ -107,17 +107,16 @@ PG_DATABASE = os.getenv('PG_DATABASE')
 
 # Инициализация окружения
 env = environ.Env()
-environ.Env.read_env()  # Чтение из .env файла
+environ.Env.read_env()  # Чтение .env файла
 
-# Настройки базы данных
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('PG_DATABASE'),  # Имя базы данных
-        'USER': env('PG_USER'),      # Имя пользователя
-        'PASSWORD': env('PG_PASSWORD'),  # Пароль пользователя
-        'HOST': env('PG_HOST'),      # Хост базы данных
-        'PORT': env('PG_PORT'),      # Порт базы данных
+        'NAME': env('PG_DATABASE'),
+        'USER': env('PG_USER'),
+        'PASSWORD': env('PG_PASSWORD'),
+        'HOST': env('PG_HOST'),
+        'PORT': env('PG_PORT'),
     }
 }
 

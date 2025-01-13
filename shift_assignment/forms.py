@@ -26,6 +26,7 @@ class CompletedShiftAssignmentForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = CompletedShiftAssignment
         fields = [
+            # 'date',
             'operator',
             'operation_name',
             'machine_id',

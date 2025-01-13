@@ -76,7 +76,7 @@ class CompletedShiftAssignmentView(View):
 
         # Передаем объект сменного задания в контекст
         initial_data = {
-            'operator_name': shift_assignment.operator,
+            'operator': shift_assignment.operator,
             'operation_name': shift_assignment.operation_name,
             'machine_id': shift_assignment.machine_id,
             'part_id': shift_assignment.part_id,
