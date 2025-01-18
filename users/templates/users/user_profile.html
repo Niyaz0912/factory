@@ -13,7 +13,7 @@
         задание</a>
     {% endif %}
 
-    <h3 class="text-primary">Сменные задания:</h3>
+    <h3 style="color: #1184f0;">Сменные задания:</h3>
     <div class="row">
         {% for assignment in shift_assignments %}
         <div class="col-md-4 mb-4">
@@ -44,7 +44,7 @@
         <p>Нет активных сменных заданий.</p>
         {% endfor %}
     </div>
-    <h3 class="text-success">Выполненные сменные задания:</h3>
+    <h3 style="color: #2e9409;">Выполненные сменные задания:</h3>
     <div class="row">
         {% for completed in completed_assignments %}
         <div class="col-md-4">
