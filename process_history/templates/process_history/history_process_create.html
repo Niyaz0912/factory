@@ -43,23 +43,27 @@
                 <table class="table">
                     <tbody>
                     <tr>
-                            <td>Шероховатость:</td>
-                            <td class="form_toggle">
-                                <div class="form_toggle-item item-1">
-                                    <input type="radio" name="roughness" value="+" id="roughness_yes" checked/>
-                                    <label for="roughness_yes">+</label>
-                                </div>
-                                <div class="form_toggle-item item-2">
-                                    <input type="radio" name="roughness" value="-" id="roughness_no"/>
-                                    <label for="roughness_no">-</label>
-                                </div>
-                            </td>
-                        </tr>
+                        <td>Шероховатость:</td>
+                        <td class="form_toggle">
+                            <div class="form_toggle-item item-1">
+                                <input type="radio" name="roughness" value="+" id="roughness_yes" checked/>
+                                <label for="roughness_yes">+</label>
+                            </div>
+                            <div class="form_toggle-item item-2">
+                                <input type="radio" name="roughness" value="-" id="roughness_no"/>
+                                <label for="roughness_no">-</label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>Специальная характеристика:</td>
-                        <td>
+                        <td style="padding: 5px;">
                             <input type="number" id="specialCharacteristic" name="value"
                                    min="21.95" max="22" step="0.001" placeholder="от 21.95 до 22"
-                                   required style="width: 150px;"/>
+                                   required style="width: 150px; -moz-appearance: textfield; /* Для Firefox */
+               -webkit-appearance: none; /* Для Chrome, Safari и Opera */
+               appearance: none; /* Для других браузеров */
+               "/>
                         </td>
                     </tr>
 
@@ -168,17 +172,25 @@
 
                     </tbody>
                 </table>
-
-                <button type='button' id='addMeasurementButton'
-                        class='btn-new'
-                        style="
-                    width: 200px; /* Ширина кнопки */
-                    height: 70px; /* Высота кнопки */
-                    font-size: 24px;
+                <div style="display: flex; align-items: flex-start;">
+                    <button type='button' id='addMeasurementButton'
+                            class='btn-new'
+                            style="
+                    width: 160px; /* Ширина кнопки */
+                    height: 55px; /* Высота кнопки */
+                    font-size: 16px;
                     cursor: pointer;
-                    margin-left: 30px;">Новый замер
-                </button>
-
+                    margin-right: 25px;">Новый замер
+                    </button>
+                    <p style="font-size: 10px; margin: 0;"> Коды контроля:<br>
+                        1-корректировка параметров<br>
+                        2-запуск, замер первых деталей<br>
+                        3-замена инструмента/оснастки<br>
+                        4-корректировка параметров<br>
+                        5-ремонт оборудования<br>
+                        6-контроль последней детали
+                    </p>
+                </div>
             </div>
 
         </div>
@@ -186,25 +198,25 @@
     </div>
 
 
-<h2 style="margin: 40px auto 0; text-align: center;">Таблица параметров</h2>
+    <h2 style="margin: 40px auto 0; text-align: center;">Таблица параметров</h2>
 
-<table class="table" style="margin-left: 20px; margin-right: 20px;"> <!-- Добавлены отступы -->
-    <thead>
-    <tr>
-        <th>Колич.</th>
-        <th>Шерох.</th>
-        <th>Спец. харак.</th>
-        <th>Внеш. вид</th>
-        <th>Резьб./отверст.</th>
-        <th>Галтель</th>
-        <th>Код</th>
-        <th>Да/Нет</th>
-    </tr>
-    </thead>
-    <tbody id="parametersTableBody">
-    <!-- Записи будут добавляться сюда -->
-    </tbody>
-</table>
+    <table class="table" style="margin-left: 20px; margin-right: 20px;"> <!-- Добавлены отступы -->
+        <thead>
+        <tr>
+            <th>Колич.</th>
+            <th>Шерох.</th>
+            <th>Спец. харак.</th>
+            <th>Внеш. вид</th>
+            <th>Резьб./отверст.</th>
+            <th>Галтель</th>
+            <th>Код</th>
+            <th>Да/Нет</th>
+        </tr>
+        </thead>
+        <tbody id="parametersTableBody">
+        <!-- Записи будут добавляться сюда -->
+        </tbody>
+    </table>
 </form>
 {% endblock %}
 
