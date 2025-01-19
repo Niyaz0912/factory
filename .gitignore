@@ -1,4 +1,31 @@
-venv
-.idea
+# Игнорируем байт-код Python
+__pycache__/
+*.py[cod]
+
+# Игнорируем виртуальные окружения
+venv/
 .env
+
+# Игнорируем файлы конфигурации
+local_settings.py
+
+# Игнорируем директории и файлы, созданные инструментами разработки
+.idea/
+*.egg-info/
+dist/
+build/
+
+# Игнорируем временные файлы и кэши
+*.log
+*.pot
+*.pyc
 .coverage
+.cache/
+
+# Игнорируем Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Игнорируем другие временные файлы
+*.tmp
+*.bak
+
