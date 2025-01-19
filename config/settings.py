@@ -26,7 +26,19 @@ SECRET_KEY = 'django-insecure-3fn%eh*miuw2w!^!(qf%))&087nmjz-$24=uzr81k4p&9vu4*!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '192.168.1.74',
+    'app.ictd.ru'
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1',
+    '192.168.1.74',
+    'http://localhost',
+    'https://app.ictd.ru',
+]
 
 LOGIN_URL = 'login'  # URL для страницы входа
 LOGIN_REDIRECT_URL = '/profile/'  # URL для перенаправления после успешной аутентификации
