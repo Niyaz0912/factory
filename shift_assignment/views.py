@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, DeleteView
-
 from .forms import ShiftAssignmentForm, CompletedShiftAssignmentForm
 from .models import ShiftAssignment, CompletedShiftAssignment
 
@@ -13,12 +12,20 @@ from django.http import JsonResponse
 
 
 class UploadShiftAssignmentView(LoginRequiredMixin, View):
+    """
+    Представление для загрузки сменных заданий из Excel файла.
+
+    Это представление обрабатывает загрузку файла и сохранение данных в базу данных.
+    """
+
     template_name = 'shift_assignment/upload_shift_assignment.html'
 
     def get(self, request):
+        """Обрабатывает GET запрос для отображения формы загрузки."""
         return render(request, self.template_name)
 
     def post(self, request):
+        """Обрабатывает POST запрос для загрузки файла с данными."""
         if request.method == 'POST' and 'file' in request.FILES:
             file = request.FILES['file']
             try:
@@ -30,11 +37,13 @@ class UploadShiftAssignmentView(LoginRequiredMixin, View):
                 df = pd.read_excel(file)
 
                 # Проверка наличия необходимых столбцов
-                required_columns = ['batch_number', 'operation_name', 'quantity', 'operator_id', 'part_id', 'machine_id']
+                required_columns = ['batch_number', 'operation_name', 'quantity', 'operator_id', 'part_id',
+                                    'machine_id']
                 missing_columns = [col for col in required_columns if col not in df.columns]
 
                 if missing_columns:
-                    return JsonResponse({'status': 'error', 'message': f'Отсутствуют обязательные столбцы: {", ".join(missing_columns)}'})
+                    return JsonResponse({'status': 'error',
+                                         'message': f'Отсутствуют обязательные столбцы: {", ".join(missing_columns)}'})
 
                 # Получаем модель пользователя
                 User = get_user_model()
@@ -45,7 +54,8 @@ class UploadShiftAssignmentView(LoginRequiredMixin, View):
                     try:
                         operator = User.objects.get(id=operator_id)  # Получите объект пользователя по ID
                     except User.DoesNotExist:
-                        return JsonResponse({'status': 'error', 'message': f'Пользователь с ID {operator_id} не найден.'})
+                        return JsonResponse(
+                            {'status': 'error', 'message': f'Пользователь с ID {operator_id} не найден.'})
 
                     ShiftAssignment.objects.create(
                         batch_number=row['batch_number'],
@@ -67,10 +77,17 @@ class UploadShiftAssignmentView(LoginRequiredMixin, View):
 
 
 class CompletedShiftAssignmentView(View):
+    """
+    Представление для создания завершенного сменного задания.
+
+    Это представление отображает форму для завершения задания и обрабатывает его сохранение.
+    """
+
     model = ShiftAssignment  # Указываем модель, если это необходимо
     template_name = 'shift_assignment/completed_shift_assignment.html'
 
     def get(self, request, *args, **kwargs):
+        """Обрабатывает GET запрос для отображения формы завершенного задания."""
         assignment_id = kwargs.get('pk')  # Получаем ID сменного задания из URL
         shift_assignment = get_object_or_404(ShiftAssignment, id=assignment_id)
 
@@ -92,6 +109,7 @@ class CompletedShiftAssignmentView(View):
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
+        """Обрабатывает POST запрос для сохранения завершенного задания."""
         form = CompletedShiftAssignmentForm(request.POST)
 
         if form.is_valid():
@@ -131,46 +149,80 @@ class CompletedShiftAssignmentView(View):
 
 
 class CompletedShiftAssignmentUpdateView(UpdateView):
+    """
+    Представление для обновления завершенного сменного задания.
+
+    Это представление обрабатывает обновление существующего завершенного задания.
+    """
+
     model = CompletedShiftAssignment
     form_class = CompletedShiftAssignmentForm
     template_name = 'shift_assignment/completed_shift_assignment_update.html'
 
     def get_success_url(self):
-        # Перенаправляем на профиль текущего пользователя после успешного обновления
+        """Возвращает URL для перенаправления после успешного обновления."""
         return reverse_lazy('users:user_profile', kwargs={'pk': self.request.user.pk})
 
 
 class DeleteCompletedShiftView(View):
+    """
+    Представление для удаления завершенного сменного задания.
+
+    Это представление обрабатывает удаление существующего завершенного задания.
+    """
+
     def post(self, request, id):
+        """Обрабатывает POST запрос для удаления завершенного задания."""
         completed_shift = get_object_or_404(CompletedShiftAssignment, id=id)
         completed_shift.delete()
+
         return redirect('users:user_profile', pk=request.user.id)
 
 
 class ShiftAssignmentDetailView(DetailView):
+    """
+    Представление для отображения деталей сменного задания.
+
+    Это представление показывает информацию о конкретном задании.
+    """
+
     model = ShiftAssignment
     template_name = 'shift_assignment/shift_assignment_detail.html'
     context_object_name = 'assignment'
 
 
 class ShiftAssignmentUpdateView(UpdateView):
+    """
+    Представление для обновления сменного задания.
+
+    Это представление обрабатывает обновление существующего задания.
+    """
+
     model = ShiftAssignment
     form_class = ShiftAssignmentForm
     template_name = 'shift_assignment/shift_assignments_update.html'
 
     def get_success_url(self):
-        # Перенаправляем на профиль текущего пользователя после успешного обновления
+        """Возвращает URL для перенаправления после успешного обновления."""
         return reverse_lazy('users:user_profile', kwargs={'pk': self.request.user.pk})
 
 
 class ShiftAssignmentDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    Представление для удаления сменного задания.
+
+    Это представление обрабатывает удаление существующего задания.
+    """
+
     model = ShiftAssignment
     template_name = 'shift_assignment/shift_assignment_delete.html'
 
     def get_success_url(self):
-        # Возвращаем URL для перенаправления на профиль текущего пользователя
+        """Возвращает URL для перенаправления после успешного удаления."""
         return reverse_lazy('users:user_profile', kwargs={'pk': self.request.user.pk})
 
     def get_object(self, queryset=None):
+        """Получает объект по первичному ключу (pk)."""
         return get_object_or_404(ShiftAssignment, pk=self.kwargs['pk'])
+
 

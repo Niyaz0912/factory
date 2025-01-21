@@ -6,7 +6,18 @@ from users.forms import StyleFormMixin
 
 
 class ProcessHistoryForm(StyleFormMixin, forms.ModelForm):
+    """
+    Форма для ввода данных о процессе.
+
+    Эта форма используется для создания или редактирования записей
+    в модели ProcessHistory. Она включает поля для проверки
+    различных характеристик процесса.
+    """
+
+    # Поле для ввода количества брака (необязательное)
     defect_quantity = forms.IntegerField(required=False, label='Количество брака')
+
+    # Поле для выбора причины остановки процесса
     stop_reason = forms.ChoiceField(
         choices=[
             ('СлНал', 'СлНал'),
@@ -15,6 +26,8 @@ class ProcessHistoryForm(StyleFormMixin, forms.ModelForm):
         ],
         label='Причина остановки'
     )
+
+    # Поле для ввода специальных характеристик
     special_characteristics = forms.DecimalField(
         label='Специальные характеристики',
         max_digits=5,
@@ -23,7 +36,7 @@ class ProcessHistoryForm(StyleFormMixin, forms.ModelForm):
     )
 
     class Meta:
-        model = ProcessHistory
+        model = ProcessHistory  # Модель, с которой работает форма
         fields = [
             'roughness_check',
             'defects_check',
@@ -34,11 +47,16 @@ class ProcessHistoryForm(StyleFormMixin, forms.ModelForm):
             'control_code',
             'mark_yes_no',
             'defect_quantity',  # Добавляем поле количества брака
-            'stop_reason',      # Добавляем поле причины остановки
+            'stop_reason',  # Добавляем поле причины остановки
             'special_characteristics'  # Добавляем поле специальных характеристик
         ]
 
     def clean_value(self):
+        """
+        Валидация поля value.
+
+        Проверяет, что значение находится в заданном диапазоне и округляет его до трех знаков после запятой.
+        """
         value = self.cleaned_data.get('value')
 
         if value is not None:
@@ -53,7 +71,14 @@ class ProcessHistoryForm(StyleFormMixin, forms.ModelForm):
 
 
 class QualityControlForm(StyleFormMixin, forms.Form):
+    """
+    Форма для контроля качества.
+
+    Эта форма используется для ввода данных о шероховатости и отсутствии дефектов.
+    """
+
     roughness = forms.DecimalField(label='Шероховатость (мкм)', max_digits=5, decimal_places=2)
+
     defects_absent = forms.BooleanField(required=False, label='Отсутствие рисок, канавок и т.д.')
 
 
@@ -72,14 +97,22 @@ class SaveProcessHistoryForm(StyleFormMixin, forms.ModelForm):
             'quantity',
             'file'
         ]
+
         widgets = {
             # Применяем виджеты для улучшения отображения полей
             'date': forms.DateInput(attrs={'type': 'date'}),
         }
 
     def clean_quantity(self):
-        """Пример валидации поля quantity."""
+        """
+        Валидация поля quantity.
+
+        Проверяет, что количество больше нуля.
+        """
         quantity = self.cleaned_data.get('quantity')
+
         if quantity <= 0:
             raise forms.ValidationError("Количество должно быть больше нуля.")
+
         return quantity
+

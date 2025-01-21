@@ -33,12 +33,12 @@ ALLOWED_HOSTS = [
     'app.ictd.ru'
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1',
-    '192.168.1.74',
-    'http://localhost',
-    'https://app.ictd.ru',
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://127.0.0.1',
+#     '192.168.1.74',
+#     'http://localhost',
+#     'https://app.ictd.ru',
+# ]
 
 LOGIN_URL = 'login'  # URL для страницы входа
 LOGIN_REDIRECT_URL = '/profile/'  # URL для перенаправления после успешной аутентификации

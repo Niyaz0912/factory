@@ -12,6 +12,11 @@ from shift_assignment.models import ShiftAssignment, CompletedShiftAssignment
 
 
 class UserRegisterView(CreateView):
+    """
+    Представление для регистрации нового пользователя.
+
+    Это представление использует форму регистрации и перенаправляет на страницу входа после успешной регистрации.
+    """
     model = User
     form_class = UserRegisterForm
     success_url = reverse_lazy('users:login_user')  # Убедитесь, что это имя маршрута соответствует вашему urls.py
@@ -19,21 +24,33 @@ class UserRegisterView(CreateView):
 
 
 class UserLoginView(LoginView):
+    """
+    Представление для входа пользователя.
+
+    Это представление проверяет учетные данные пользователя и перенаправляет на профиль после успешного входа.
+    """
     form_class = UserLoginForm
     template_name = 'users/login_user.html'
 
     def form_valid(self, form):
+        """Обрабатывает успешное заполнение формы входа."""
         user = form.get_user()
         login(self.request, user)
         return redirect('users:user_profile', pk=user.pk)
 
 
 class UserProfileView(LoginRequiredMixin, DetailView):
+    """
+    Представление для отображения профиля пользователя.
+
+    Это представление показывает информацию о пользователе и связанные с ним задания.
+    """
     model = User
     template_name = 'users/user_profile.html'
     context_object_name = 'user'
 
     def get_context_data(self, **kwargs):
+        """Добавляет дополнительные данные в контекст профиля пользователя."""
         context = super().get_context_data(**kwargs)
         user_role = self.request.user.role  # Получаем роль пользователя
 
@@ -48,9 +65,11 @@ class UserProfileView(LoginRequiredMixin, DetailView):
 
         # Получаем выполненные сменные задания для текущего пользователя и всех мастеров и администраторов
         if user_role in [UserRoles.ADMIN, UserRoles.MASTER]:
-            context['completed_assignments'] = CompletedShiftAssignment.objects.all()  # Все выполненные задания для админа и мастера
+            context[
+                'completed_assignments'] = CompletedShiftAssignment.objects.all()  # Все выполненные задания для админа и мастера
         else:
-            context['completed_assignments'] = CompletedShiftAssignment.objects.filter(operator=self.request.user)  # Только для оператора
+            context['completed_assignments'] = CompletedShiftAssignment.objects.filter(
+                operator=self.request.user)  # Только для оператора
 
         # Передаем строковые значения ролей в контекст
         context['is_admin'] = user_role == UserRoles.ADMIN
@@ -61,32 +80,58 @@ class UserProfileView(LoginRequiredMixin, DetailView):
 
 
 class UserUpdateView(UpdateView):
+    """
+    Представление для обновления данных пользователя.
+
+    Это представление позволяет пользователю обновить свои данные.
+    """
     model = User
     form_class = UserUpdateForm
     template_name = 'users/update_user.html'
 
     def get_success_url(self):
+        """Возвращает URL для перенаправления после успешного обновления."""
         return reverse_lazy('users:user_profile', kwargs={'pk': self.object.pk})
 
 
 class UserLogoutView(LogoutView):
+    """
+    Представление для выхода пользователя из системы.
+
+    Это представление обрабатывает выход и перенаправляет на страницу входа.
+    """
+
     template_name = 'users/logout_user.html'
     next_page = reverse_lazy('users:login_user')
 
 
 class UserListView(LoginRequiredMixin, ListView):
+    """
+    Представление для отображения списка пользователей.
+
+    Это представление показывает всех активных пользователей системы.
+    """
+
     model = User
     extra_context = {
         'title': 'Сотрудники УМКИ:'
     }
+
     template_name = 'users/users.html'
 
     def get_queryset(self):
+        """Фильтрует список пользователей по активности."""
         queryset = super().get_queryset()
-        queryset = queryset.filter(is_active=True)
+        queryset = queryset.filter(is_active=True)  # Показывает только активных пользователей
         return queryset
 
 
 class UserViewProfileView(DetailView):
+    """
+    Представление для просмотра профиля другого пользователя.
+
+    Это представление отображает информацию о выбранном пользователе.
+    """
+
     model = User
     template_name = 'users/user_view_profile.html'
