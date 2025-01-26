@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="ru">
+{% load static %}
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}My App{% endblock %}</title>
-
-    {% load static %}  <!-- Загружаем тег статических файлов -->
+    <title>{{ title }}</title>
+    <link rel="icon" href="{% static 'icons8-микрометр-50.png' %}" type="image/png">
 
     <!-- Подключение Bootstrap через CDN -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -20,11 +20,6 @@
     <!-- Подключение вашего JS файла -->
     <script src="{% static 'process_history/js/scripts.js' %}"></script>
 
-    <!--    <style>-->
-    <!--        body {-->
-    <!--            background-color: #F8F8FF; /* Светло-серый фон */-->
-    <!--        }-->
-    <!--    </style>-->
 </head>
 <body>
 <div class="container mt-5">
